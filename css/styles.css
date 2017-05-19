@@ -24,12 +24,12 @@ body {
 
 ::selection {
     color: #fff;
-    background: #F50087;
+    background: #6A0888;
 }
 
 ::-moz-selection {
     color: #fff;
-    background: #F50087;
+    background: #6A0888;
 }
 
 p {
@@ -71,7 +71,7 @@ p {
     }
 
 a {
-    color: #F50087;
+    color: #6A0888;
     text-decoration: none;
     text-shadow: none;
     -webkit-transition: all 0.2s linear;
@@ -95,11 +95,15 @@ background: #E24040;
 }
 
 .btn-primary {
-    background: #F50087;
+    background: #6A0888;
 }
 
 .form-control {
     border-radius: 0px;
+}
+
+.mrgn10 {
+    margin: 10px 0;
 }
 
 .mrgn30 {
@@ -121,7 +125,7 @@ background: #E24040;
     bottom: 20px;
     right: 20px;
     z-index: 5;
-	background: #F50087;
+	background: #6A0888;
 }
 .topHome .fa-2x {
 font-size: 20px;
@@ -133,7 +137,7 @@ margin: 4px;
 .header {
     position: fixed;
     width: 100%;
-    background: #F50087;
+    background: #6A0888;
     z-index: 50;
     border-radius: 0;
     top: 0px;
@@ -141,23 +145,23 @@ margin: 4px;
 }
 
 .navbar-inverse .navbar-toggle {
-    border-color: #F50087;
-    background-color: #F50087;
+    border-color: #6A0888;
+    background-color: #6A0888;
 }
 .header .navbar {
 margin: 0;
 background: transparent !important;
 }
     .navbar-inverse .navbar-toggle .icon-bar {
-        /*background-color: #F50087;*/;
+        /*background-color: #6A0888;*/;
     }
 
     .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
-        background: #F50087;
+        background: #6A0888;
     }
 
 .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
-    color: #F50087;
+    color: #6A0888;
 }
 
 .navbar-inverse .navbar-toggle:hover .icon-bar {
@@ -178,7 +182,7 @@ background: none;
 /*.carousel-inner*/
 #myCarousel {
     margin-top: 50px;
-    border-bottom: 4px solid #F50087;
+    border-bottom: 4px solid #6A0888;
 }
 
 .carousel-inner > .item {
@@ -210,7 +214,7 @@ background: none;
 
 .actionPanel {
     padding: 25px 0;
-    background: #F50087;
+    background: #6A0888;
 }
 
     .actionPanel h3 {
@@ -218,7 +222,7 @@ background: none;
     }
 
 .circle {
-    background: #F50087;
+    background: #6A0888;
     height: 60px;
     width: 60px;
     border-radius: 35px;
@@ -231,7 +235,7 @@ background: none;
     padding: 16px 15px;
     line-height: 18px;
     height: 50px;
-    /*color:#F50087;*/;
+    /*color:#6A0888;*/;
 }
 
 .navbar-brand b {
@@ -300,7 +304,7 @@ background: none;
     }
 
 .page-section h2 {
-    color: #F50087;
+    color: #6A0888;
 }
 
 .page-section p {
@@ -313,7 +317,7 @@ background: none;
 }
 
     .darkBg .fa {
-        color: #F50087;
+        color: #6A0888;
     }
 /*--- Banner ----*/
 .banner-container {
@@ -462,7 +466,7 @@ margin-top: 5px;
 background-color: #D6D6D6;
 }
 .progress .progress-bar {
-background-color: #F50087;
+background-color: #6A0888;
 }
 /*Skills*/
 
@@ -478,7 +482,7 @@ background-color: #F50087;
   position: absolute;
   content: " ";
   width: 2px;
-  background-color: #F50087;
+  background-color: #6A0888;
   left: 50%;
   margin-left: -1.5px;
 }
@@ -496,7 +500,7 @@ background-color: #F50087;
   top: 20px;
   left: 50%;
   margin-left: -25px;
-  background-color: #F50087;
+  background-color: #6A0888;
   z-index: 36;
   border-top-right-radius: 50%;
   border-top-left-radius: 50%;
@@ -521,7 +525,7 @@ display: inherit;
   top: 40px;
 }
 #timeline .timeline-badge.timeline-filter-movement a span {
-  color: #F50087;
+  color: #6A0888;
   font-size: 1.3em;
   top: -1px;
 }
@@ -534,13 +538,13 @@ display: inherit;
   margin-left: -18px;
 }
 #timeline .timeline-badge.timeline-future-movement a span {
-  color: #F50087;
+  color: #6A0888;
   font-size: .9em;
   top: 2px;
   left: 1px;
 }
 #timeline .timeline-movement {
-  border-bottom: dashed 1px #F50087;
+  border-bottom: dashed 1px #6A0888;
   position: relative;
 }
 #timeline .timeline-movement.timeline-movement-top {
@@ -627,7 +631,7 @@ display: inherit;
 .team-member .member-img img {
     max-width: 250px;
     margin: 0 auto;
-    border: 1px solid #F50087;
+    border: 1px solid #6A0888;
 }
 
 .team-member h4 {
@@ -711,12 +715,12 @@ nav#filter {
     nav#filter a {
         padding: 4px 12px;
         line-height: 20px;
-        border: 1px solid #F50087;
+        border: 1px solid #6A0888;
         text-decoration: none;
     }
 
 .current {
-    background: #F50087;
+    background: #6A0888;
     color: #fff;
 }
 
