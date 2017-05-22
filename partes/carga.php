@@ -32,6 +32,9 @@
     <link href="../css/switch.css" rel="stylesheet">
 
     <?php include_once "../php/clases.php";?>
+
+    <script type="text/javascript" src="../js/funcionesABM.js"></script>
+
 </head>
 
 <body>
@@ -83,75 +86,69 @@
             </div>
 
             <div class="row mrgn10">
+                <input type="hidden" name="idModificar" id="idModificar" />
 
-                <form method="post" action="" id="contactfrm" role="form">
+                <div class="col-sm-4">
+                    <div class="form-group" title="Por favor seleccione el tipo de operación.">
+                        <label for="operacion">Operación</label><br />
+                        <input type="radio" name="operacion" value="alquiler"> Alquiler<br />
+                        <input type="radio" name="operacion" value="venta"> Venta
+                    </div>
 
-                    <div class="col-sm-4">
-                    <!--
-                    Operación: Combo - Alquiler, venta.
-                    Tipo de vivienda: Combo - Depto, casa, local.
-                    Cantidad de ambientes: ¿Numeral o combo?
-                    Zona: Combo - Capital Federal, Gran buenos Aires Sur, Costa Atlántica.
-                    Descripción: Texto.
-                    Ocultar publicación: Checkbox.
-                    Destacada: Checkbox.
-                    -->
-                        <div class="form-group" title="Por favor seleccione el tipo de operación.">
-                            <label for="operacion">Operación</label><br />
-                            <input type="radio" name="operacion" value="alquiler"> Alquiler<br />
-                            <input type="radio" name="operacion" value="venta"> Venta
-                        </div>
+                    <div class="form-group" title="Por favor seleccione el tipo de vivienda.">
+                        <label for="tipo">Tipo de vivienda</label><br />
+                        <input type="radio" name="tipo" value="depto"> Departamento<br />
+                        <input type="radio" name="tipo" value="casa"> Casa<br />
+                        <input type="radio" name="tipo" value="local"> Local
+                    </div>
 
-                        <div class="form-group" title="Por favor seleccione el tipo de vivienda.">
-                            <label for="tipo">Tipo de vivienda</label><br />
-                            <input type="radio" name="tipo" value="depto"> Departamento<br />
-                            <input type="radio" name="tipo" value="casa"> Casa<br />
-                            <input type="radio" name="tipo" value="local"> Local
-                        </div>
+                    <div class="form-group" title="Por favor seleccione la zona.">
+                        <label for="ambientes">Cantidad de ambientes</label>
+                        <input type="text" class="form-control" name="ambientes" id="ambientes">
+                    </div>
 
-                        <div class="form-group" title="Por favor seleccione la zona.">
-                            <label for="ambientes">Cantidad de ambientes</label>
-                            <input type="text" class="form-control" name="ambientes" id="ambientes">
-                        </div>
+                    <div class="form-group" title="Por favor seleccione la zona.">
+                        <label for="zona">Zona</label><br />
+                        <select class="form-control" name="zona" id="zona">
+                            <option value="none">Por favor seleccione la zona</option>
+                            <option value="caba">Ciudad Autónoma de Buenos Aires</option>
+                            <option value="gbasur">Gran Buenos Aires Sur</option>
+                            <option value="costa">Costa Atlántica</option>
+                        </select>
+                    </div>
 
-                        <div class="form-group" title="Por favor seleccione la zona.">
-                            <label for="tipo">Zona</label><br />
-                            <select class="form-control" name="zona" id="zona">
-                                <option value="none">Por favor seleccione la zona</option>
-                                <option value="caba">Ciudad Autónoma de Buenos Aires</option>
-                                <option value="gbasur">Gran Buenos Aires Sur</option>
-                                <option value="costa">Costa Atlántica</option>
-                            </select>
-                        </div>
+                    <div class="form-group" title="Por favor ingrese la descripción.">
+                        <label for="descripcion">Descripción</label>
+                        <textarea name="descripcion" class="form-control" id="descripcion" cols="3" rows="5"></textarea>
+                    </div>
 
-                        <div class="form-group" title="Por favor ingrese la descripción.">
-                            <label for="descripcion">Descripción</label>
-                            <textarea name="descripcion" class="form-control" id="descripcion" cols="3" rows="5"></textarea>
+                    <div class="form-group form-control">
+                        Publicación destacada
+                        <div class="material-switch pull-right">
+                            <input id="destacada" name="destacada" type="checkbox"/>
+                            <label for="destacada" class="label-primary"></label>
                         </div>
+                    </div>
+                    
+                    <div class="form-group form-control">
+                        Ocultar publicación
+                        <div class="material-switch pull-right">
+                            <input id="ocultar" name="ocultar" type="checkbox"/>
+                            <label for="ocultar" class="label-primary"></label>
+                        </div>
+                    </div>
 
-                        <div class="form-group form-control">
-                            Publicación destacada
-                            <div class="material-switch pull-right">
-                                <input id="destacada" name="destacada" type="checkbox"/>
-                                <label for="destacada" class="label-primary"></label>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group form-control">
-                            Ocultar publicación
-                            <div class="material-switch pull-right">
-                                <input id="ocultar" name="ocultar" type="checkbox"/>
-                                <label for="ocultar" class="label-primary"></label>
-                            </div>
-                        </div>
-                        
+                    <div class="form-group" title="Por favor ingrese imágenes de la propiedad.">
+                        <label for="imagen">Imágenes</label>
+                        <input type="file" class="form-control" name="imagen" id="imagen" accept="image/*" multiple>
+                    </div>
                     
 
-                        <button name="submit" type="submit" class="btn btn-lg btn-primary" id="submit">Guardar</button>
-                        <div class="result"></div>
+                    <input type="button" class="btn btn-lg btn-primary" name="guardar" value="Guardar"
+                        onclick="GuardarPropiedad()" />
+                    <div class="mensajesABM"></div>
 
-                    </div>
-                </form>
+                </div>
             </div>
 
         </div>
@@ -189,14 +186,14 @@
     <a href="#top" class="topHome"><i class="fa fa-chevron-up fa-2x"></i></a>
 
     <!--[if lte IE 8]><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><![endif]-->
-    <script src="js/modernizr-latest.js"></script>
-    <script src="js/jquery-1.8.2.min.js" type="text/javascript"></script>
-    <script src="js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="js/jquery.isotope.min.js" type="text/javascript"></script>
-    <script src="js/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
-    <script src="js/jquery.nav.js" type="text/javascript"></script>
-    <script src="js/jquery.cslider.js" type="text/javascript"></script>
-    <script src="js/custom.js" type="text/javascript"></script>
-    <script src="js/owl-carousel/owl.carousel.js"></script>
+    <script src="../js/modernizr-latest.js"></script>
+    <script src="../js/jquery-1.8.2.min.js" type="text/javascript"></script>
+    <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../js/jquery.isotope.min.js" type="text/javascript"></script>
+    <script src="../js/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+    <script src="../js/jquery.nav.js" type="text/javascript"></script>
+    <script src="../js/jquery.cslider.js" type="text/javascript"></script>
+    <script src="../js/custom.js" type="text/javascript"></script>
+    <script src="../js/owl-carousel/owl.carousel.js"></script>
 </body>
 </html>
