@@ -1,5 +1,6 @@
 <?php 
-require_once('recaptchalib.php');
+//require_once('recaptchalib.php');
+require_once('/clases/Elemento.php');
 
 function SendContactEmail() {
 
@@ -62,6 +63,19 @@ function strContains($needle, $haystack)
 function isLocalServer() {
     return strContains('localhost',$_SERVER['HTTP_HOST']);   
 }
+
+// Checks the server the site is running on. Returns true if it is localhost
+//function obtenerHost() {
+//    //$host = 'http://www.tplaurenzano.esy.es/SERVIDOR/ws.php';
+//
+//    if (isLocalServer()) {
+//        return 'http://localhost:8080/martillera/SERVIDOR/ws.php';
+//    } else {
+//        return 'http://localhost:80/TP-Laurenzano/SERVIDOR/ws.php';
+//    }
+//
+//
+//}
 
 // reCAPTCHA Data site key
 function getDataSitekey() {
@@ -140,6 +154,10 @@ function GuardarFoto($patente) {
         }           
     }
     return true;
+}
+
+function ObtenerDestacadas() {
+    return Elemento::TraerDestacadas();
 }
 
 ?>

@@ -1,3 +1,7 @@
+<?php
+require_once('/php/funciones.php');
+?>
+
 <!doctype html>
 <!--[if IE 7 ]>    <html lang="en-gb" class="isie ie7 oldie no-js"> <![endif]-->
 <!--[if IE 8 ]>    <html lang="en-gb" class="isie ie8 oldie no-js"> <![endif]-->
@@ -28,6 +32,19 @@
     <link rel="stylesheet" href="css/styles.css" />
     <!-- Font Awesome -->
     <link href="font/css/font-awesome.min.css" rel="stylesheet">
+
+    <script src="js/funcionesAjax.js"></script>
+
+    <!--[if lte IE 8]><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><![endif]-->
+    <script src="js/modernizr-latest.js"></script>
+    <script src="js/jquery-1.8.2.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/jquery.isotope.min.js" type="text/javascript"></script>
+    <script src="js/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+    <script src="js/jquery.nav.js" type="text/javascript"></script>
+    <script src="js/jquery.cslider.js" type="text/javascript"></script>
+    <script src="js/custom.js" type="text/javascript"></script>
+    <script src="js/owl-carousel/owl.carousel.js"></script>
 </head>
 
 <body>
@@ -106,94 +123,12 @@
                 </nav>
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="portfolio-items isotopeWrapper clearfix" id="3">
-
-                            <article class="col-sm-4 isotopeItem venta">
-                                <div class="portfolio-item">
-                                    <img src="images/portfolio/depto-3amb-720x550.jpg" alt="" />
-                                    <div class="portfolio-desc align-center">
-                                        <div class="folio-info">
-                                            <a href="images/portfolio/depto-3amb-720x550.jpg" class="fancybox">
-                                                <h5>Depto 3 amb</h5>
-                                                <i class="fa fa-arrows-alt fa-2x"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <article class="col-sm-4 isotopeItem alquiler">
-                                <div class="portfolio-item">
-                                    <img src="images/portfolio/depto-1amb-720x550.jpg" alt="" />
-                                    <div class="portfolio-desc align-center">
-                                        <div class="folio-info">
-                                            <a href="images/portfolio/depto-1amb-720x550.jpg" class="fancybox">
-                                                <h5>depto 1 amb</h5>
-                                                <i class="fa fa-arrows-alt fa-2x"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-
-
-                            <article class="col-sm-4 isotopeItem alquiler">
-                                <div class="portfolio-item">
-                                    <img src="images/portfolio/casa-4amb-720x550.jpg" alt="" />
-                                    <div class="portfolio-desc align-center">
-                                        <div class="folio-info">
-                                            <a href="images/portfolio/casa-4amb-720x550.jpg" class="fancybox">
-                                                <h5>casa 4 amb</h5>
-                                                <i class="fa fa-arrows-alt fa-2x"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <article class="col-sm-4 isotopeItem venta">
-                                <div class="portfolio-item">
-                                    <img src="images/portfolio/casa-antigua-720x550.jpg" alt="" />
-                                    <div class="portfolio-desc align-center">
-                                        <div class="folio-info">
-                                            <a href="images/portfolio/casa-antigua-720x550.jpg" class="fancybox">
-                                                <h5>casa antigua</h5>
-                                                <i class="fa fa-arrows-alt fa-2x"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <article class="col-sm-4 isotopeItem alquiler">
-                                <div class="portfolio-item">
-                                    <img src="images/portfolio/depto-2amb-720x550.jpg" alt="" />
-                                    <div class="portfolio-desc align-center">
-                                        <div class="folio-info">
-                                            <a href="images/portfolio/depto-2amb-720x550.jpg" class="fancybox">
-                                                <h5>depto 2 amb</h5>
-                                                <i class="fa fa-arrows-alt fa-2x"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                            
-                            <article class="col-sm-4 isotopeItem venta">
-                                <div class="portfolio-item">
-                                    <img src="images/portfolio/casa-hobbit-720x550.jpg" alt="" />
-                                    <div class="portfolio-desc align-center">
-                                        <div class="folio-info">
-                                            <a href="images/portfolio/casa-hobbit-720x550.jpg" class="fancybox">
-                                                <h5>casa de campo</h5>
-                                                <i class="fa fa-arrows-alt fa-2x"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-
+                        <div class="portfolio-items isotopeWrapper clearfix" id="destacadas">
                         </div>
+
+                        <script>
+                            $("#destacadas").html(MostrarDestacadasJSON('<?php echo ObtenerDestacadas(); ?>'));
+                        </script>
                     </div>
 
                 </div>
@@ -296,15 +231,6 @@
     </section>
     <a href="#top" class="topHome"><i class="fa fa-chevron-up fa-2x"></i></a>
 
-    <!--[if lte IE 8]><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><![endif]-->
-    <script src="js/modernizr-latest.js"></script>
-    <script src="js/jquery-1.8.2.min.js" type="text/javascript"></script>
-    <script src="js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="js/jquery.isotope.min.js" type="text/javascript"></script>
-    <script src="js/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
-    <script src="js/jquery.nav.js" type="text/javascript"></script>
-    <script src="js/jquery.cslider.js" type="text/javascript"></script>
-    <script src="js/custom.js" type="text/javascript"></script>
-    <script src="js/owl-carousel/owl.carousel.js"></script>
+    
 </body>
 </html>
