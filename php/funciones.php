@@ -1,6 +1,6 @@
 <?php 
 //require_once('recaptchalib.php');
-require_once('/clases/Elemento.php');
+require_once('clases/Elemento.php');
 
 function SendContactEmail() {
 

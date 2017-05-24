@@ -48,8 +48,8 @@ function MostrarDestacadasJSON(propiedades) {
     retorno += '<img src="images/portfolio/' + propiedades[i].imagenes + '" alt="" />';
 
 
-    retorno += '<div class="portfolio-desc align-center">';
-    retorno += '<div class="folio-info">';
+    retorno += '<div class="portfolio-desc align-center" style="height:100%;">';
+    retorno += '<div class="folio-info" style="height:100%;">';
     retorno += '<a href="images/portfolio/' + propiedades[i].imagenes + '" class="fancybox">';
 	retorno += '<h5>' + propiedades[i].tipo + ' ' + propiedades[i].ambientes + ' ambientes</h5>';
 	retorno += '<i class="fa fa-arrows-alt fa-2x"></i>';
