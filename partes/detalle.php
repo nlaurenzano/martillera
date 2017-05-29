@@ -23,15 +23,18 @@
     <link rel="stylesheet" type="text/css" href="../css/isotope.css" media="screen" />
     <link rel="stylesheet" href="../js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
     <link rel="stylesheet" type="text/css" href="../css/da-slider.css" />
-    <!-- Owl Carousel Assets -->
-    <link href="../js/owl-carousel/owl.carousel.css" rel="stylesheet">
+    
     <link rel="stylesheet" href="../css/styles.css" />
     <!-- Font Awesome -->
     <link href="../font/css/font-awesome.min.css" rel="stylesheet">
     
-    <link href="../css/switch.css" rel="stylesheet">
+    <!--<link href="../css/switch.css" rel="stylesheet">-->
+    <link href="../skins/default.css" rel="stylesheet" />
 
+    <link href="../css/fancybox/jquery.fancybox.css" rel="stylesheet">
+    <link href="../css/jcarousel.css" rel="stylesheet" />
     <link href="../css/flexslider.css" rel="stylesheet" />
+
 
     <?php include_once "../php/clases/Elemento.php";?>
 
