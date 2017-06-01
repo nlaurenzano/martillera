@@ -91,7 +91,7 @@
                 <input type="hidden" name="idPropiedad" id="idPropiedad" />
 
                 <div class="col-lg-8" id="detallePropiedad">
-                </div>
+                <!-- </div> -->
                 <!-- /.col -->
 
                 <script>
@@ -99,25 +99,22 @@
                 </script>
 
 
-
-
-
                     <article>
                             <div class="post-slider">
                                 <div class="post-heading">
-                                    <h3><a href="#">This is an example of slider post format</a></h3>
+                                    
                                 </div>
                                 <!-- start flexslider -->
                                 <div id="post-slider" class="flexslider">
                                     <ul class="slides">
                                         <li>
-                                        <img src="../images/portfolio/depto-1amb-720x550.jpg" alt="" />
+                                            <img src="../images/portfolio/depto-1amb-720x550.jpg" alt="" />
                                         </li>
                                         <li>
-                                        <img src="../images/portfolio/depto-1amb-720x550.jpg" alt="" />
+                                            <img src="../images/portfolio/depto-3amb-720x550.jpg" alt="" />
                                         </li>
                                         <li>
-                                        <img src="../images/portfolio/depto-1amb-720x550.jpg" alt="" />
+                                            <img src="../images/portfolio/casa-antigua-720x550.jpg" alt="" />
                                         </li>
                                     </ul>
                                 </div>
@@ -135,6 +132,40 @@
                                 </ul>
                             </div>
                     </article>
+
+                </div>
+                <!-- /.col -->
+
+            <div class="col-lg-4">
+                <aside class="right-sidebar">
+
+                    <form method="post" action="" id="contactfrm" role="form">
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <!--<label for="name">Nombre</label>-->
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Nombre" title="Por favor ingrese su nombre">
+                            </div>
+                            <div class="form-group">
+                                <!--<label for="email">Correo electrónico</label>-->
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Correo electrónico" title="Por favor ingrese una dirección de correo electrónico válida">
+                            </div>
+                            <div class="form-group">
+                                <!--<label for="comments">Mensaje</label>-->
+                                <textarea name="comment" class="form-control" id="comments" cols="3" rows="5" placeholder="Mensaje" title="Por favor ingrese su mensaje"></textarea>
+                            </div>
+                            <button name="submit" type="submit" class="btn btn-lg btn-primary" id="submit">Enviar</button>
+                            <div class="result"></div>
+                        </div>
+                    </form>
+
+
+
+                
+                </aside>
+            </div>
+
+
 
 
 
@@ -186,6 +217,7 @@
     <a href="#top" class="topHome"><i class="fa fa-chevron-up fa-2x"></i></a>
 
     <!--[if lte IE 8]><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><![endif]-->
+    <!--
     <script src="../js/modernizr-latest.js"></script>
     <script src="../js/jquery-1.8.2.min.js" type="text/javascript"></script>
     <script src="../js/bootstrap.min.js" type="text/javascript"></script>
@@ -195,5 +227,19 @@
     <script src="../js/jquery.cslider.js" type="text/javascript"></script>
     <script src="../js/custom.js" type="text/javascript"></script>
     <script src="../js/owl-carousel/owl.carousel.js"></script>
+-->
+
+    <script src="../js/jquery.js"></script>
+    <script src="../js/jquery.easing.1.3.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.fancybox.pack.js"></script>
+    <script src="../js/jquery.fancybox-media.js"></script>
+    <script src="../js/google-code-prettify/prettify.js"></script>
+    <script src="../js/portfolio/jquery.quicksand.js"></script>
+    <script src="../js/portfolio/setting.js"></script>
+    <script src="../js/jquery.flexslider.js"></script>
+    <script src="../js/animate.js"></script>
+    <script src="../js/custom2.js"></script>
+
 </body>
 </html>

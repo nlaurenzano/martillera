@@ -1,10 +1,10 @@
 function GuardarPropiedad()
 {
-	alert('¡Guardado!');return false;
+	//alert('¡Guardado!');return false;
 	
 	$(".mensajesABM").html('');
 
-	var id=$("#idModificar").val();
+	var id=$("#idPropiedad").val();
 	var operacion=$("#operacion").val();	// radio
 	var tipo=$("#tipo").val();				// radio
 	var ambientes=$("#ambientes").val();
@@ -46,7 +46,7 @@ function GuardarPropiedad()
 		
 	});
 	funcionAjax.fail(function(retorno){
-		$(".mensajesABM").html("Error al ingresar el elemento: " + retorno.responseText);
+		$(".mensajesABM").html("Error al ingresar la propiedad: " + retorno.responseText);
 	});
 }
 
