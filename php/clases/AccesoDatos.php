@@ -1,6 +1,6 @@
 <?php
 
-require_once('../php/funciones.php');
+//require_once('./php/funciones.php');
 
 class AccesoDatos
 {

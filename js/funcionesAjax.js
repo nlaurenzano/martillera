@@ -1,9 +1,9 @@
 function Mostrar(queMostrar)
 {
-	$("#principal").html('<img style="padding-top:10%;" src="imagenes/preloader.gif">');
+	$("#principal").html('<img style="padding-top:10%;" src="images/preloader.gif">');
 
 	var funcionAjax=$.ajax({
-		url:"nexo.php",
+		url:"php/action.php",
 		type:"post",
 		data:{queHacer:queMostrar}
 	});
@@ -21,7 +21,7 @@ function Mostrar(queMostrar)
 
 function MostrarLogin() {
 	var funcionAjax=$.ajax({
-		url:"nexo.php",
+		url:"php/action.php",
 		type:"post",
 		data:{queHacer:"MostrarLogin"}
 	});
