@@ -42,6 +42,16 @@
 
 </head>
 
+
+<?php
+if(isset($_POST['idPropiedad'])) {
+        $propiedad = Elemento::TraerPorId($_POST['idPropiedad']);
+    } else {
+        $propiedad = Elemento::TraerPorId('1');
+    }
+
+?>
+
 <body>
     <header class="header">
         <div class="container">
@@ -77,12 +87,6 @@
     <div id="#top"></div>
 
 
-
-
-
-
-
-	<!--Contact -->
     <section id="detalle" class="page-section secPad">
         <div class="container">
 
@@ -102,19 +106,19 @@
                     <article>
                             <div class="post-slider">
                                 <div class="post-heading">
-                                    
+                                    <h3><?php echo isset($propiedad) ?  $propiedad->GetTipo()." | ".$propiedad->GetZona() : "" ; ?></h3>
                                 </div>
                                 <!-- start flexslider -->
                                 <div id="post-slider" class="flexslider">
                                     <ul class="slides">
                                         <li>
-                                            <img src="../images/portfolio/depto-1amb-720x550.jpg" alt="" />
+                                            <img src="../images/portfolio/<?php echo isset($propiedad) ?  $propiedad->GetImagenes()[0] : "" ; ?>" alt="" />
                                         </li>
                                         <li>
-                                            <img src="../images/portfolio/depto-3amb-720x550.jpg" alt="" />
+                                            <img src="../images/portfolio/<?php echo isset($propiedad) ?  $propiedad->GetImagenes()[1] : "" ; ?>" alt="" />
                                         </li>
                                         <li>
-                                            <img src="../images/portfolio/casa-antigua-720x550.jpg" alt="" />
+                                            <img src="../images/portfolio/<?php echo isset($propiedad) ?  $propiedad->GetImagenes()[2] : "" ; ?>" alt="" />
                                         </li>
                                     </ul>
                                 </div>
@@ -142,6 +146,8 @@
                     <form method="post" action="" id="contactfrm" role="form">
 
                         <div class="col-sm-12">
+                            <h3>Contacto</h3>
+                            
                             <div class="form-group">
                                 <!--<label for="name">Nombre</label>-->
                                 <input type="text" class="form-control" name="name" id="name" placeholder="Nombre" title="Por favor ingrese su nombre">

@@ -10,7 +10,6 @@ class AccesoDatos
     private function __construct()
     {
         try {
-            //$this->objetoPDO = new PDO('mysql:host=localhost;dbname=u299730995_est;charset=utf8', 'u299730995_root', 'nsmo1cl', array(PDO::ATTR_EMULATE_PREPARES => false,PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
             if (isLocalServer()) {
             $this->objetoPDO = new PDO('mysql:host=localhost;dbname=silvanapropiedades;charset=utf8', 'root', '', array(PDO::ATTR_EMULATE_PREPARES => false,PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
             } else {

@@ -41,7 +41,7 @@ class Elemento
 		return $this->descripcion;
 	}
 	public function GetImagenes() {
-		return $this->imagenes;
+		return explode(",",$this->imagenes);;
 	}
 	public function GetOcultar() {
 		return $this->ocultar;
@@ -70,7 +70,7 @@ class Elemento
 		$this->descripcion = $valor;
 	}
 	public function SetImagenes($valor) {
-		$this->imagenes = $valor;
+		$this->imagenes = implode(",",$valor);
 	}
 	public function SetOcultar($valor) {
 		$this->ocultar = $valor;
@@ -143,12 +143,12 @@ class Elemento
 	public static function TraerPorId($id) 
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta = $objetoAccesoDato->RetornarConsulta("SELECT id, campo1, campo2, campo3 FROM listado WHERE id = :id");
+		$consulta = $objetoAccesoDato->RetornarConsulta("SELECT id,operacion,tipo,ambientes,zona,descripcion,imagenes,ocultar,destacada FROM propiedades WHERE id = :id");
 		$consulta->bindValue(':id', $id, PDO::PARAM_STR);
 		$consulta->execute();
-		//return $consulta->fetchObject('Elemento');
-		$elementos = $consulta->fetchall();
-		return $elementos[0];
+		return $consulta->fetchObject('Elemento');
+		//$elementos = $consulta->fetchall();
+		//return $elementos[0];
 	}
 
 	public static function Borrar($id)
