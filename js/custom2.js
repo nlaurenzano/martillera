@@ -42,8 +42,8 @@ jQuery(document).ready(function($) {
 		// tooltip
 		$('.social-network li a, .options_box .color a').tooltip();
 
-		// fancybox
-		$(".fancybox").fancybox({				
+		// fancybox2
+		$(".fancybox2").fancybox2({				
 				padding : 0,
 				autoResize: true,
 				beforeShow: function () {
