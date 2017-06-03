@@ -1,4 +1,7 @@
 <?php
+require_once('../php/funciones.php');
+require_once('../php/clases/Elemento.php');
+
 if(isset($_POST['idPropiedad'])) {
         $propiedad = Elemento::TraerPorId($_POST['idPropiedad']);
     } else {
@@ -6,6 +9,26 @@ if(isset($_POST['idPropiedad'])) {
     }
 
 ?>
+
+<link rel="stylesheet" href="./css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="./css/isotope.css" media="screen" />
+<link rel="stylesheet" href="./js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+<link rel="stylesheet" type="text/css" href="./css/da-slider.css" />
+
+<link rel="stylesheet" href="./css/styles.css" />
+<!-- Font Awesome -->
+<link href="./font/css/font-awesome.min.css" rel="stylesheet">
+
+<!--<link href="./css/switch.css" rel="stylesheet">-->
+<link href="./skins/default.css" rel="stylesheet" />
+
+<link href="./css/fancybox/jquery.fancybox.css" rel="stylesheet">
+<link href="./css/jcarousel.css" rel="stylesheet" />
+<link href="./css/flexslider.css" rel="stylesheet" />
+
+<script type="text/javascript" src="./js/funcionesABM.js"></script>
+
+
 
 <section id="detalle" class="page-section secPad">
     <div class="container">
@@ -32,13 +55,13 @@ if(isset($_POST['idPropiedad'])) {
                             <div id="post-slider" class="flexslider">
                                 <ul class="slides">
                                     <li>
-                                        <img src="../images/portfolio/<?php echo isset($propiedad) ?  $propiedad->GetImagenes()[0] : "" ; ?>" alt="" />
+                                        <img src="./images/portfolio/<?php echo isset($propiedad) ?  $propiedad->GetImagenes()[0] : "" ; ?>" alt="" />
                                     </li>
                                     <li>
-                                        <img src="../images/portfolio/<?php echo isset($propiedad) ?  $propiedad->GetImagenes()[1] : "" ; ?>" alt="" />
+                                        <img src="./images/portfolio/<?php echo isset($propiedad) ?  $propiedad->GetImagenes()[1] : "" ; ?>" alt="" />
                                     </li>
                                     <li>
-                                        <img src="../images/portfolio/<?php echo isset($propiedad) ?  $propiedad->GetImagenes()[2] : "" ; ?>" alt="" />
+                                        <img src="./images/portfolio/<?php echo isset($propiedad) ?  $propiedad->GetImagenes()[2] : "" ; ?>" alt="" />
                                     </li>
                                 </ul>
                             </div>
@@ -104,3 +127,16 @@ if(isset($_POST['idPropiedad'])) {
     </div>
     <!--/.container-->
 </section>
+
+
+<script src="./js/jquery.js"></script>
+<!--<script src="./js/jquery.easing.1.3.js"></script>-->
+<script src="./js/bootstrap.min.js"></script>
+<!--<script src="./js/jquery.fancybox.pack.js"></script>-->
+<script src="./js/jquery.fancybox-media.js"></script>
+<script src="./js/google-code-prettify/prettify.js"></script>
+<script src="./js/portfolio/jquery.quicksand.js"></script>
+<script src="./js/portfolio/setting.js"></script>
+<script src="./js/jquery.flexslider.js"></script>
+<script src="./js/animate.js"></script>
+<script src="./js/custom2.js"></script>

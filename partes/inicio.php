@@ -1,6 +1,22 @@
 <?php
-require_once('./php/funciones.php');
+require_once('../php/funciones.php');
 ?>
+
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/isotope.css" media="screen" />
+<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+<link rel="stylesheet" type="text/css" href="css/da-slider.css" />
+<!-- Font Awesome -->
+<link href="font/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- Owl Carousel Assets -->
+<link href="js/owl-carousel/owl.carousel.css" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css" />
+
+<script src="js/jquery-1.8.2.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/funcionesAjax.js"></script>
+
+
 
 <section id="home">
     <div class="banner-container">
@@ -44,6 +60,7 @@ require_once('./php/funciones.php');
                     <li><a href="#" class="btn-theme btn-small" data-filter=".alquiler">Alquiler</a></li>
                 </ul>
             </nav>
+            <a onclick="MostrarHeader('MostrarHeaderPropiedad');Mostrar('MostrarPropiedad');">DETALLE TEST</a>
             <div class="col-md-12">
                 <div class="row">
                     <div class="portfolio-items isotopeWrapper clearfix" id="destacadas">
@@ -124,3 +141,15 @@ require_once('./php/funciones.php');
     </div>
     <!--/.container-->
 </section>
+
+
+<div class="clear"></div>
+
+<script src="js/modernizr-latest.js"></script>
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/jquery.isotope.min.js" type="text/javascript"></script>
+<script src="js/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+<script src="js/jquery.nav.js" type="text/javascript"></script>
+<script src="js/jquery.cslider.js" type="text/javascript"></script>
+<script src="js/custom.js" type="text/javascript"></script>
+<script src="js/owl-carousel/owl.carousel.js"></script>
