@@ -1,17 +1,17 @@
 /*!
- * Media helper for fancybox2
+ * Media helper for fancyBox
  * version: 1.0.5 (Tue, 23 Oct 2012)
- * @requires fancybox2 v2.0 or later
+ * @requires fancyBox v2.0 or later
  *
  * Usage:
- *     $(".fancybox2").fancybox2({
+ *     $(".fancybox").fancybox({
  *         helpers : {
  *             media: true
  *         }
  *     });
  *
  * Set custom URL parameters:
- *     $(".fancybox2").fancybox2({
+ *     $(".fancybox").fancybox({
  *         helpers : {
  *             media: {
  *                 youtube : {
@@ -24,7 +24,7 @@
  *     });
  *
  * Or:
- *     $(".fancybox2").fancybox2({,
+ *     $(".fancybox").fancybox({,
  *	       helpers : {
  *             media: true
  *         },
@@ -64,8 +64,8 @@
 (function ($) {
 	"use strict";
 
-	//Shortcut for fancybox2 object
-	var F = $.fancybox2,
+	//Shortcut for fancyBox object
+	var F = $.fancybox,
 		format = function( url, rez, params ) {
 			params = params || '';
 

@@ -11,6 +11,12 @@ switch ($queHago) {
 	case 'MostrarPropiedad':
 		include("../partes/detalle.php");
 		break;
+	case 'MostrarHeaderInicio':
+		include("../partes/navInicio.html");
+		break;
+	case 'MostrarHeaderPropiedad':
+		include("../partes/navPropiedad.html");
+		break;
 /*
 	case 'GuardarPropiedad':
 		Elemento::GuardarPropiedad($_POST['id'], $_POST['campo1'], $_POST['campo2'], $_POST['campo3']);
