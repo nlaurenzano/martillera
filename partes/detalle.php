@@ -132,7 +132,7 @@ if(isset($_POST['idPropiedad'])) {
 <script src="./js/jquery.js"></script>
 <!--<script src="./js/jquery.easing.1.3.js"></script>-->
 <script src="./js/bootstrap.min.js"></script>
-<!--<script src="./js/jquery.fancybox.pack.js"></script>-->
+<script src="./js/jquery.fancybox.pack.js"></script>
 <script src="./js/jquery.fancybox-media.js"></script>
 <script src="./js/google-code-prettify/prettify.js"></script>
 <script src="./js/portfolio/jquery.quicksand.js"></script>
