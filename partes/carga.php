@@ -102,7 +102,7 @@
                         <input type="radio" name="tipo" value="local"> Local
                     </div>
 
-                    <div class="form-group" title="Por favor seleccione la zona.">
+                    <div class="form-group" title="Por favor seleccione la cantidad de ambientes.">
                         <label for="ambientes">Cantidad de ambientes</label>
                         <input type="text" class="form-control" name="ambientes" id="ambientes">
                     </div>
