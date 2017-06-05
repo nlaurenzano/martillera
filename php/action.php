@@ -6,10 +6,13 @@ $queHago = $_POST['queHacer'];
 
 switch ($queHago) {
 	case 'MostrarInicio':
-		include("../partes/inicio.php");
+		//include("../partes/inicio.php");
+
+		header("../partes/inicio.php");
 		break;
 	case 'MostrarPropiedad':
-		include("../partes/detalle.php");
+		//include("../partes/detalle.php");
+		header("../partes/detalle.php");
 		break;
 	case 'MostrarHeaderInicio':
 		include("../partes/navInicio.html");

@@ -9,25 +9,24 @@ if(isset($_POST['idPropiedad'])) {
     }
 
 ?>
-
+<!--
 <link rel="stylesheet" href="./css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="./css/isotope.css" media="screen" />
 <link rel="stylesheet" href="./js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
 <link rel="stylesheet" type="text/css" href="./css/da-slider.css" />
-
 <link rel="stylesheet" href="./css/styles.css" />
+-->
 <!-- Font Awesome -->
-<link href="./font/css/font-awesome.min.css" rel="stylesheet">
+<!--<link href="./font/css/font-awesome.min.css" rel="stylesheet">-->
 
 <!--<link href="./css/switch.css" rel="stylesheet">-->
+<!--
 <link href="./skins/default.css" rel="stylesheet" />
 
 <link href="./css/fancybox/jquery.fancybox.css" rel="stylesheet">
 <link href="./css/jcarousel.css" rel="stylesheet" />
 <link href="./css/flexslider.css" rel="stylesheet" />
-
-<script type="text/javascript" src="./js/funcionesABM.js"></script>
-
+-->
 
 
 <section id="detalle" class="page-section secPad">
@@ -128,9 +127,12 @@ if(isset($_POST['idPropiedad'])) {
     <!--/.container-->
 </section>
 
-
+<!--
 <script src="./js/jquery.js"></script>
+-->
 <!--<script src="./js/jquery.easing.1.3.js"></script>-->
+
+<!--
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/jquery.fancybox.pack.js"></script>
 <script src="./js/jquery.fancybox-media.js"></script>
@@ -140,3 +142,4 @@ if(isset($_POST['idPropiedad'])) {
 <script src="./js/jquery.flexslider.js"></script>
 <script src="./js/animate.js"></script>
 <script src="./js/custom2.js"></script>
+-->
