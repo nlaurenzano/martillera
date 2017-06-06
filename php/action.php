@@ -4,21 +4,27 @@ require_once("clases/Elemento.php");
 
 $queHago = $_POST['queHacer'];
 
+if(isset($_POST['idPropiedad'])) {
+    $propiedad = $_POST['idPropiedad'];
+} else {
+    $propiedad = '1';
+}
+
 switch ($queHago) {
 	case 'MostrarInicio':
-		//include("../partes/inicio.php");
-
-		header("../partes/inicio.php");
+		include("../partes/inicio.php");
 		break;
 	case 'MostrarPropiedad':
-		//include("../partes/detalle.php");
-		header("../partes/detalle.php");
+		include("../partes/detalle.php");
 		break;
 	case 'MostrarHeaderInicio':
 		include("../partes/navInicio.html");
 		break;
 	case 'MostrarHeaderPropiedad':
-		include("../partes/navPropiedad.html");
+		include("../partes/navDetalle.html");
+		break;
+	case 'MostrarHeaderListado':
+		include("../partes/navListado.html");
 		break;
 /*
 	case 'GuardarPropiedad':

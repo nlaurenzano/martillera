@@ -60,7 +60,6 @@ require_once('../php/funciones.php');
                     <li><a href="#" class="btn-theme btn-small" data-filter=".alquiler">Alquiler</a></li>
                 </ul>
             </nav>
-            <a onclick="MostrarHeader('MostrarHeaderPropiedad');Mostrar('MostrarInicio');">DETALLE TEST</a>
             <div class="col-md-12">
                 <div class="row">
                     <div class="portfolio-items isotopeWrapper clearfix" id="destacadas">

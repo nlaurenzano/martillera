@@ -9,78 +9,37 @@ if(isset($_POST['idPropiedad'])) {
     }
 
 ?>
-<!--
+
 <link rel="stylesheet" href="./css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="./css/isotope.css" media="screen" />
 <link rel="stylesheet" href="./js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
 <link rel="stylesheet" type="text/css" href="./css/da-slider.css" />
 <link rel="stylesheet" href="./css/styles.css" />
--->
-<!-- Font Awesome -->
-<!--<link href="./font/css/font-awesome.min.css" rel="stylesheet">-->
 
-<!--<link href="./css/switch.css" rel="stylesheet">-->
-<!--
+<!-- Font Awesome -->
+<link href="./font/css/font-awesome.min.css" rel="stylesheet">
+
+<link href="./css/switch.css" rel="stylesheet">
+
 <link href="./skins/default.css" rel="stylesheet" />
 
 <link href="./css/fancybox/jquery.fancybox.css" rel="stylesheet">
 <link href="./css/jcarousel.css" rel="stylesheet" />
 <link href="./css/flexslider.css" rel="stylesheet" />
--->
 
 
 <section id="detalle" class="page-section secPad">
     <div class="container">
 
-        <div class="row mrgn10">
+        <div class="row mrgn30">
 
-            <input type="hidden" name="idPropiedad" id="idPropiedad" />
-
-            <div class="col-lg-8" id="detallePropiedad">
-            <!-- </div> -->
+            <div class="col-lg-8 mainContent" id="detallePropiedad">
+            </div>
             <!-- /.col -->
 
             <script>
-                //$("#detallePropiedad").html(MostrarDetalleJSON('<?php //echo ObtenerDetalle(); ?>'));
+                $("#detallePropiedad").html(MostrarDetalleJSON('<?php echo ObtenerDetalle($_POST["idPropiedad"]); ?>'));
             </script>
-
-
-                <article>
-                        <div class="post-slider">
-                            <div class="post-heading">
-                                <h3><?php echo isset($propiedad) ?  $propiedad->GetTipo()." | ".$propiedad->GetZona() : "" ; ?></h3>
-                            </div>
-                            <!-- start flexslider -->
-                            <div id="post-slider" class="flexslider">
-                                <ul class="slides">
-                                    <li>
-                                        <img src="./images/portfolio/<?php echo isset($propiedad) ?  $propiedad->GetImagenes()[0] : "" ; ?>" alt="" />
-                                    </li>
-                                    <li>
-                                        <img src="./images/portfolio/<?php echo isset($propiedad) ?  $propiedad->GetImagenes()[1] : "" ; ?>" alt="" />
-                                    </li>
-                                    <li>
-                                        <img src="./images/portfolio/<?php echo isset($propiedad) ?  $propiedad->GetImagenes()[2] : "" ; ?>" alt="" />
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- end flexslider -->
-                        </div>
-                        <p>
-                             Descripción de la propiedad
-                        </p>
-                        <div class="bottom-article">
-                            <ul class="meta-post">
-                                <li><i class="icon-calendar"></i><a href="#"> Mar 23, 2013</a></li>
-                                <li><i class="icon-user"></i><a href="#"> Admin</a></li>
-                                <li><i class="icon-folder-open"></i><a href="#"> Blog</a></li>
-                                <li><i class="icon-comments"></i><a href="#">4 Comments</a></li>
-                            </ul>
-                        </div>
-                </article>
-
-            </div>
-            <!-- /.col -->
 
         <div class="col-lg-4">
             <aside class="right-sidebar">
@@ -127,12 +86,10 @@ if(isset($_POST['idPropiedad'])) {
     <!--/.container-->
 </section>
 
-<!--
 <script src="./js/jquery.js"></script>
--->
+
 <!--<script src="./js/jquery.easing.1.3.js"></script>-->
 
-<!--
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/jquery.fancybox.pack.js"></script>
 <script src="./js/jquery.fancybox-media.js"></script>
@@ -142,4 +99,3 @@ if(isset($_POST['idPropiedad'])) {
 <script src="./js/jquery.flexslider.js"></script>
 <script src="./js/animate.js"></script>
 <script src="./js/custom2.js"></script>
--->

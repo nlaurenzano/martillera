@@ -160,4 +160,12 @@ function ObtenerDestacadas() {
     return Elemento::TraerDestacadas();
 }
 
+function ObtenerTodas() {
+    return Elemento::TraerTodos();
+}
+
+function ObtenerDetalle($idPropiedad) {
+    return json_encode(Elemento::TraerPorId($idPropiedad));
+}
+
 ?>

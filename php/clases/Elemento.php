@@ -146,9 +146,9 @@ class Elemento
 		$consulta = $objetoAccesoDato->RetornarConsulta("SELECT id,operacion,tipo,ambientes,zona,descripcion,imagenes,ocultar,destacada FROM propiedades WHERE id = :id");
 		$consulta->bindValue(':id', $id, PDO::PARAM_STR);
 		$consulta->execute();
-		return $consulta->fetchObject('Elemento');
-		//$elementos = $consulta->fetchall();
-		//return $elementos[0];
+		//return $consulta->fetchObject('Elemento');
+		$elementos = $consulta->fetchall();
+		return $elementos[0];
 	}
 
 	public static function Borrar($id)
@@ -173,11 +173,10 @@ class Elemento
 	public static function TraerTodos()
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta=$objetoAccesoDato->RetornarConsulta("SELECT id,campo1,campo2,campo3 FROM listado");
+		$consulta=$objetoAccesoDato->RetornarConsulta("SELECT id,operacion,tipo,ambientes,zona,descripcion,imagenes,ocultar,destacada FROM propiedades");
 		$consulta->execute();
-
-		//return $consulta->fetchall(PDO::FETCH_CLASS,"Elemento");
-		return $consulta->fetchall();
+		$retorno = json_encode($consulta->fetchall());
+		return $retorno;
 	}
 
 //--------------------------------------------------------------------------------//
