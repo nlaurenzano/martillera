@@ -37,6 +37,11 @@ p {
 	line-height:22px;
 }
 
+label {
+    color: #858585;
+    line-height:22px;
+}
+
 .white {
 	background:#fff;
 }

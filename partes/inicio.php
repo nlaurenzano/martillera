@@ -70,6 +70,69 @@ require_once('../php/funciones.php');
                     </script>
                 </div>
 
+                <div class="col-md-2">
+                </div>
+
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group" title="Por favor seleccione el tipo de operación.">
+                                <label for="operacion">Operación</label><br />
+                                <select class="form-control" name="operacion" id="operacion">
+                                    <option value="none">-</option>
+                                    <option value="alquiler">Alquiler</option>
+                                    <option value="venta">Venta</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group" title="Por favor seleccione el tipo de vivienda.">
+                                <label for="tipo">Tipo de vivienda</label><br />
+                                <select class="form-control" name="tipo" id="tipo">
+                                    <option value="none">-</option>
+                                    <option value="depto">Departamento</option>
+                                    <option value="casa">Casa</option>
+                                    <option value="local">Local</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group" title="Por favor seleccione la cantidad de ambientes.">
+                                <label for="ambientes">Cantidad de ambientes</label>
+                                <select class="form-control" name="ambientes" id="ambientes">
+                                    <option value="none">-</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="form-group" title="Por favor seleccione la zona.">
+                                <label for="zona">Zona</label><br />
+                                <select class="form-control" name="zona" id="zona">
+                                    <option value="none">Todas las zonas</option>
+                                    <option value="caba">Ciudad Autónoma de Buenos Aires</option>
+                                    <option value="gbasur">Gran Buenos Aires Sur</option>
+                                    <option value="costa">Costa Atlántica</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 text-center">
+                            <input type="button" class="btn btn-lg btn-primary" name="buscar" value="Buscar"
+                            onclick="BuscarPropiedades()" />
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
         </div>
     </div>
