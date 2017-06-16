@@ -170,6 +170,54 @@ class Elemento
 		return $retorno;
 	}
 
+	public static function TraerPorFiltro($operacion, $tipo, $ambientes, $zona) {
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+
+		// Si no se seteó un filtro, entonces no se incluye en el query
+		if ($operacion == 'none') {
+			$operacionQuery = '';
+		} else {
+			$operacionQuery = 'operacion = :operacion AND';
+		}
+		if ($tipo == 'none') {
+			$tipoQuery = '';
+		} else {
+			$tipoQuery = 'tipo = :tipo AND';
+		}
+		if ($ambientes == 'none') {
+			$ambientesQuery = '';
+		} else {
+			$ambientesQuery = 'ambientes = :ambientes AND';
+		}
+		if ($zona == 'none') {
+			$zonaQuery = '';
+		} else {
+			$zonaQuery = 'zona = :zona AND';
+		}
+
+		// Las condiciones del query se terminan en TRUE para completar el posible AND que queda al final
+		$consulta=$objetoAccesoDato->RetornarConsulta("SELECT id,operacion,tipo,ambientes,zona,descripcion,imagenes,ocultar,destacada FROM propiedades WHERE " . $operacionQuery . $tipoQuery . $ambientesQuery . $zonaQuery . " TRUE");
+		
+		// Si el filtro no se incluyó en el query, entonces no hay que bindearlo
+		if ($operacion != 'none') {
+			$consulta->bindValue(':operacion', $operacion, PDO::PARAM_STR);
+		}
+		if ($tipo != 'none') {
+			$consulta->bindValue(':tipo', $tipo, PDO::PARAM_STR);
+		}
+		if ($ambientes != 'none') {
+			$consulta->bindValue(':ambientes', $ambientes, PDO::PARAM_STR);
+		}
+		if ($zona != 'none') {
+			$consulta->bindValue(':zona', $zona, PDO::PARAM_STR);
+		}
+
+		$consulta->execute();
+		//return $consulta->fetchall(PDO::FETCH_CLASS,"Elemento");
+		$retorno = json_encode($consulta->fetchall());
+		return $retorno;
+	}
+
 	public static function TraerTodos()
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();

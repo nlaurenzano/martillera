@@ -59,6 +59,48 @@ function MostrarLogin() {
 	});
 }
 
+function BuscarPropiedades() {
+	var operacion=$("#operacion").val();
+	var tipo=$("#tipo").val();
+	var ambientes=$("#ambientes").val();
+	var zona=$("#zona").val();
+alert('operacion: ' + operacion);
+	$("#operacion").val('');
+	$("#tipo").val('');
+	$("#ambientes").val('');
+	$("#zona").val('');
+
+	var funcionAjax=$.ajax({
+		url:"php/action.php",
+		type:"post",
+		data:{
+			queHacer:"BuscarPropiedad",
+			operacion:operacion,
+			tipo:tipo,
+			ambientes:ambientes,
+			zona:zona}
+	});
+	funcionAjax.done(function(retorno){
+		alert('cargando listado...');
+		$("#principal").html(retorno);
+	});
+	funcionAjax.fail(function(retorno){
+		//$("#principal").html(retorno.responseText);	
+		alert('Error');
+	});
+	funcionAjax.always(function(retorno){
+		//alert("siempre "+retorno.statusText);
+
+	});
+
+
+}
+
+
+
+
+
+
 function MostrarDestacadasJSON(propiedades) {
 	//return propiedades;
 	propiedades = JSON.parse(propiedades);
@@ -138,3 +180,4 @@ function MostrarTodasJSON(propiedades) {
 
 	return retorno;
 }
+

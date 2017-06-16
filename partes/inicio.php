@@ -125,8 +125,11 @@ require_once('../php/funciones.php');
                         </div>
 
                         <div class="col-md-4 text-center">
-                            <input type="button" class="btn btn-lg btn-primary" name="buscar" value="Buscar"
+                            <div class="form-group">
+                                <br />
+                                <input type="button" class="btn btn-lg btn-primary" name="buscar" value="Buscar"
                             onclick="BuscarPropiedades()" />
+                            </div>
                         </div>
 
                     </div>

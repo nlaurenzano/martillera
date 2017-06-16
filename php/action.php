@@ -26,6 +26,9 @@ switch ($queHago) {
 	case 'MostrarHeaderListado':
 		include("../partes/navListado.html");
 		break;
+	case 'BuscarPropiedad':
+		echo Elemento::TraerPorFiltro($_POST['operacion'], $_POST['tipo'], $_POST['ambientes'], $_POST['zona']);
+		break;
 /*
 	case 'GuardarPropiedad':
 		Elemento::GuardarPropiedad($_POST['id'], $_POST['campo1'], $_POST['campo2'], $_POST['campo3']);
