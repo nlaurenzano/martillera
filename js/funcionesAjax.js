@@ -64,7 +64,7 @@ function BuscarPropiedades() {
 	var tipo=$("#tipo").val();
 	var ambientes=$("#ambientes").val();
 	var zona=$("#zona").val();
-alert('operacion: ' + operacion);
+
 	$("#operacion").val('');
 	$("#tipo").val('');
 	$("#ambientes").val('');
@@ -81,8 +81,14 @@ alert('operacion: ' + operacion);
 			zona:zona}
 	});
 	funcionAjax.done(function(retorno){
-		alert('cargando listado...');
-		$("#principal").html(retorno);
+		MostrarHeader('MostrarHeaderListado');
+		// Se arma la página que muestra el listado de resultados
+		$("#principal").html(MostrarSeccionListado());
+
+		// Estas dos secciones forman parte de la página de resultados
+		$("#resultados").html(MostrarResultadosJSON(retorno));
+		$("#filtros").html(MostrarFiltros(operacion, tipo, ambientes, zona));
+
 	});
 	funcionAjax.fail(function(retorno){
 		//$("#principal").html(retorno.responseText);	
@@ -162,11 +168,39 @@ function MostrarDetalleJSON(propiedad) {
 	return retorno;
 }
 
-function MostrarTodasJSON(propiedades) {
-	//return propiedades;
-	propiedades = JSON.parse(propiedades);
+function MostrarSeccionListado() {
+
 	var retorno = '';
 
+	retorno += '<section class="page-section secPad">';
+	retorno += '<div class="container">';
+	retorno += '<div class="row mrgn30">';
+	retorno += '<div class="col-lg-8">';
+	retorno += '<div id="resultados"></div>';
+
+	// PAGINACIÓN
+	retorno += '<div id="pagination"><span class="all">Página 1 de 3</span><span class="current">1</span><a href="#" class="inactive">2</a><a href="#" class="inactive">3</a></div>';
+	
+	retorno += '</div>';		// /.col
+
+	retorno += '<div class="col-lg-4"><aside class="right-sidebar">';
+
+	// FILTROS
+	retorno += '<div id="filtros"></div>';
+
+	retorno += '</aside></div>';		// /.col
+	retorno += '</div>';				// /.row
+	retorno += '</div>';				// /.container
+	retorno += '</section>';
+
+	return retorno;
+}
+
+function MostrarResultadosJSON(propiedadesJSON) {
+	//return propiedadesJSON;
+	propiedades = JSON.parse(propiedadesJSON);
+
+	var retorno = '';
 	for (var i = 0; i <= propiedades.length - 1; i++) {
 		retorno += '<article><div class="row mrgn10"><div class="col-lg-4"><div class="post-image">';
 
@@ -181,3 +215,84 @@ function MostrarTodasJSON(propiedades) {
 	return retorno;
 }
 
+function MostrarFiltros(operacion, tipo, ambientes, zona) {
+
+	//return propiedad;
+	var retorno = '';
+	var filtrosAplicados = '';
+	var filtrosDisponibles = '';
+
+	retorno += '<div class="widget"><h4 class="widgetheading">Categorías</h4>';
+
+	// Filtros aplicados
+	filtrosAplicados += armarEtiquetaFiltroAplicado(operacion);
+	filtrosAplicados += armarEtiquetaFiltroAplicado(tipo);
+	filtrosAplicados += armarEtiquetaFiltroAplicado(ambientes);
+	filtrosAplicados += armarEtiquetaFiltroAplicado(zona);
+
+	if (filtrosAplicados != '') {
+		filtrosAplicados = '<h4 class="widgetheading">Filtros aplicados</h4><ul class="cat">' + filtrosAplicados;
+		filtrosAplicados += '</ul>';
+		retorno += filtrosAplicados;
+	}
+
+	// Filtros disponibles
+	filtrosDisponibles += armarEtiquetaFiltroDisponible(operacion, tipo, ambientes, zona);
+
+	if (filtrosDisponibles != '') {
+		filtrosDisponibles = '<h4 class="widgetheading">Filtros Disponibles</h4><ul class="cat">' + filtrosDisponibles;
+		filtrosDisponibles += '</ul>';
+		retorno += filtrosDisponibles;
+	}
+	
+	retorno += '';
+	retorno += '';
+	retorno += '';
+	
+	retorno += '</div>';
+
+	return retorno;
+}
+
+function armarEtiquetaFiltroAplicado(valor) {
+	if (valor != 'none') {
+		return '<li><i class="icon-angle-right"></i><a href="#">' + valor + '</a></li>';
+	} else {
+		return '';
+	}
+}
+
+function armarEtiquetaFiltroDisponible(operacion, tipo, ambientes, zona) {
+	var retorno = '';
+
+	if (operacion == 'none') {
+		retorno += '<h6 class="widgetheading">Tipo de operación</h6><ul class="cat">';
+        retorno += '<li><i class="icon-angle-right"></i><a href="#">Alquiler</a></li>';
+        retorno += '<li><i class="icon-angle-right"></i><a href="#">Venta</a></li>';
+		retorno += '</ul>';
+	}
+
+	if (tipo == 'none') {
+		retorno += '<h6 class="widgetheading">Tipo de vivienda</h6><ul class="cat">';
+        retorno += '<li><i class="icon-angle-right"></i><a href="#">Departamento</a></li>';
+		retorno += '<li><i class="icon-angle-right"></i><a href="#">Casa</a></li>';
+		retorno += '<li><i class="icon-angle-right"></i><a href="#">Local</a></li>';
+		retorno += '</ul>';
+	}
+
+	if (ambientes == 'none') {
+		retorno += '<h6 class="widgetheading">Cantidad de ambientes</h6><ul class="cat">';
+        retorno += '<li><i class="icon-angle-right"></i><a href="#">2 ambientes</a></li>';
+        retorno += '<li><i class="icon-angle-right"></i><a href="#">3 ambientes</a></li>';
+		retorno += '</ul>';
+	}
+
+	if (zona == 'none') {
+		retorno += '<h6 class="widgetheading">Zona</h6><ul class="cat">';
+        retorno += '<li><i class="icon-angle-right"></i><a href="#">Ciudad Autónoma de Buenos Aires</a></li>';
+        retorno += '<li><i class="icon-angle-right"></i><a href="#">Gran Buenos Aires Sur</a></li>';
+        retorno += '<li><i class="icon-angle-right"></i><a href="#">Costa Atlántica</a></li>';
+		retorno += '</ul>';
+	}
+	return retorno;
+}
