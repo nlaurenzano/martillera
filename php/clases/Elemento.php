@@ -177,26 +177,26 @@ class Elemento
 		if ($operacion == 'none') {
 			$operacionQuery = '';
 		} else {
-			$operacionQuery = 'operacion = :operacion AND';
+			$operacionQuery = 'operacion = :operacion AND ';
 		}
 		if ($tipo == 'none') {
 			$tipoQuery = '';
 		} else {
-			$tipoQuery = 'tipo = :tipo AND';
+			$tipoQuery = 'tipo = :tipo AND ';
 		}
 		if ($ambientes == 'none') {
 			$ambientesQuery = '';
 		} else {
-			$ambientesQuery = 'ambientes = :ambientes AND';
+			$ambientesQuery = 'ambientes = :ambientes AND ';
 		}
 		if ($zona == 'none') {
 			$zonaQuery = '';
 		} else {
-			$zonaQuery = 'zona = :zona AND';
+			$zonaQuery = 'zona = :zona AND ';
 		}
 
 		// Las condiciones del query se terminan en TRUE para completar el posible AND que queda al final
-		$consulta=$objetoAccesoDato->RetornarConsulta("SELECT id,operacion,tipo,ambientes,zona,descripcion,imagenes,ocultar,destacada FROM propiedades WHERE " . $operacionQuery . $tipoQuery . $ambientesQuery . $zonaQuery . " TRUE");
+		$consulta=$objetoAccesoDato->RetornarConsulta("SELECT id,operacion,tipo,ambientes,zona,descripcion,imagenes,ocultar,destacada FROM propiedades WHERE " . $operacionQuery . $tipoQuery . $ambientesQuery . $zonaQuery . "TRUE");
 		
 		// Si el filtro no se incluyó en el query, entonces no hay que bindearlo
 		if ($operacion != 'none') {

@@ -88,6 +88,8 @@ function BuscarPropiedades() {
 		// Estas dos secciones forman parte de la página de resultados
 		$("#resultados").html(MostrarResultadosJSON(retorno));
 		$("#filtros").html(MostrarFiltros(operacion, tipo, ambientes, zona));
+		
+		$(".topHome").click();
 
 	});
 	funcionAjax.fail(function(retorno){
@@ -198,6 +200,9 @@ function MostrarSeccionListado() {
 
 function MostrarResultadosJSON(propiedadesJSON) {
 	//return propiedadesJSON;
+
+	// else
+
 	propiedades = JSON.parse(propiedadesJSON);
 
 	var retorno = '';
@@ -209,7 +214,12 @@ function MostrarResultadosJSON(propiedadesJSON) {
 
 		retorno += '<div class="col-lg-8"><div class="post-heading">';
 		retorno += '<h3>' + propiedades[i].tipo + ' | ' + propiedades[i].zona + '</h3>';
-		retorno += '</div><p>' + propiedades[i].descripcion + '</p></div></div></article>';
+		retorno += '</div>';
+		retorno += '<p>' + propiedades[i].operacion + '</p>';
+		retorno += '<p>Ambientes: ' + propiedades[i].ambientes + '</p>';
+		retorno += '<p>' + propiedades[i].descripcion + '</p>';
+
+		retorno += '</div></div></article>';
 	}
 
 	return retorno;
@@ -222,7 +232,7 @@ function MostrarFiltros(operacion, tipo, ambientes, zona) {
 	var filtrosAplicados = '';
 	var filtrosDisponibles = '';
 
-	retorno += '<div class="widget"><h4 class="widgetheading">Categorías</h4>';
+	retorno += '<div class="widget">';
 
 	// Filtros aplicados
 	filtrosAplicados += armarEtiquetaFiltroAplicado(operacion);
@@ -233,8 +243,10 @@ function MostrarFiltros(operacion, tipo, ambientes, zona) {
 	if (filtrosAplicados != '') {
 		filtrosAplicados = '<h4 class="widgetheading">Filtros aplicados</h4><ul class="cat">' + filtrosAplicados;
 		filtrosAplicados += '</ul>';
-		retorno += filtrosAplicados;
+	} else {
+		filtrosAplicados = '<h4 class="widgetheading">Sin filtros aplicados</h4>';
 	}
+	retorno += filtrosAplicados;
 
 	// Filtros disponibles
 	filtrosDisponibles += armarEtiquetaFiltroDisponible(operacion, tipo, ambientes, zona);
@@ -244,10 +256,6 @@ function MostrarFiltros(operacion, tipo, ambientes, zona) {
 		filtrosDisponibles += '</ul>';
 		retorno += filtrosDisponibles;
 	}
-	
-	retorno += '';
-	retorno += '';
-	retorno += '';
 	
 	retorno += '</div>';
 
