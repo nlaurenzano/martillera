@@ -70,6 +70,13 @@ function BuscarPropiedades() {
 	$("#ambientes").val('');
 	$("#zona").val('');
 
+	BuscarPropiedadesFiltro(operacion, tipo, ambientes, zona, true);
+}
+
+function BuscarPropiedadesFiltro(operacion, tipo, ambientes, zona, header) {
+	// El parámetro 'header' es un boolean que indica si debe cargarse el encabezado
+	// Es falso cuando la búsqueda se llama desde el listado, por lo que no debe volverse a cargar
+
 	var funcionAjax=$.ajax({
 		url:"php/action.php",
 		type:"post",
@@ -81,7 +88,8 @@ function BuscarPropiedades() {
 			zona:zona}
 	});
 	funcionAjax.done(function(retorno){
-		MostrarHeader('MostrarHeaderListado');
+		if (header == true) {MostrarHeader('MostrarHeaderListado');}
+
 		// Se arma la página que muestra el listado de resultados
 		$("#principal").html(MostrarSeccionListado());
 
@@ -235,14 +243,13 @@ function MostrarFiltros(operacion, tipo, ambientes, zona) {
 	retorno += '<div class="widget">';
 
 	// Filtros aplicados
-	filtrosAplicados += armarEtiquetaFiltroAplicado(operacion);
-	filtrosAplicados += armarEtiquetaFiltroAplicado(tipo);
-	filtrosAplicados += armarEtiquetaFiltroAplicado(ambientes);
-	filtrosAplicados += armarEtiquetaFiltroAplicado(zona);
+	filtrosAplicados += armarEtiquetaFiltroAplicado(operacion, tipo, ambientes, zona);
 
 	if (filtrosAplicados != '') {
-		filtrosAplicados = '<h4 class="widgetheading">Filtros aplicados</h4><ul class="cat">' + filtrosAplicados;
+		filtrosAplicados = '<h4 class="widgetheading">Filtros Aplicados</h4><ul class="cat">' + filtrosAplicados;
 		filtrosAplicados += '</ul>';
+		filtrosAplicados += '<p ><a href="#top" onclick="BuscarPropiedadesFiltro(\'none\',\'none\',\'none\',\'none\', false)">Quitar filtros</a></p>';
+
 	} else {
 		filtrosAplicados = '<h4 class="widgetheading">Sin filtros aplicados</h4>';
 	}
@@ -262,12 +269,34 @@ function MostrarFiltros(operacion, tipo, ambientes, zona) {
 	return retorno;
 }
 
-function armarEtiquetaFiltroAplicado(valor) {
-	if (valor != 'none') {
-		return '<li><i class="icon-angle-right"></i><a href="#">' + valor + '</a></li>';
+function armarEtiquetaFiltroAplicado(operacion, tipo, ambientes, zona) {
+	var retorno = '';
+
+	if (operacion != 'none') {
+		retorno += '<li>' + operacion + ' <a href="#top" onclick="BuscarPropiedadesFiltro(\'none\', \'' + tipo + '\', \'' + ambientes + '\', \'' + zona + '\', false)"><span class="fa fa-times"></span></a></li>';
 	} else {
-		return '';
+		retorno += '';
 	}
+	
+	if (tipo != 'none') {
+		retorno += '<li>' + tipo + ' <a href="#top" onclick="BuscarPropiedadesFiltro( \'' + tipo + '\',\'none\', \'' + ambientes + '\', \'' + zona + '\', false)"><span class="fa fa-times"></span></a></li>';
+	} else {
+		retorno += '';
+	}
+	
+	if (ambientes != 'none') {
+		retorno += '<li>' + ambientes + ' <a href="#top" onclick="BuscarPropiedadesFiltro( \'' + tipo + '\', \'' + tipo + '\',\'none\', \'' + zona + '\', false)"><span class="fa fa-times"></span></a></li>';
+	} else {
+		retorno += '';
+	}
+	
+	if (zona != 'none') {
+		retorno += '<li>' + zona + ' <a href="#top" onclick="BuscarPropiedadesFiltro( \'' + tipo + '\', \'' + tipo + '\', \'' + ambientes + '\',\'none\', false)"><span class="fa fa-times"></span></a></li>';
+	} else {
+		retorno += '';
+	}
+
+	return retorno;
 }
 
 function armarEtiquetaFiltroDisponible(operacion, tipo, ambientes, zona) {
@@ -275,31 +304,31 @@ function armarEtiquetaFiltroDisponible(operacion, tipo, ambientes, zona) {
 
 	if (operacion == 'none') {
 		retorno += '<h6 class="widgetheading">Tipo de operación</h6><ul class="cat">';
-        retorno += '<li><i class="icon-angle-right"></i><a href="#">Alquiler</a></li>';
-        retorno += '<li><i class="icon-angle-right"></i><a href="#">Venta</a></li>';
+        retorno += '<li class="label label-default"><a href="#top" onclick="BuscarPropiedadesFiltro(\'alquiler\', \'' + tipo + '\', \'' + ambientes + '\', \'' + zona + '\', false)">Alquiler</a></li></ br>';
+        retorno += '<li class="label label-default"><a href="#top" onclick="BuscarPropiedadesFiltro(\'venta\', \'' + tipo + '\', \'' + ambientes + '\', \'' + zona + '\', false)">Venta</a></li>';
 		retorno += '</ul>';
 	}
 
 	if (tipo == 'none') {
 		retorno += '<h6 class="widgetheading">Tipo de vivienda</h6><ul class="cat">';
-        retorno += '<li><i class="icon-angle-right"></i><a href="#">Departamento</a></li>';
-		retorno += '<li><i class="icon-angle-right"></i><a href="#">Casa</a></li>';
-		retorno += '<li><i class="icon-angle-right"></i><a href="#">Local</a></li>';
+        retorno += '<li><i class="icon-angle-right"></i><a href="#top" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\', \'depto\', \'' + ambientes + '\', \'' + zona + '\', false)">Departamento</a></li>';
+		retorno += '<li><i class="icon-angle-right"></i><a href="#top" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\', \'casa\', \'' + ambientes + '\', \'' + zona + '\', false)">Casa</a></li>';
+		retorno += '<li><i class="icon-angle-right"></i><a href="#top" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\', \'local\', \'' + ambientes + '\', \'' + zona + '\', false)">Local</a></li>';
 		retorno += '</ul>';
 	}
 
 	if (ambientes == 'none') {
 		retorno += '<h6 class="widgetheading">Cantidad de ambientes</h6><ul class="cat">';
-        retorno += '<li><i class="icon-angle-right"></i><a href="#">2 ambientes</a></li>';
-        retorno += '<li><i class="icon-angle-right"></i><a href="#">3 ambientes</a></li>';
+        retorno += '<li><i class="icon-angle-right"></i><a href="#top" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\',\'' + tipo + '\',\'2\', \'' + zona + '\', false)">2 ambientes</a></li>';
+        retorno += '<li><i class="icon-angle-right"></i><a href="#top" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\',\'' + tipo + '\',\'3\', \'' + zona + '\', false)">3 ambientes</a></li>';
 		retorno += '</ul>';
 	}
 
 	if (zona == 'none') {
 		retorno += '<h6 class="widgetheading">Zona</h6><ul class="cat">';
-        retorno += '<li><i class="icon-angle-right"></i><a href="#">Ciudad Autónoma de Buenos Aires</a></li>';
-        retorno += '<li><i class="icon-angle-right"></i><a href="#">Gran Buenos Aires Sur</a></li>';
-        retorno += '<li><i class="icon-angle-right"></i><a href="#">Costa Atlántica</a></li>';
+        retorno += '<li><i class="icon-angle-right"></i><a href="#top" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\',\'' + tipo + '\',\'' + ambientes + '\',\'caba\', false)">Ciudad Autónoma de Buenos Aires</a></li>';
+        retorno += '<li><i class="icon-angle-right"></i><a href="#top" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\',\'' + tipo + '\',\'' + ambientes + '\',\'gbasur\', false)">Gran Buenos Aires Sur</a></li>';
+        retorno += '<li><i class="icon-angle-right"></i><a href="#top" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\',\'' + tipo + '\',\'' + ambientes + '\',\'costa\', false)">Costa Atlántica</a></li>';
 		retorno += '</ul>';
 	}
 	return retorno;
