@@ -29,6 +29,9 @@ switch ($queHago) {
 	case 'BuscarPropiedad':
 		echo Elemento::TraerPorFiltro($_POST['operacion'], $_POST['tipo'], $_POST['ambientes'], $_POST['zona']);
 		break;
+	case 'Descripciones':
+		echo ObtenerDescripciones();
+		break;
 /*
 	case 'GuardarPropiedad':
 		Elemento::GuardarPropiedad($_POST['id'], $_POST['campo1'], $_POST['campo2'], $_POST['campo3']);

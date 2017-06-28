@@ -33,7 +33,6 @@
     
     <script src="js/jquery-1.8.2.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/funcionesAjax.js"></script>
-
 </head>
 
 <body>

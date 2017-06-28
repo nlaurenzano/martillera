@@ -1,6 +1,7 @@
 <?php 
 //require_once('recaptchalib.php');
 require_once('clases/Elemento.php');
+require_once('clases/Descripciones.php');
 
 function SendContactEmail() {
 
@@ -168,4 +169,7 @@ function ObtenerDetalle($idPropiedad) {
     return json_encode(Elemento::TraerPorId($idPropiedad));
 }
 
+function ObtenerDescripciones() {
+    return Descripciones::TraerTodos();
+}
 ?>

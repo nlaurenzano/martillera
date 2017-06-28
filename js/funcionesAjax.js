@@ -1,29 +1,33 @@
-function Mostrar(queMostrar, idPropiedad)
-{
-	$("#principal").html('<img style="padding-top:10%;" src="images/preloader.gif">');
+function Mostrar(queMostrar, idPropiedad) {
+	//$("#principal").html('<img style="padding-top:10%;" src="images/preloader.gif">');
 
-	var funcionAjax=$.ajax({
-		url:"php/action.php",
-		type:"post",
-		data:{
-			queHacer:queMostrar,
-			idPropiedad:idPropiedad}
-	});
-	funcionAjax.done(function(retorno){
-		$("#principal").html(retorno);
-	});
-	funcionAjax.fail(function(retorno){
-		$("#principal").html(retorno.responseText);	
-	});
-	funcionAjax.always(function(retorno){
-		//alert("siempre "+retorno.statusText);
+	// Primero se chequea si las descripciones de texto están cargadas
+	if (typeof hayDescripciones=="undefined") {
+		// Cargamos las descripciones
+		CargarDescripcionesAjax(queMostrar, idPropiedad);
+	} else {
+		var funcionAjax=$.ajax({
+			url:"php/action.php",
+			type:"post",
+			data:{
+				queHacer:queMostrar,
+				idPropiedad:idPropiedad}
+		});
+		funcionAjax.done(function(retorno){
+			$("#principal").html(retorno);
+		});
+		funcionAjax.fail(function(retorno){
+			$("#principal").html(retorno.responseText);	
+		});
+		funcionAjax.always(function(retorno){
+			//alert("siempre "+retorno.statusText);
 
-	});
+		});
+	}
 }
 
-function MostrarHeader(queMostrar)
-{
-	$("#navegacion").html('<img style="padding-top:10%;" src="images/preloader.gif">');
+function MostrarHeader(queMostrar) {
+	//$("#navegacion").html('<img style="padding-top:10%;" src="images/preloader.gif">');
 
 	var funcionAjax=$.ajax({
 		url:"php/action.php",
@@ -35,6 +39,26 @@ function MostrarHeader(queMostrar)
 	});
 	funcionAjax.fail(function(retorno){
 		$("#navegacion").html(retorno.responseText);	
+	});
+	funcionAjax.always(function(retorno){
+		//alert("siempre "+retorno.statusText);
+
+	});
+}
+
+function CargarDescripcionesAjax(queMostrar, idPropiedad) {
+	var funcionAjax=$.ajax({
+		url:"php/action.php",
+		type:"post",
+		data:{
+			queHacer:'Descripciones'}
+	});
+	funcionAjax.done(function(retorno){
+		CargarDescripciones(retorno);
+		Mostrar(queMostrar, idPropiedad);
+	});
+	funcionAjax.fail(function(retorno){
+		//$("#principal").html(retorno.responseText);	
 	});
 	funcionAjax.always(function(retorno){
 		//alert("siempre "+retorno.statusText);
@@ -112,11 +136,6 @@ function BuscarPropiedadesFiltro(operacion, tipo, ambientes, zona, header) {
 
 }
 
-
-
-
-
-
 function MostrarDestacadasJSON(propiedades) {
 	//return propiedades;
 	propiedades = JSON.parse(propiedades);
@@ -132,14 +151,16 @@ function MostrarDestacadasJSON(propiedades) {
     retorno += '<div class="portfolio-desc align-center" style="height:100%;">';
     retorno += '<div class="folio-info" style="height:100%;">';
     retorno += '<a href="images/portfolio/' + propiedades[i].imagenes.split(",")[0] + '" class="fancybox">';
-	retorno += '<h5>' + propiedades[i].tipo + ' ' + propiedades[i].ambientes + ' ambientes</h5>';
+
+	if (propiedades[i].ambientes == '1') {
+		retorno += '<h5>' + ObtenerDesc('tipo',propiedades[i].tipo) + ' ' + propiedades[i].ambientes + ObtenerDesc('ambientes','1ambiente') + '</h5>';
+	} else {
+		retorno += '<h5>' + ObtenerDesc('tipo',propiedades[i].tipo) + ' ' + propiedades[i].ambientes + ObtenerDesc('ambientes','xambientes') + '</h5>';
+	}
+
 	retorno += '<i class="fa fa-arrows-alt fa-2x"></i>';
 	retorno += '</a>';
-	
-
-	retorno += '<a class="mrgn30" style="cursor: pointer;" onclick="MostrarHeader(\'MostrarHeaderPropiedad\');Mostrar(\'MostrarPropiedad\',' + propiedades[i].id + ');">DETALLE</a>';
-	
-
+	retorno += '<a class="mrgn30" style="cursor: pointer;text-transform:uppercase;" onclick="MostrarHeader(\'MostrarHeaderPropiedad\');Mostrar(\'MostrarPropiedad\',' + propiedades[i].id + ');">' + ObtenerDesc('etiquetas','detalle') + '</a>';
 	retorno += '</div></div></div></article>';
 	}
 
@@ -153,7 +174,7 @@ function MostrarDetalleJSON(propiedad) {
 	var retorno = '';
 
 	retorno += '<article><div class="post-slider"><div class="post-heading">';
-	retorno += '<h3>' + propiedad.tipo + ' | ' + propiedad.zona + '</h3></div>';
+	retorno += '<h3>' + ObtenerDesc('tipo',propiedad.tipo) + ' | ' + ObtenerDesc('zona',propiedad.zona) + '</h3></div>';
 	retorno += '<div id="post-slider" class="flexslider">';
     retorno += '<ul class="slides">';
 
@@ -165,14 +186,14 @@ function MostrarDetalleJSON(propiedad) {
     retorno += '</ul>';
     retorno += '</div></div>';
 
-  	retorno += '<div class="mrgn30"><h4>Descripción</h4>';
+  	retorno += '<div class="mrgn30"><h4>' + ObtenerDesc('etiquetas','descripcion') + '</h4>';
   	retorno += '<p>' + propiedad.descripcion + '</p></div>';
 
   	retorno += '<div class="bottom-article"><ul class="meta-post">';
-  	retorno += '<li><strong>Tipo de operación:</strong> ' + propiedad.operacion + '</li>';
-  	retorno += '<li><strong>Tipo de vivienda:</strong> ' + propiedad.tipo + '</li>';
-  	retorno += '<li><strong>Cantidad de ambientes:</strong> ' + propiedad.ambientes + '</li>';
-  	retorno += '<li><strong>Zona:</strong> ' + propiedad.zona + '</li>';
+  	retorno += '<li><strong>' + ObtenerDesc('etiquetas','operacion') + ':</strong> ' + ObtenerDesc('operacion',propiedad.operacion) + '</li>';
+  	retorno += '<li><strong>' + ObtenerDesc('etiquetas','tipo') + ':</strong> ' + ObtenerDesc('tipo',propiedad.tipo) + '</li>';
+  	retorno += '<li><strong>' + ObtenerDesc('etiquetas','ambientes') + ':</strong> ' + propiedad.ambientes + '</li>';
+  	retorno += '<li><strong>' + ObtenerDesc('etiquetas','zona') + ':</strong> ' + ObtenerDesc('zona',propiedad.zona) + '</li>';
 	retorno += '</ul></div></article>';
 
 	return retorno;
@@ -208,22 +229,18 @@ function MostrarSeccionListado() {
 
 function MostrarResultadosJSON(propiedadesJSON) {
 	//return propiedadesJSON;
-
-	// else
-
 	propiedades = JSON.parse(propiedadesJSON);
 
 	var retorno = '';
 	for (var i = 0; i <= propiedades.length - 1; i++) {
 		retorno += '<article><div class="row mrgn10"><div class="col-lg-4"><div class="post-image">';
-
-		retorno += '<img src="images/portfolio/' + propiedades[i].imagenes.split(",")[0] + '" alt="" style="width:100%;"/>';
+		retorno += '<a class="mrgn30" style="cursor: pointer;text-transform:uppercase;" onclick="MostrarHeader(\'MostrarHeaderPropiedad\');Mostrar(\'MostrarPropiedad\',' + propiedades[i].id + ');"><img src="images/portfolio/' + propiedades[i].imagenes.split(",")[0] + '" alt="" style="width:100%;"/></a>';
 		retorno += '</div></div>';
 
 		retorno += '<div class="col-lg-8"><div class="post-heading">';
-		retorno += '<h3>' + propiedades[i].tipo + ' | ' + propiedades[i].zona + '</h3>';
+		retorno += '<h3>' + ObtenerDesc('tipo',propiedades[i].tipo) + ' | ' + ObtenerDesc('zona',propiedades[i].zona) + '</h3>';
 		retorno += '</div>';
-		retorno += '<p>' + propiedades[i].operacion + '</p>';
+		retorno += '<p>' + ObtenerDesc('operacion',propiedades[i].operacion) + '</p>';
 		retorno += '<p>Ambientes: ' + propiedades[i].ambientes + '</p>';
 		retorno += '<p>' + propiedades[i].descripcion + '</p>';
 
@@ -246,12 +263,12 @@ function MostrarFiltros(operacion, tipo, ambientes, zona) {
 	filtrosAplicados += armarEtiquetaFiltroAplicado(operacion, tipo, ambientes, zona);
 
 	if (filtrosAplicados != '') {
-		filtrosAplicados = '<h4 class="widgetheading">Filtros Aplicados</h4><ul class="cat">' + filtrosAplicados;
+		filtrosAplicados = '<h4 class="tituloFiltros" style="text-transform:capitalize;">' + ObtenerDesc('etiquetas','filtrosaplicados') + '</h4><ul class="cat">' + filtrosAplicados;
 		filtrosAplicados += '</ul>';
-		filtrosAplicados += '<p ><a href="#top" onclick="BuscarPropiedadesFiltro(\'none\',\'none\',\'none\',\'none\', false)">Quitar filtros</a></p>';
+		filtrosAplicados += '<p ><a href="#top" class="quitarFiltros" onclick="BuscarPropiedadesFiltro(\'none\',\'none\',\'none\',\'none\', false)">Quitar filtros</a></p>';
 
 	} else {
-		filtrosAplicados = '<h4 class="widgetheading">Sin filtros aplicados</h4>';
+		filtrosAplicados = '<h4 class="tituloFiltros" style="text-transform:capitalize;">' + ObtenerDesc('etiquetas','sinfiltrosaplicados') + '</h4>';
 	}
 	retorno += filtrosAplicados;
 
@@ -259,7 +276,7 @@ function MostrarFiltros(operacion, tipo, ambientes, zona) {
 	filtrosDisponibles += armarEtiquetaFiltroDisponible(operacion, tipo, ambientes, zona);
 
 	if (filtrosDisponibles != '') {
-		filtrosDisponibles = '<h4 class="widgetheading">Filtros Disponibles</h4><ul class="cat">' + filtrosDisponibles;
+		filtrosDisponibles = '<h4 class="tituloFiltros" style="text-transform:capitalize;">' + ObtenerDesc('etiquetas','filtrosdisponibles') + '</h4><ul class="cat">' + filtrosDisponibles;
 		filtrosDisponibles += '</ul>';
 		retorno += filtrosDisponibles;
 	}
@@ -271,27 +288,32 @@ function MostrarFiltros(operacion, tipo, ambientes, zona) {
 
 function armarEtiquetaFiltroAplicado(operacion, tipo, ambientes, zona) {
 	var retorno = '';
+//cursor: pointer;
 
 	if (operacion != 'none') {
-		retorno += '<li>' + operacion + ' <a href="#top" onclick="BuscarPropiedadesFiltro(\'none\', \'' + tipo + '\', \'' + ambientes + '\', \'' + zona + '\', false)"><span class="fa fa-times"></span></a></li>';
+		retorno += '<li class="label label-default filtroAplicado" onclick="BuscarPropiedadesFiltro(\'none\', \'' + tipo + '\', \'' + ambientes + '\', \'' + zona + '\', false)">' + ObtenerDesc('operacion',operacion) + ' <span class="fa fa-times pull-right"></span></li>';
 	} else {
 		retorno += '';
 	}
 	
 	if (tipo != 'none') {
-		retorno += '<li>' + tipo + ' <a href="#top" onclick="BuscarPropiedadesFiltro( \'' + tipo + '\',\'none\', \'' + ambientes + '\', \'' + zona + '\', false)"><span class="fa fa-times"></span></a></li>';
+		retorno += '<li class="label label-default filtroAplicado" onclick="BuscarPropiedadesFiltro( \'' + operacion + '\',\'none\', \'' + ambientes + '\', \'' + zona + '\', false)">' + ObtenerDesc('tipo',tipo) + ' <span class="fa fa-times pull-right"></span></li>';
 	} else {
 		retorno += '';
 	}
 	
 	if (ambientes != 'none') {
-		retorno += '<li>' + ambientes + ' <a href="#top" onclick="BuscarPropiedadesFiltro( \'' + tipo + '\', \'' + tipo + '\',\'none\', \'' + zona + '\', false)"><span class="fa fa-times"></span></a></li>';
+		if (ambientes == '1') {
+			retorno += '<li class="label label-default filtroAplicado" onclick="BuscarPropiedadesFiltro( \'' + operacion + '\', \'' + tipo + '\',\'none\', \'' + zona + '\', false)">' + ambientes + ObtenerDesc('ambientes','1ambiente') + ' <span class="fa fa-times pull-right"></span></li>';
+		} else {
+			retorno += '<li class="label label-default filtroAplicado" onclick="BuscarPropiedadesFiltro( \'' + operacion + '\', \'' + tipo + '\',\'none\', \'' + zona + '\', false)">' + ambientes + ObtenerDesc('ambientes','xambientes') + ' <span class="fa fa-times pull-right"></span></li>';
+		}
 	} else {
 		retorno += '';
 	}
 	
 	if (zona != 'none') {
-		retorno += '<li>' + zona + ' <a href="#top" onclick="BuscarPropiedadesFiltro( \'' + tipo + '\', \'' + tipo + '\', \'' + ambientes + '\',\'none\', false)"><span class="fa fa-times"></span></a></li>';
+		retorno += '<li class="label label-default filtroAplicado" style="text-align: justify;" onclick="BuscarPropiedadesFiltro( \'' + operacion + '\', \'' + tipo + '\', \'' + ambientes + '\',\'none\', false)">' + ObtenerDesc('zona',zona) + ' <span class="fa fa-times pull-right"></span></li>';
 	} else {
 		retorno += '';
 	}
@@ -303,33 +325,48 @@ function armarEtiquetaFiltroDisponible(operacion, tipo, ambientes, zona) {
 	var retorno = '';
 
 	if (operacion == 'none') {
-		retorno += '<h6 class="widgetheading">Tipo de operación</h6><ul class="cat">';
-        retorno += '<li class="label label-default"><a href="#top" onclick="BuscarPropiedadesFiltro(\'alquiler\', \'' + tipo + '\', \'' + ambientes + '\', \'' + zona + '\', false)">Alquiler</a></li></ br>';
-        retorno += '<li class="label label-default"><a href="#top" onclick="BuscarPropiedadesFiltro(\'venta\', \'' + tipo + '\', \'' + ambientes + '\', \'' + zona + '\', false)">Venta</a></li>';
+		retorno += '<h5 class="tituloFiltros">' + ObtenerDesc('etiquetas','operacion') + '</h5><ul class="cat">';
+        retorno += '<li class="filtroDisponible" onclick="BuscarPropiedadesFiltro(\'alquiler\', \'' + tipo + '\', \'' + ambientes + '\', \'' + zona + '\', false)">' + ObtenerDesc('operacion','alquiler') + '</li>';
+        retorno += '<li class="filtroDisponible" onclick="BuscarPropiedadesFiltro(\'venta\', \'' + tipo + '\', \'' + ambientes + '\', \'' + zona + '\', false)">' + ObtenerDesc('operacion','venta') + '</li>';
 		retorno += '</ul>';
 	}
 
 	if (tipo == 'none') {
-		retorno += '<h6 class="widgetheading">Tipo de vivienda</h6><ul class="cat">';
-        retorno += '<li><i class="icon-angle-right"></i><a href="#top" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\', \'depto\', \'' + ambientes + '\', \'' + zona + '\', false)">Departamento</a></li>';
-		retorno += '<li><i class="icon-angle-right"></i><a href="#top" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\', \'casa\', \'' + ambientes + '\', \'' + zona + '\', false)">Casa</a></li>';
-		retorno += '<li><i class="icon-angle-right"></i><a href="#top" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\', \'local\', \'' + ambientes + '\', \'' + zona + '\', false)">Local</a></li>';
+		retorno += '<h5 class="tituloFiltros">' + ObtenerDesc('etiquetas','tipo') + '</h5><ul class="cat">';
+        retorno += '<li class="filtroDisponible" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\', \'depto\', \'' + ambientes + '\', \'' + zona + '\', false)">' + ObtenerDesc('tipo','depto') + '</li>';
+		retorno += '<li class="filtroDisponible" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\', \'casa\', \'' + ambientes + '\', \'' + zona + '\', false)">' + ObtenerDesc('tipo','casa') + '</li>';
+		retorno += '<li class="filtroDisponible" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\', \'local\', \'' + ambientes + '\', \'' + zona + '\', false)">' + ObtenerDesc('tipo','local') + '</li>';
 		retorno += '</ul>';
 	}
 
 	if (ambientes == 'none') {
-		retorno += '<h6 class="widgetheading">Cantidad de ambientes</h6><ul class="cat">';
-        retorno += '<li><i class="icon-angle-right"></i><a href="#top" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\',\'' + tipo + '\',\'2\', \'' + zona + '\', false)">2 ambientes</a></li>';
-        retorno += '<li><i class="icon-angle-right"></i><a href="#top" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\',\'' + tipo + '\',\'3\', \'' + zona + '\', false)">3 ambientes</a></li>';
+		retorno += '<h5 class="tituloFiltros">' + ObtenerDesc('etiquetas','ambientes') + '</h5><ul class="cat">';
+        retorno += '<li class="filtroDisponible" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\',\'' + tipo + '\',\'1\', \'' + zona + '\', false)">1' + ObtenerDesc('ambientes','1ambiente') + '</li>';
+        retorno += '<li class="filtroDisponible" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\',\'' + tipo + '\',\'2\', \'' + zona + '\', false)">2' + ObtenerDesc('ambientes','xambientes') + '</li>';
+        retorno += '<li class="filtroDisponible" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\',\'' + tipo + '\',\'3\', \'' + zona + '\', false)">3' + ObtenerDesc('ambientes','xambientes') + '</li>';
 		retorno += '</ul>';
 	}
 
 	if (zona == 'none') {
-		retorno += '<h6 class="widgetheading">Zona</h6><ul class="cat">';
-        retorno += '<li><i class="icon-angle-right"></i><a href="#top" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\',\'' + tipo + '\',\'' + ambientes + '\',\'caba\', false)">Ciudad Autónoma de Buenos Aires</a></li>';
-        retorno += '<li><i class="icon-angle-right"></i><a href="#top" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\',\'' + tipo + '\',\'' + ambientes + '\',\'gbasur\', false)">Gran Buenos Aires Sur</a></li>';
-        retorno += '<li><i class="icon-angle-right"></i><a href="#top" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\',\'' + tipo + '\',\'' + ambientes + '\',\'costa\', false)">Costa Atlántica</a></li>';
+		retorno += '<h5 class="tituloFiltros">' + ObtenerDesc('etiquetas','zona') + '</h5><ul class="cat">';
+        retorno += '<li class="filtroDisponible" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\',\'' + tipo + '\',\'' + ambientes + '\',\'caba\', false)">' + ObtenerDesc('zona','caba') + '</li>';
+        retorno += '<li class="filtroDisponible" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\',\'' + tipo + '\',\'' + ambientes + '\',\'gbasur\', false)">' + ObtenerDesc('zona','gbasur') + '</li>';
+        retorno += '<li class="filtroDisponible" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\',\'' + tipo + '\',\'' + ambientes + '\',\'costa\', false)">' + ObtenerDesc('zona','costa') + '</li>';
 		retorno += '</ul>';
 	}
 	return retorno;
+}
+
+
+function CargarDescripciones(descripciones) {
+	//return descripciones;
+	descripciones = JSON.parse(descripciones);
+	hayDescripciones = true;	// Se chequea esta variable para saber si es necesario cargar las descripciones
+	for (var i = 0; i <= descripciones.length - 1; i++) {
+		eval(descripciones[i].grupo + descripciones[i].clave + ' = "' + descripciones[i].descripcion + '";');
+	}
+}
+
+function ObtenerDesc(grupo,clave) {
+	return eval(grupo + clave);
 }
