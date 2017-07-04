@@ -109,8 +109,8 @@ class Elemento
 //--------------------------------------------------------------------------------//
 //--METODO DE CLASE
 
-	public static function Guardar($id, $campo1, $campo2, $campo3) {
-		
+	public static function Guardar($id, $operacion,$tipo,$ambientes,$zona,$descripcion,$imagenes,$ocultar,$destacada) {
+
 		$unElemento = new Elemento();
 		$unElemento->SetId($id);
 		$unElemento->SetOperacion($operacion);
@@ -118,9 +118,9 @@ class Elemento
 		$unElemento->SetAmbientes($ambientes);
 		$unElemento->SetZona($zona);
 		$unElemento->SetDescripcion($descripcion);
-		$unElemento->SetImagenes($imagenes);
 		$unElemento->SetOcultar($ocultar);
 		$unElemento->SetDestacada($destacada);
+		$unElemento->SetImagenes($imagenes);
 
 		if ($unElemento->id > 0) {
 			$unElemento->Modificar();
@@ -234,10 +234,18 @@ class Elemento
 	public function Insertar()
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO listado (campo1, campo2, campo3) values (:campo1, :campo2, :campo3)");
-		$consulta->bindValue(':campo1',$this->campo1, PDO::PARAM_STR);
-		$consulta->bindValue(':campo2',$this->campo2, PDO::PARAM_STR);
-		$consulta->bindValue(':campo3',$this->campo3, PDO::PARAM_STR);
+		$consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO listado (operacion,tipo,ambientes,zona,descripcion,imagenes,ocultar,destacada) values (:operacion,:tipo,:ambientes,:zona,:descripcion,:imagenes,:ocultar,:destacada)");
+
+		$consulta->bindValue(':id',$this->id, PDO::PARAM_STR);
+		$consulta->bindValue(':operacion',$this->operacion, PDO::PARAM_STR);
+		$consulta->bindValue(':tipo',$this->tipo, PDO::PARAM_STR);
+		$consulta->bindValue(':ambientes',$this->ambientes, PDO::PARAM_STR);
+		$consulta->bindValue(':zona',$this->zona, PDO::PARAM_STR);
+		$consulta->bindValue(':descripcion',$this->descripcion, PDO::PARAM_STR);
+		$consulta->bindValue(':destacada',$this->destacada, PDO::PARAM_STR);
+		$consulta->bindValue(':ocultar',$this->ocultar, PDO::PARAM_STR);
+		$consulta->bindValue(':imagenes',$this->imagenes, PDO::PARAM_STR);
+		
 		$consulta->execute();
 		//return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	}
@@ -247,9 +255,13 @@ class Elemento
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		$consulta = $objetoAccesoDato->RetornarConsulta("
 			UPDATE listado SET campo1=:campo1,campo2=:campo2',campo3=:campo3' WHERE id=:id");
+	
+
 		$consulta->bindValue(':campo1',$this->campo1, PDO::PARAM_STR);
 		$consulta->bindValue(':campo2',$this->campo2, PDO::PARAM_STR);
 		$consulta->bindValue(':campo3',$this->campo3, PDO::PARAM_STR);
+	
+
 		$consulta->bindValue(':id',$this->id, PDO::PARAM_STR);
 		$consulta->execute();
 	}

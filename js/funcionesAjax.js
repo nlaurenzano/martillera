@@ -370,3 +370,88 @@ function CargarDescripciones(descripciones) {
 function ObtenerDesc(grupo,clave) {
 	return eval(grupo + clave);
 }
+
+function MostrarFormCarga(propiedad) {
+// El parámetro 'propiedad' es null para propiedades nuevas. Caso contrario, se trata de una modificación
+
+//                <input type="hidden" name="idModificar" id="idModificar" />
+
+	var retorno = '';
+
+	// Título
+	retorno += '<div class="row"><div class="heading text-center">';
+	retorno += '<h2>' + ObtenerDesc('etiquetas','propiedadNueva') + '</h2>';
+	retorno += '</div></div>';
+	
+	retorno += '<div class="row mrgn10">';
+
+	// Operación
+	retorno += '<div class="col-sm-4">';
+	retorno += '<div class="form-group" title="' + ObtenerDesc('etiquetas','seleccioneOperacion') + '">';
+	retorno += '<label for="operacion">' + ObtenerDesc('etiquetas','operacion') + '</label><br />';
+	retorno += '<input type="radio" name="operacion" value="alquiler"> ' + ObtenerDesc('operacion','alquiler') + '<br />';
+	retorno += '<input type="radio" name="operacion" value="venta"> ' + ObtenerDesc('operacion','venta');
+	retorno += '</div>';
+
+	// Tipo
+	retorno += '<div class="form-group" title="' + ObtenerDesc('etiquetas','seleccioneTipo') + '">';
+	retorno += '<label for="tipo">' + ObtenerDesc('etiquetas','tipo') + '</label><br />';
+	retorno += '<input type="radio" name="tipo" value="depto"> ' + ObtenerDesc('tipo','depto') + '<br />';
+	retorno += '<input type="radio" name="tipo" value="casa"> ' + ObtenerDesc('tipo','casa') + '<br />';
+	retorno += '<input type="radio" name="tipo" value="local"> ' + ObtenerDesc('tipo','local') + '';
+	retorno += '</div>';
+	
+	// Ambientes
+	retorno += '<div class="form-group" title="' + ObtenerDesc('etiquetas','seleccioneAmbientes') + '">';
+	retorno += '<label for="ambientes">' + ObtenerDesc('etiquetas','ambientes') + '</label>';
+	retorno += '<input type="text" class="form-control" name="ambientes" id="ambientes">';
+	retorno += '</div>';
+
+	// Zona
+	retorno += '<div class="form-group" title="' + ObtenerDesc('etiquetas','seleccioneZona') + '">';
+	retorno += '<label for="zona">' + ObtenerDesc('etiquetas','zona') + '</label><br />';
+	retorno += '<select class="form-control" name="zona" id="zona">';
+	retorno += '<option value="none">' + ObtenerDesc('etiquetas','seleccioneZona') + '</option>';
+	retorno += '<option value="caba">' + ObtenerDesc('zona','caba') + '</option>';
+	retorno += '<option value="gbasur">' + ObtenerDesc('zona','gbasur') + '</option>';
+	retorno += '<option value="costa">' + ObtenerDesc('zona','costa') + '</option>';
+	retorno += '</select>';
+	retorno += '</div>';
+
+	// Descripción
+	retorno += '<div class="form-group" title="' + ObtenerDesc('etiquetas','ingreseDescripcion') + '">';
+	retorno += '<label for="descripcion">' + ObtenerDesc('etiquetas','descripcion') + '</label>';
+	retorno += '<textarea name="descripcion" class="form-control" id="descripcion" cols="3" rows="5"></textarea>';
+	retorno += '</div>';
+	
+	// Destacada
+	retorno += '<div class="form-group form-control">';
+	retorno += ObtenerDesc('etiquetas','destacada');
+	retorno += '<div class="material-switch pull-right">';
+	retorno += '<input id="destacada" name="destacada" type="checkbox"/>';
+	retorno += '<label for="destacada" class="label-primary"></label>';
+	retorno += '</div>';
+	retorno += '</div>';
+
+	// Ocultar
+	retorno += '<div class="form-group form-control">';
+	retorno += ObtenerDesc('etiquetas','ocultar');
+	retorno += '<div class="material-switch pull-right">';
+	retorno += '<input id="ocultar" name="ocultar" type="checkbox"/>';
+	retorno += '<label for="ocultar" class="label-primary"></label>';
+	retorno += '</div>';
+	retorno += '</div>';
+
+	// Imágenes
+	retorno += '<div class="form-group" title="' + ObtenerDesc('etiquetas','ingreseImagenes') + '">';
+	retorno += '<label for="imagen">' + ObtenerDesc('etiquetas','imagenes') + '</label>';
+	retorno += '<input type="file" class="form-control" name="imagen" id="imagen" accept="image/*" multiple>';
+	retorno += '</div>';
+
+
+	retorno += '<input type="button" class="btn btn-lg btn-primary" name="guardar" value="' + ObtenerDesc('etiquetas','btnGuardar') + '" onclick="GuardarPropiedad()" />';
+	retorno += '<div class="mensajesABM"></div>';
+	retorno += '</div></div>';
+
+	$("#principal").html(retorno);
+}

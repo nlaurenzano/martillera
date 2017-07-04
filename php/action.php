@@ -26,17 +26,20 @@ switch ($queHago) {
 	case 'MostrarHeaderListado':
 		include("../partes/navListado.html");
 		break;
+	case 'MostrarHeaderCarga':
+		include("../partes/navCarga.html");
+		break;
 	case 'BuscarPropiedad':
 		echo Elemento::TraerPorFiltro($_POST['operacion'], $_POST['tipo'], $_POST['ambientes'], $_POST['zona']);
 		break;
 	case 'Descripciones':
 		echo ObtenerDescripciones();
 		break;
-/*
 	case 'GuardarPropiedad':
-		Elemento::GuardarPropiedad($_POST['id'], $_POST['campo1'], $_POST['campo2'], $_POST['campo3']);
+		Elemento::GuardarPropiedad($_POST['id'],$_POST['operacion'],$_POST['tipo'],$_POST['ambientes'],$_POST['zona'],$_POST['descripcion'],$_POST['destacada'],$_POST['ocultar'],$_POST['imagen']);
 		break;
 
+/*
 	case 'MostrarBotones':
 		include("partes/botonesNav.php");
 		break;

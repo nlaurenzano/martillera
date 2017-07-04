@@ -31,8 +31,6 @@
     
     <link href="../css/switch.css" rel="stylesheet">
 
-    <?php include_once "../php/clases.php";?>
-
     <script type="text/javascript" src="../js/funcionesABM.js"></script>
 
 </head>
@@ -77,79 +75,16 @@
 	<!--Contact -->
     <section id="contactUs" class="page-section secPad">
         <div class="container">
-
-            <div class="row">
-                <div class="heading text-center">
-                    <!-- Heading -->
-                    <h2>Carga de propiedades</h2>
-                </div>
+            <div id="formCarga">
             </div>
 
-            <div class="row mrgn10">
-                <input type="hidden" name="idModificar" id="idModificar" />
+            <script>
+                $("#formCarga").html(mostrarFormCarga(null));
+            </script>
 
-                <div class="col-sm-4">
-                    <div class="form-group" title="Por favor seleccione el tipo de operación.">
-                        <label for="operacion">Operación</label><br />
-                        <input type="radio" name="operacion" value="alquiler"> Alquiler<br />
-                        <input type="radio" name="operacion" value="venta"> Venta
-                    </div>
 
-                    <div class="form-group" title="Por favor seleccione el tipo de vivienda.">
-                        <label for="tipo">Tipo de vivienda</label><br />
-                        <input type="radio" name="tipo" value="depto"> Departamento<br />
-                        <input type="radio" name="tipo" value="casa"> Casa<br />
-                        <input type="radio" name="tipo" value="local"> Local
-                    </div>
 
-                    <div class="form-group" title="Por favor seleccione la cantidad de ambientes.">
-                        <label for="ambientes">Cantidad de ambientes</label>
-                        <input type="text" class="form-control" name="ambientes" id="ambientes">
-                    </div>
 
-                    <div class="form-group" title="Por favor seleccione la zona.">
-                        <label for="zona">Zona</label><br />
-                        <select class="form-control" name="zona" id="zona">
-                            <option value="none">Por favor seleccione la zona</option>
-                            <option value="caba">Ciudad Autónoma de Buenos Aires</option>
-                            <option value="gbasur">Gran Buenos Aires Sur</option>
-                            <option value="costa">Costa Atlántica</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group" title="Por favor ingrese la descripción.">
-                        <label for="descripcion">Descripción</label>
-                        <textarea name="descripcion" class="form-control" id="descripcion" cols="3" rows="5"></textarea>
-                    </div>
-
-                    <div class="form-group form-control">
-                        Publicación destacada
-                        <div class="material-switch pull-right">
-                            <input id="destacada" name="destacada" type="checkbox"/>
-                            <label for="destacada" class="label-primary"></label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group form-control">
-                        Ocultar publicación
-                        <div class="material-switch pull-right">
-                            <input id="ocultar" name="ocultar" type="checkbox"/>
-                            <label for="ocultar" class="label-primary"></label>
-                        </div>
-                    </div>
-
-                    <div class="form-group" title="Por favor ingrese imágenes de la propiedad.">
-                        <label for="imagen">Imágenes</label>
-                        <input type="file" class="form-control" name="imagen" id="imagen" accept="image/*" multiple>
-                    </div>
-                    
-
-                    <input type="button" class="btn btn-lg btn-primary" name="guardar" value="Guardar"
-                        onclick="GuardarPropiedad()" />
-                    <div class="mensajesABM"></div>
-
-                </div>
-            </div>
 
         </div>
         <!--/.container-->

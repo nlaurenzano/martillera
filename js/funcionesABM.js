@@ -23,7 +23,7 @@ function GuardarPropiedad()
 	$("#descripcion").val('');
 	$("#destacada").checked(false);
 	$("#ocultar").checked(false);
-	$("#imagen").checked(false);
+	$("#imagen").val('');
 
 	var funcionAjax=$.ajax({
 		url:"action.php",
