@@ -30,6 +30,8 @@
     <!-- Owl Carousel Assets -->
     <link href="js/owl-carousel/owl.carousel.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css" />
+
+    <link href="../css/switch.css" rel="stylesheet">
     
     <script src="js/jquery-1.8.2.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/funcionesAjax.js"></script>
