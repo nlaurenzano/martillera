@@ -70,7 +70,12 @@ class Elemento
 		$this->descripcion = $valor;
 	}
 	public function SetImagenes($valor) {
-		$this->imagenes = implode(",",$valor);
+		if ($valor=="false") {
+			$this->imagenes = "";
+		} else {
+			var_dump($valor);
+			$this->imagenes = implode(",",$valor);
+		}
 	}
 	public function SetOcultar($valor) {
 		$this->ocultar = $valor;
@@ -234,9 +239,8 @@ class Elemento
 	public function Insertar()
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO listado (operacion,tipo,ambientes,zona,descripcion,imagenes,ocultar,destacada) values (:operacion,:tipo,:ambientes,:zona,:descripcion,:imagenes,:ocultar,:destacada)");
+		$consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO propiedades (operacion,tipo,ambientes,zona,descripcion,imagenes,ocultar,destacada) values (:operacion,:tipo,:ambientes,:zona,:descripcion,:imagenes,:ocultar,:destacada)");
 
-		$consulta->bindValue(':id',$this->id, PDO::PARAM_STR);
 		$consulta->bindValue(':operacion',$this->operacion, PDO::PARAM_STR);
 		$consulta->bindValue(':tipo',$this->tipo, PDO::PARAM_STR);
 		$consulta->bindValue(':ambientes',$this->ambientes, PDO::PARAM_STR);
@@ -254,7 +258,7 @@ class Elemento
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		$consulta = $objetoAccesoDato->RetornarConsulta("
-			UPDATE listado SET campo1=:campo1,campo2=:campo2',campo3=:campo3' WHERE id=:id");
+			UPDATE propiedades SET campo1=:campo1,campo2=:campo2',campo3=:campo3' WHERE id=:id");
 	
 
 		$consulta->bindValue(':campo1',$this->campo1, PDO::PARAM_STR);

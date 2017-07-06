@@ -1,32 +1,29 @@
 function GuardarPropiedad()
 {
-	//alert('¡Guardado!');return false;
-	
 	$(".mensajesABM").html('');
 
-	var id=$("#idPropiedad").val();
-	var operacion=$("#operacion").val();	// radio
-	var tipo=$("#tipo").val();				// radio
+	var id='0';		//$("#idPropiedad").val()
+	var operacion=$("input:radio[name=operacion]:checked").val();	// radio
+	var tipo=$("input:radio[name=tipo]:checked").val();				// radio
 	var ambientes=$("#ambientes").val();
 	var zona=$("#zona").val();				// select
 	var descripcion=$("#descripcion").val();
-	var destacada=$("#destacada").val();	// check
-	var ocultar=$("#ocultar").val();		// check
+	var destacada=$("#destacada").prop('checked');	// check
+	var ocultar=$("#ocultar").prop('checked');		// check
 	var imagen=$("#imagen").val();			// file upload
-
 
 	// TODO: Ver si esto es mejor ubicarlo al final
 	$("#operacion").val('');
 	$("#tipo").val('');
 	$("#ambientes").val('');
-	$("#zona").checked(false);
+	$("#zona").val('');
 	$("#descripcion").val('');
-	$("#destacada").checked(false);
-	$("#ocultar").checked(false);
+	$("#destacada").prop( "checked", false )
+	$("#ocultar").prop( "checked", false )
 	$("#imagen").val('');
 
 	var funcionAjax=$.ajax({
-		url:"action.php",
+		url:"php/action.php",
 		type:"post",
 		data:{
 			queHacer:"GuardarPropiedad",
