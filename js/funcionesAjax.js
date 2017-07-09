@@ -142,26 +142,28 @@ function MostrarDestacadasJSON(propiedades) {
 	var retorno = '';
 
 	for (var i = 0; i <= propiedades.length - 1; i++) {
+		// Si no se encuentra el nombre de la primera imagen, no se incluye en la lista de destacadas
+		if (propiedades[i].imagenes.split(",")[0]!='') {
+			retorno += '<article class="col-sm-4 isotopeItem ' + propiedades[i].operacion + '">';
+			retorno += '<div class="portfolio-item">';
+		    retorno += '<img src="images/portfolio/' + propiedades[i].imagenes.split(",")[0] + '" alt="" />';
 
-	retorno += '<article class="col-sm-4 isotopeItem ' + propiedades[i].operacion + '">';
-	retorno += '<div class="portfolio-item">';
-    retorno += '<img src="images/portfolio/' + propiedades[i].imagenes.split(",")[0] + '" alt="" />';
 
+		    retorno += '<div class="portfolio-desc align-center" style="height:100%;">';
+		    retorno += '<div class="folio-info" style="height:100%;">';
+		    retorno += '<a href="images/portfolio/' + propiedades[i].imagenes.split(",")[0] + '" class="fancybox">';
 
-    retorno += '<div class="portfolio-desc align-center" style="height:100%;">';
-    retorno += '<div class="folio-info" style="height:100%;">';
-    retorno += '<a href="images/portfolio/' + propiedades[i].imagenes.split(",")[0] + '" class="fancybox">';
+			if (propiedades[i].ambientes == '1') {
+				retorno += '<h5>' + ObtenerDesc('tipo',propiedades[i].tipo) + ' ' + propiedades[i].ambientes + ObtenerDesc('ambientes','1ambiente') + '</h5>';
+			} else {
+				retorno += '<h5>' + ObtenerDesc('tipo',propiedades[i].tipo) + ' ' + propiedades[i].ambientes + ObtenerDesc('ambientes','xambientes') + '</h5>';
+			}
 
-	if (propiedades[i].ambientes == '1') {
-		retorno += '<h5>' + ObtenerDesc('tipo',propiedades[i].tipo) + ' ' + propiedades[i].ambientes + ObtenerDesc('ambientes','1ambiente') + '</h5>';
-	} else {
-		retorno += '<h5>' + ObtenerDesc('tipo',propiedades[i].tipo) + ' ' + propiedades[i].ambientes + ObtenerDesc('ambientes','xambientes') + '</h5>';
-	}
-
-	retorno += '<i class="fa fa-arrows-alt fa-2x"></i>';
-	retorno += '</a>';
-	retorno += '<a class="mrgn30" style="cursor: pointer;text-transform:uppercase;" onclick="MostrarHeader(\'MostrarHeaderPropiedad\');Mostrar(\'MostrarPropiedad\',' + propiedades[i].id + ');">' + ObtenerDesc('etiquetas','detalle') + '</a>';
-	retorno += '</div></div></div></article>';
+			retorno += '<i class="fa fa-arrows-alt fa-2x"></i>';
+			retorno += '</a>';
+			retorno += '<a class="mrgn30" style="cursor: pointer;text-transform:uppercase;" onclick="MostrarHeader(\'MostrarHeaderPropiedad\');Mostrar(\'MostrarPropiedad\',' + propiedades[i].id + ');">' + ObtenerDesc('etiquetas','detalle') + '</a>';
+			retorno += '</div></div></div></article>';
+		}
 	}
 
 	return retorno;
@@ -172,6 +174,7 @@ function MostrarDetalleJSON(propiedad) {
 	//return propiedad;
 	propiedad = JSON.parse(propiedad);
 	var retorno = '';
+	var imagen;
 
 	retorno += '<article><div class="post-slider"><div class="post-heading">';
 	retorno += '<h3>' + ObtenerDesc('tipo',propiedad.tipo) + ' | ' + ObtenerDesc('zona',propiedad.zona) + '</h3></div>';
@@ -180,7 +183,11 @@ function MostrarDetalleJSON(propiedad) {
 
     var imagenes = propiedad.imagenes.split(",");
     for (var i = 0; i <= imagenes.length - 1; i++) {
-    	retorno += '<li><img src="./images/portfolio/' + imagenes[i] + '" alt="" /></li>';
+    	imagen = imagenes[i];
+		if (imagen=='') {
+			imagen = 'sin_foto.jpg';	// Si no se encuentra el nombre de la foto, sale la imagen por defecto
+		}
+    	retorno += '<li><img src="./images/portfolio/' + imagen + '" alt="" /></li>';
     }
 
     retorno += '</ul>';
@@ -232,10 +239,17 @@ function MostrarResultadosJSON(propiedadesJSON) {
 	propiedades = JSON.parse(propiedadesJSON);
 
 	var retorno = '';
+	var imagen;
+
 	for (var i = 0; i <= propiedades.length - 1; i++) {
 		retorno += '<article><div class="row mrgn10"><div class="col-lg-4"><div class="post-image">';
-		retorno += '<a class="mrgn30" style="cursor: pointer;text-transform:uppercase;" onclick="MostrarHeader(\'MostrarHeaderPropiedad\');Mostrar(\'MostrarPropiedad\',' + propiedades[i].id + ');"><img src="images/portfolio/' + propiedades[i].imagenes.split(",")[0] + '" alt="" style="width:100%;"/></a>';
-		retorno += '</div></div>';
+		retorno += '<a class="mrgn30" style="cursor: pointer;text-transform:uppercase;" onclick="MostrarHeader(\'MostrarHeaderPropiedad\');Mostrar(\'MostrarPropiedad\',' + propiedades[i].id + ');">';
+		imagen = propiedades[i].imagenes.split(",")[0];
+		if (imagen=='') {
+			imagen = 'sin_foto.jpg';	// Si no se encuentra el nombre de la foto, sale la imagen por
+		}
+		retorno += '<img src="images/portfolio/' + imagen + '" alt="" style="width:100%;"/>';
+		retorno += '</a></div></div>';
 
 		retorno += '<div class="col-lg-8"><div class="post-heading">';
 		retorno += '<h3>' + ObtenerDesc('tipo',propiedades[i].tipo) + ' | ' + ObtenerDesc('zona',propiedades[i].zona) + '</h3>';
@@ -379,11 +393,12 @@ function MostrarFormCarga(propiedad) {
 	var retorno = '';
 
 	// Título
-	retorno += '<div class="row"><div class="heading text-center">';
+	retorno += '<div class="row mt20"><div class="heading text-center">';
 	retorno += '<h2>' + ObtenerDesc('etiquetas','propiedadNueva') + '</h2>';
 	retorno += '</div></div>';
 	
 	retorno += '<div class="row mrgn10">';
+	retorno += '<form action="" method="post" enctype="multipart/form-data">';
 
 	// Operación
 	retorno += '<div class="col-sm-4">';
@@ -451,7 +466,7 @@ function MostrarFormCarga(propiedad) {
 
 	retorno += '<input type="button" class="btn btn-lg btn-primary" name="guardar" value="' + ObtenerDesc('etiquetas','btnGuardar') + '" onclick="GuardarPropiedad()" />';
 	retorno += '<div class="mensajesABM"></div>';
-	retorno += '</div></div>';
+	retorno += '</div></form></div>';
 
 	$("#principal").html(retorno);
 }

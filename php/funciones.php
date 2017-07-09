@@ -96,7 +96,7 @@ function getSiteSecretKey() {
     }
 }
 
-
+/*
 //public static function GuardarFoto($patente) {
 function GuardarFoto($patente) {
 
@@ -156,6 +156,91 @@ function GuardarFoto($patente) {
     }
     return true;
 }
+*/
+
+
+function GuardarImagen($idPropiedad) {
+var_dump($_FILES['imagenes']);
+    // Prueba inicial, sin validaciones
+    $NombreCompleto = explode(".", $_FILES['imagenes']['name']);
+    var_dump($NombreCompleto);
+    $Extension = end($NombreCompleto);
+
+    $destino = "images/potfolio/$idPropiedad.$Extension";
+    $imagen = $idPropiedad.".".$Extension;
+
+    // MUEVO EL ARCHIVO DEL TEMPORAL AL DESTINO FINAL
+    if (move_uploaded_file($_FILES["imagenes"]["tmp_name"],$destino))
+    {       
+        //echo "ok";
+        return $imagen;
+    }
+    else
+    {   
+        // algun error;
+        return false;
+    }
+    // FIN prueba inicial
+
+
+
+    if($_FILES["imagen"]['error'])
+    {
+        //error de imagen
+        return false;
+    }
+    else
+    {
+        $tamanio = $_FILES['imagen']['size'];
+        if($tamanio>1024000)
+        {
+            // "Error: archivo muy grande!"."<br>";
+            return false;
+        }
+        else
+        {
+            //OBTIENE EL TAMAÑO DE UNA IMAGEN, SI EL ARCHIVO NO ES UNA
+            //IMAGEN, RETORNA FALSE
+            $esImagen = getimagesize($_FILES["imagen"]["tmp_name"]);
+            if($esImagen === FALSE) 
+            {
+                //NO ES UNA IMAGEN
+                return false;
+            }
+            else
+            {
+                $NombreCompleto = explode(".", $_FILES['imagen']['name']);
+                $Extension = end($NombreCompleto);
+                $arrayDeExtValida = array("jpg", "jpeg", "gif", "bmp","png");  //defino antes las extensiones que seran validas
+                if(!in_array($Extension, $arrayDeExtValida))
+                {
+                   //"Error archivo de extension invalida";
+                    return false;
+                }
+                else
+                {
+                    $destino = "image/potfolio/$idPropiedad.$Extension";
+                    $imagen=$idPropiedad.".".$Extension;
+
+                    // MUEVO EL ARCHIVO DEL TEMPORAL AL DESTINO FINAL
+                    if (move_uploaded_file($_FILES["imagen"]["tmp_name"],$destino))
+                    {       
+                         //echo "ok";
+                        return $imagen;
+                    }
+                    else
+                    {   
+                        // algun error;
+                        return false;
+                    }
+
+                }
+            }
+        }           
+    }
+    return true;
+}
+
 
 function ObtenerDestacadas() {
     return Elemento::TraerDestacadas();
