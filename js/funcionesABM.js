@@ -67,8 +67,14 @@ function GuardarImagenes()
 	});
 */
 	var formData = new FormData();
-	var file_data = jQuery('#imagen')[0].files[0];
-	formData.append('imagenes', file_data);
+	//var file_data = jQuery('#imagen')[0].files;
+	//formData.append('imagenes', file_data);
+	//$('#imagen')[0].files.each(function(i) {
+	var file_data = jQuery('#imagen')[0].files;
+	$(file_data).each(function(i) {
+		formData.append('imagenes[]', this);
+	});
+
 
 	var funcionAjax=$.ajax({
 		url:"php/actionImagenes.php",
@@ -80,12 +86,14 @@ function GuardarImagenes()
         data:formData
 	});
 	funcionAjax.done(function(retorno){
-		$(".mensajesABM").html(retorno);
+		if (retorno!='') {
+			$(".mensajesABM").html(retorno);
+		}
 		//$("#imagen").val('');
 		
 	});
 	funcionAjax.fail(function(retorno){
-		$(".mensajesABM").html("Error al ingresar la propiedad: " + retorno.responseText);
+		$(".mensajesABM").html("Error al cargar archivos: " + retorno);
 	});
 
 

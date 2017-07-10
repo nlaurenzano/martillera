@@ -160,83 +160,65 @@ function GuardarFoto($patente) {
 
 
 function GuardarImagen($idPropiedad) {
-var_dump($_FILES['imagenes']);
-    // Prueba inicial, sin validaciones
-    $NombreCompleto = explode(".", $_FILES['imagenes']['name']);
-    var_dump($NombreCompleto);
-    $Extension = end($NombreCompleto);
 
-    $destino = "images/potfolio/$idPropiedad.$Extension";
-    $imagen = $idPropiedad.".".$Extension;
-
-    // MUEVO EL ARCHIVO DEL TEMPORAL AL DESTINO FINAL
-    if (move_uploaded_file($_FILES["imagenes"]["tmp_name"],$destino))
-    {       
-        //echo "ok";
-        return $imagen;
-    }
-    else
-    {   
-        // algun error;
-        return false;
-    }
-    // FIN prueba inicial
+var_dump($_POST["imagenes[]"]);
 
 
-
-    if($_FILES["imagen"]['error'])
-    {
-        //error de imagen
-        return false;
-    }
-    else
-    {
-        $tamanio = $_FILES['imagen']['size'];
-        if($tamanio>1024000)
+    foreach ($_FILES["imagenes"]["error"] as $key => $error) {
+        if($_FILES["imagenes"]['error'][$key])
         {
-            // "Error: archivo muy grande!"."<br>";
+            //error de imagen
             return false;
         }
         else
         {
-            //OBTIENE EL TAMAÑO DE UNA IMAGEN, SI EL ARCHIVO NO ES UNA
-            //IMAGEN, RETORNA FALSE
-            $esImagen = getimagesize($_FILES["imagen"]["tmp_name"]);
-            if($esImagen === FALSE) 
+            $tamanio = $_FILES['imagenes']['size'][$key];
+            if($tamanio>1024000)
             {
-                //NO ES UNA IMAGEN
+                // "Error: archivo muy grande!"."<br>";
                 return false;
             }
             else
             {
-                $NombreCompleto = explode(".", $_FILES['imagen']['name']);
-                $Extension = end($NombreCompleto);
-                $arrayDeExtValida = array("jpg", "jpeg", "gif", "bmp","png");  //defino antes las extensiones que seran validas
-                if(!in_array($Extension, $arrayDeExtValida))
+                //OBTIENE EL TAMAÑO DE UNA IMAGEN, SI EL ARCHIVO NO ES UNA
+                //IMAGEN, RETORNA FALSE
+                $esImagen = getimagesize($_FILES["imagenes"]["tmp_name"][$key]);
+                if($esImagen === FALSE) 
                 {
-                   //"Error archivo de extension invalida";
-                    return false;
+                    //NO ES UNA IMAGEN
+                    return 'El archivo no es una imagen.';
                 }
                 else
                 {
-                    $destino = "image/potfolio/$idPropiedad.$Extension";
-                    $imagen=$idPropiedad.".".$Extension;
-
-                    // MUEVO EL ARCHIVO DEL TEMPORAL AL DESTINO FINAL
-                    if (move_uploaded_file($_FILES["imagen"]["tmp_name"],$destino))
-                    {       
-                         //echo "ok";
-                        return $imagen;
+                    $NombreCompleto = explode(".", $_FILES['imagenes']['name'][$key]);
+                    $Extension = strtolower(end($NombreCompleto));
+                    $arrayDeExtValida = array("jpg","jpeg","gif","bmp","png");  //defino antes las extensiones que seran validas
+                    if(!in_array($Extension, $arrayDeExtValida))
+                    {
+                       //"Error archivo de extension invalida";
+                        //return "Error: archivo de extension inválida";
+                        return 'La extensión del archivo es inválida';
                     }
                     else
-                    {   
-                        // algun error;
-                        return false;
-                    }
+                    {
+                        $imagen = $idPropiedad."_$key.".$Extension;
+                        $destino = "../images/portfolio/$imagen";
 
+                        // MUEVO EL ARCHIVO DEL TEMPORAL AL DESTINO FINAL
+                        if (move_uploaded_file($_FILES["imagenes"]["tmp_name"][$key],$destino))
+                        {       
+                            return '';
+                        }
+                        else
+                        {   
+                            // algun error;
+                            return false;
+                        }
+
+                    }
                 }
-            }
-        }           
+            }           
+        }
     }
     return true;
 }
