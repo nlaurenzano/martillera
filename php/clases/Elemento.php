@@ -70,7 +70,6 @@ class Elemento
 		$this->descripcion = $valor;
 	}
 	public function SetDestacada($valor) {
-		var_dump($valor);
 		$this->destacada = $valor;
 	}
 	public function SetOcultar($valor) {
@@ -80,9 +79,17 @@ class Elemento
 		if ($valor=="false") {
 			$this->imagenes = "";
 		} else {
-			var_dump($valor);
-			$this->imagenes = implode(",",$valor);
+			//var_dump($valor);
+			//$this->imagenes = implode(",",$valor);
+			$imagenesArray = array();
+			foreach ($_FILES["imagenes"]["name"] as $key => $name) {
+				array_push($imagenesArray,$name);
+			}
+			$this->imagenes = $imagenesArray;
+			var_dump($this->imagenes);
+
 		}
+
 	}
 
 	
@@ -126,7 +133,7 @@ class Elemento
 		$unElemento->SetDescripcion($descripcion);
 		$unElemento->SetDestacada($destacada);
 		$unElemento->SetOcultar($ocultar);
-		//$unElemento->SetImagenes($imagenes);
+		$unElemento->SetImagenes($imagenes);
 
 		if ($unElemento->id > 0) {
 			$unElemento->Modificar();
@@ -252,14 +259,13 @@ class Elemento
 		$consulta->bindValue(':descripcion',$this->descripcion, PDO::PARAM_STR);
 		$consulta->bindValue(':destacada',$this->destacada, PDO::PARAM_STR);
 		$consulta->bindValue(':ocultar',$this->ocultar, PDO::PARAM_STR);
-		//$consulta->bindValue(':imagenes',$this->imagenes, PDO::PARAM_STR);
+		$consulta->bindValue(':imagenes',$this->imagenes, PDO::PARAM_STR);
 		
 		$consulta->execute();
 		//return $objetoAccesoDato->RetornarUltimoIdInsertado();
 
 		// TEST - Guadando la imagen con cualquier nombre (falta pasarle el ID de la propiedad)
-		$testImagen = GuardarImagen('testImagen');
-		var_dump($testImagen);
+		GuardarImagen('testImagen');
 	}
 	
 	public function Modificar()

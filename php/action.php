@@ -36,7 +36,7 @@ switch ($queHago) {
 		echo ObtenerDescripciones();
 		break;
 	case 'GuardarPropiedad':
-		Elemento::Guardar($_POST['id'],$_POST['operacion'],$_POST['tipo'],$_POST['ambientes'],$_POST['zona'],$_POST['descripcion'],$_POST['destacada'],$_POST['ocultar'],$_POST['imagen']);
+		Elemento::Guardar($_POST['id'],$_POST['operacion'],$_POST['tipo'],$_POST['ambientes'],$_POST['zona'],$_POST['descripcion'],$_POST['destacada'],$_POST['ocultar'],$_POST['imagenesNombre']);
 		break;
 
 /*

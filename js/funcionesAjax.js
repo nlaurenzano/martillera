@@ -398,7 +398,7 @@ function MostrarFormCarga(propiedad) {
 	retorno += '</div></div>';
 	
 	retorno += '<div class="row mrgn10">';
-	retorno += '<form action="" method="post" enctype="multipart/form-data">';
+	retorno += '<form action="" method="post" enctype="multipart/form-data" id="formCarga">';
 
 	// Operación
 	retorno += '<div class="col-sm-4">';

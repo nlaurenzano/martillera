@@ -23,7 +23,7 @@ function SendContactEmail() {
             $message = !empty($_POST['message'])?$_POST['message']:'';
             $from = 'From: ReLatIBaS';
             
-            $to = 'power500@gmail.com'; 
+            $to = 'power500@gmail.com';
             $subject = 'Contact';
 
             $htmlContent = "
@@ -160,8 +160,6 @@ function GuardarFoto($patente) {
 
 
 function GuardarImagen($idPropiedad) {
-
-var_dump($_POST["imagenes[]"]);
 
 
     foreach ($_FILES["imagenes"]["error"] as $key => $error) {
