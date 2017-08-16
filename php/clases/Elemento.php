@@ -76,20 +76,14 @@ class Elemento
 		$this->ocultar = $valor;
 	}
 	public function SetImagenes($valor) {
-		if ($valor=="false") {
-			$this->imagenes = "";
-		} else {
-			//var_dump($valor);
-			//$this->imagenes = implode(",",$valor);
-			$imagenesArray = array();
-			foreach ($_FILES["imagenes"]["name"] as $key => $name) {
-				array_push($imagenesArray,$name);
-			}
-			$this->imagenes = $imagenesArray;
-			var_dump($this->imagenes);
-
+		var_dump($valor);
+		$imagenesArray = explode(",",$valor);
+		$imagenesArray2 = array();
+		foreach ($imagenesArray as $name) {
+			array_push($imagenesArray2,strRightBack('\\', $name));
 		}
-
+		$this->imagenes = implode(",",$imagenesArray2);
+		var_dump($this->imagenes);
 	}
 
 	
@@ -249,8 +243,8 @@ class Elemento
 	public function Insertar()
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		//$consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO propiedades (operacion,tipo,ambientes,zona,descripcion,destacada,ocultar,imagenes) values (:operacion,:tipo,:ambientes,:zona,:descripcion,:destacada,:ocultar,:imagenes)");
-		$consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO propiedades (operacion,tipo,ambientes,zona,descripcion,destacada,ocultar) values (:operacion,:tipo,:ambientes,:zona,:descripcion,:destacada,:ocultar)");
+		$consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO propiedades (operacion,tipo,ambientes,zona,descripcion,destacada,ocultar,imagenes) values (:operacion,:tipo,:ambientes,:zona,:descripcion,:destacada,:ocultar,:imagenes)");
+		//$consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO propiedades (operacion,tipo,ambientes,zona,descripcion,destacada,ocultar) values (:operacion,:tipo,:ambientes,:zona,:descripcion,:destacada,:ocultar)");
 
 		$consulta->bindValue(':operacion',$this->operacion, PDO::PARAM_STR);
 		$consulta->bindValue(':tipo',$this->tipo, PDO::PARAM_STR);

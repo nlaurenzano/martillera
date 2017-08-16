@@ -24,7 +24,7 @@ function GuardarPropiedad()
 	formData.append('id', id);
 	formData.append('destacada', destacada);
 	formData.append('ocultar', ocultar);
-	//formData.append('imagenesNombre', imagenesNombre);
+	formData.append('imagenesNombre', imagenesNombre);
 
 /*
 	// TODO: Ver si esto es mejor ubicarlo al final

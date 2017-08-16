@@ -60,6 +60,13 @@ function strContains($needle, $haystack)
     return strpos($haystack, $needle) !== false;
 }
 
+// returns the substring to the right of parameter
+function strRightBack($substring, $string)
+{  
+    $posicion = strrpos($string, $substring);
+    return substr($string, $posicion + 1);
+}
+
 // Checks the server the site is running on. Returns true if it is localhost
 function isLocalServer() {
     return strContains('localhost',$_SERVER['HTTP_HOST']);   
