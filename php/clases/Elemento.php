@@ -11,6 +11,7 @@ class Elemento
 	private $tipo;
 	private $ambientes;
 	private $zona;
+	private $descBreve;
 	private $descripcion;
 	private $destacada;
 	private $ocultar;
@@ -36,6 +37,9 @@ class Elemento
 	}
 	public function GetZona() {
 		return $this->zona;
+	}
+	public function GetDescBreve() {
+		return $this->descBreve;
 	}
 	public function GetDescripcion() {
 		return $this->descripcion;
@@ -65,6 +69,9 @@ class Elemento
 	}
 	public function SetZona($valor) {
 		$this->zona = $valor;
+	}
+	public function SetDescBreve($valor) {
+		$this->descBreve = $valor;
 	}
 	public function SetDescripcion($valor) {
 		$this->descripcion = $valor;
@@ -98,6 +105,7 @@ class Elemento
 			$this->tipo = $obj->tipo;
 			$this->ambientes = $obj->ambientes;
 			$this->zona = $obj->zona;
+			$this->descBreve = $obj->descBreve;
 			$this->descripcion = $obj->descripcion;
 			$this->imagenes = $obj->imagenes;
 			$this->ocultar = $obj->ocultar;
@@ -109,14 +117,14 @@ class Elemento
 //--TOSTRING	
   	public function ToString()
 	{
-	  	return $this->id."  ".$this->operacion."  ".$this->tipo."  ".$this->ambientes."  ".$this->zona."  ".$this->descripcion."  ".$this->imagenes."  ".$this->ocultar."  ".$this->destacada;
+	  	return $this->id."  ".$this->operacion."  ".$this->tipo."  ".$this->ambientes."  ".$this->zona."  ".$this->descBreve."  ".$this->descripcion."  ".$this->imagenes."  ".$this->ocultar."  ".$this->destacada;
 	}
 //--------------------------------------------------------------------------------//
 
 //--------------------------------------------------------------------------------//
 //--METODO DE CLASE
 
-	public static function Guardar($id,$operacion,$tipo,$ambientes,$zona,$descripcion,$destacada,$ocultar,$imagenes) {
+	public static function Guardar($id,$operacion,$tipo,$ambientes,$zona,$descBreve,$descripcion,$destacada,$ocultar,$imagenes) {
 
 		$unElemento = new Elemento();
 		$unElemento->SetId($id);
@@ -124,6 +132,7 @@ class Elemento
 		$unElemento->SetTipo($tipo);
 		$unElemento->SetAmbientes($ambientes);
 		$unElemento->SetZona($zona);
+		$unElemento->SetDescBreve($descBreve);
 		$unElemento->SetDescripcion($descripcion);
 		$unElemento->SetDestacada($destacada);
 		$unElemento->SetOcultar($ocultar);
@@ -150,7 +159,7 @@ class Elemento
 	public static function TraerPorId($id) 
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta = $objetoAccesoDato->RetornarConsulta("SELECT id,operacion,tipo,ambientes,zona,descripcion,imagenes,ocultar,destacada FROM propiedades WHERE id = :id");
+		$consulta = $objetoAccesoDato->RetornarConsulta("SELECT id,operacion,tipo,ambientes,zona,descBreve,descripcion,imagenes,ocultar,destacada FROM propiedades WHERE id = :id");
 		$consulta->bindValue(':id', $id, PDO::PARAM_STR);
 		$consulta->execute();
 		//return $consulta->fetchObject('Elemento');
@@ -169,7 +178,7 @@ class Elemento
 
 	public static function TraerDestacadas() {
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta=$objetoAccesoDato->RetornarConsulta("SELECT id,operacion,tipo,ambientes,zona,descripcion,imagenes,ocultar,destacada FROM propiedades WHERE destacada = :destacada AND ocultar = :ocultar");
+		$consulta=$objetoAccesoDato->RetornarConsulta("SELECT id,operacion,tipo,ambientes,zona,descBreve,descripcion,imagenes,ocultar,destacada FROM propiedades WHERE destacada = :destacada AND ocultar = :ocultar");
 		$consulta->bindValue(':destacada', 1, PDO::PARAM_STR);
 		$consulta->bindValue(':ocultar', 0, PDO::PARAM_STR);
 		$consulta->execute();
@@ -204,7 +213,7 @@ class Elemento
 		}
 
 		// Las condiciones del query se terminan en TRUE para completar el posible AND que queda al final
-		$consulta=$objetoAccesoDato->RetornarConsulta("SELECT id,operacion,tipo,ambientes,zona,descripcion,imagenes,ocultar,destacada FROM propiedades WHERE " . $operacionQuery . $tipoQuery . $ambientesQuery . $zonaQuery . "ocultar = :ocultar");
+		$consulta=$objetoAccesoDato->RetornarConsulta("SELECT id,operacion,tipo,ambientes,zona,descBreve,descripcion,imagenes,ocultar,destacada FROM propiedades WHERE " . $operacionQuery . $tipoQuery . $ambientesQuery . $zonaQuery . "ocultar = :ocultar");
 		
 		// Si el filtro no se incluyó en el query, entonces no hay que bindearlo
 		if ($operacion != 'none') {
@@ -230,7 +239,7 @@ class Elemento
 	public static function TraerTodos()
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta=$objetoAccesoDato->RetornarConsulta("SELECT id,operacion,tipo,ambientes,zona,descripcion,imagenes,ocultar,destacada FROM propiedades");
+		$consulta=$objetoAccesoDato->RetornarConsulta("SELECT id,operacion,tipo,ambientes,zona,descBreve,descripcion,imagenes,ocultar,destacada FROM propiedades");
 		$consulta->execute();
 		$retorno = json_encode($consulta->fetchall());
 		return $retorno;
@@ -243,13 +252,14 @@ class Elemento
 	public function Insertar()
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO propiedades (operacion,tipo,ambientes,zona,descripcion,destacada,ocultar,imagenes) values (:operacion,:tipo,:ambientes,:zona,:descripcion,:destacada,:ocultar,:imagenes)");
+		$consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO propiedades (operacion,tipo,ambientes,zona,descBreve,descripcion,destacada,ocultar,imagenes) values (:operacion,:tipo,:ambientes,:zona,:descBreve,:descripcion,:destacada,:ocultar,:imagenes)");
 		//$consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO propiedades (operacion,tipo,ambientes,zona,descripcion,destacada,ocultar) values (:operacion,:tipo,:ambientes,:zona,:descripcion,:destacada,:ocultar)");
 
 		$consulta->bindValue(':operacion',$this->operacion, PDO::PARAM_STR);
 		$consulta->bindValue(':tipo',$this->tipo, PDO::PARAM_STR);
 		$consulta->bindValue(':ambientes',$this->ambientes, PDO::PARAM_STR);
 		$consulta->bindValue(':zona',$this->zona, PDO::PARAM_STR);
+		$consulta->bindValue(':descBreve',$this->descBreve, PDO::PARAM_STR);
 		$consulta->bindValue(':descripcion',$this->descripcion, PDO::PARAM_STR);
 		$consulta->bindValue(':destacada',$this->destacada, PDO::PARAM_STR);
 		$consulta->bindValue(':ocultar',$this->ocultar, PDO::PARAM_STR);

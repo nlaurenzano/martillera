@@ -159,6 +159,9 @@ function MostrarDestacadasJSON(propiedades) {
 				retorno += '<h5>' + ObtenerDesc('tipo',propiedades[i].tipo) + ' ' + propiedades[i].ambientes + ObtenerDesc('ambientes','xambientes') + '</h5>';
 			}
 
+			retorno += '<h6>' + propiedades[i].descBreve + '</h6>';
+
+
 			retorno += '<i class="fa fa-arrows-alt fa-2x"></i>';
 			retorno += '</a>';
 			retorno += '<a class="mrgn30" style="cursor: pointer;text-transform:uppercase;" onclick="MostrarHeader(\'MostrarHeaderPropiedad\');Mostrar(\'MostrarPropiedad\',' + propiedades[i].id + ');">' + ObtenerDesc('etiquetas','detalle') + '</a>';
@@ -217,7 +220,7 @@ function MostrarSeccionListado() {
 	retorno += '<div id="resultados"></div>';
 
 	// PAGINACIÓN
-	retorno += '<div id="pagination"><span class="all">Página 1 de 3</span><span class="current">1</span><a href="#" class="inactive">2</a><a href="#" class="inactive">3</a></div>';
+	//retorno += '<div id="pagination"><span class="all">Página 1 de 3</span><span class="current">1</span><a href="#" class="inactive">2</a><a href="#" class="inactive">3</a></div>';
 	
 	retorno += '</div>';		// /.col
 
@@ -256,7 +259,7 @@ function MostrarResultadosJSON(propiedadesJSON) {
 		retorno += '</div>';
 		retorno += '<p>' + ObtenerDesc('operacion',propiedades[i].operacion) + '</p>';
 		retorno += '<p>Ambientes: ' + propiedades[i].ambientes + '</p>';
-		retorno += '<p>' + propiedades[i].descripcion + '</p>';
+		retorno += '<p>' + propiedades[i].descBreve + '</p>';
 
 		retorno += '</div></div></article>';
 	}
@@ -433,7 +436,13 @@ function MostrarFormCarga(propiedad) {
 	retorno += '</select>';
 	retorno += '</div>';
 
-	// Descripción
+	// Descripción breve
+	retorno += '<div class="form-group" title="' + ObtenerDesc('etiquetas','ingreseDescBreve') + '">';
+	retorno += '<label for="descBreve">' + ObtenerDesc('etiquetas','descBreve') + '</label>';
+	retorno += '<textarea name="descBreve" class="form-control" id="descBreve" cols="3" rows="5"></textarea>';
+	retorno += '</div>';
+	
+	// Descripción detallada
 	retorno += '<div class="form-group" title="' + ObtenerDesc('etiquetas','ingreseDescripcion') + '">';
 	retorno += '<label for="descripcion">' + ObtenerDesc('etiquetas','descripcion') + '</label>';
 	retorno += '<textarea name="descripcion" class="form-control" id="descripcion" cols="3" rows="5"></textarea>';

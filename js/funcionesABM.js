@@ -9,6 +9,7 @@ function GuardarPropiedad()
 	var tipo=$("input:radio[name=tipo]:checked").val();				// radio
 	var ambientes=$("#ambientes").val();
 	var zona=$("#zona").val();				// select
+	var descBreve=$("#descBreve").val();
 	var descripcion=$("#descripcion").val();
 	var destacada=($("#destacada").prop('checked')===true) ? '1' : '0';	// check
 	var ocultar=($("#ocultar").prop('checked')===true) ? '1' : '0';	// check
@@ -135,6 +136,7 @@ function Modificar(idModificar) {
 		$("#tipo").val(elemento.tipo);
 		$("#ambientes").val(elemento.ambientes);
 		$("#zona").val(elemento.zona);
+		$("#descBreve").val(elemento.descBreve);
 		$("#descripcion").val(elemento.descripcion);
 		$("#destacada").val(elemento.destacada);
 		$("#ocultar").val(elemento.ocultar);
