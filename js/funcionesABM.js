@@ -13,7 +13,7 @@ function GuardarPropiedad()
 	var descripcion=$("#descripcion").val();
 	var destacada=($("#destacada").prop('checked')===true) ? '1' : '0';	// check
 	var ocultar=($("#ocultar").prop('checked')===true) ? '1' : '0';	// check
-	var imagenesNombre=$("#imagen").val();			// file upload
+	//var imagenesNombre=$("#imagen").val();			// file upload
 	var imagenes=$("#imagen");
 
 	var formData = new FormData($("#formCarga")[0]);
@@ -25,7 +25,7 @@ function GuardarPropiedad()
 	formData.append('id', id);
 	formData.append('destacada', destacada);
 	formData.append('ocultar', ocultar);
-	formData.append('imagenesNombre', imagenesNombre);
+	//formData.append('imagenesNombre', imagenesNombre);
 
 /*
 	// TODO: Ver si esto es mejor ubicarlo al final
@@ -56,7 +56,7 @@ function GuardarPropiedad()
 		
 	});
 	funcionAjax.fail(function(retorno){
-		$(".mensajesABM").html("Error al cargar archivos: " + retorno);
+		$(".mensajesABM").html("Error al cargar la propiedad: " + retorno);
 	});
 
 
@@ -64,6 +64,7 @@ function GuardarPropiedad()
 
 }
 
+/*
 function GuardarImagenes()
 {
 	$(".mensajesABM").html('');
@@ -98,6 +99,7 @@ function GuardarImagenes()
 
 
 }
+*/
 
 function Borrar(idBorrar)
 {

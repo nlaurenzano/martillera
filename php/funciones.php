@@ -165,65 +165,63 @@ function GuardarFoto($patente) {
 }
 */
 
-
-function GuardarImagen($idPropiedad) {
+function ValidarImagenes() {
 
 
     foreach ($_FILES["imagenes"]["error"] as $key => $error) {
-        if($_FILES["imagenes"]['error'][$key])
-        {
+        if($_FILES["imagenes"]['error'][$key]) {
             //error de imagen
-            return false;
-        }
-        else
-        {
+            return 'Ha ocurrido un error con la carga de imágenes.';
+        } else {
             $tamanio = $_FILES['imagenes']['size'][$key];
-            if($tamanio>1024000)
-            {
+            if($tamanio > 1048576) {
                 // "Error: archivo muy grande!"."<br>";
-                return false;
-            }
-            else
-            {
+                return 'El archivos es demasiado grande ('.$_FILES['imagenes']['name'][$key].'). Las imágenes no deben superar 1 Mb.';
+            } else {
                 //OBTIENE EL TAMAÑO DE UNA IMAGEN, SI EL ARCHIVO NO ES UNA
                 //IMAGEN, RETORNA FALSE
                 $esImagen = getimagesize($_FILES["imagenes"]["tmp_name"][$key]);
-                if($esImagen === FALSE) 
-                {
+                if($esImagen === FALSE) {
                     //NO ES UNA IMAGEN
-                    return 'El archivo no es una imagen.';
-                }
-                else
-                {
-                    $NombreCompleto = explode(".", $_FILES['imagenes']['name'][$key]);
-                    $Extension = strtolower(end($NombreCompleto));
+                    return 'El archivo no es una imagen ('.$_FILES['imagenes']['name'][$key].').';
+                } else {
+                    $nombreCompleto = explode(".", $_FILES['imagenes']['name'][$key]);
+                    $extension = strtolower(end($nombreCompleto));
                     $arrayDeExtValida = array("jpg","jpeg","gif","bmp","png");  //defino antes las extensiones que seran validas
-                    if(!in_array($Extension, $arrayDeExtValida))
-                    {
+                    if(!in_array($extension, $arrayDeExtValida)) {
                        //"Error archivo de extension invalida";
                         //return "Error: archivo de extension inválida";
-                        return 'La extensión del archivo es inválida';
-                    }
-                    else
-                    {
-                        $imagen = $idPropiedad."_$key.".$Extension;
-                        $destino = "../images/portfolio/$imagen";
-
-                        // MUEVO EL ARCHIVO DEL TEMPORAL AL DESTINO FINAL
-                        if (move_uploaded_file($_FILES["imagenes"]["tmp_name"][$key],$destino))
-                        {       
-                            return '';
-                        }
-                        else
-                        {   
-                            // algun error;
-                            return false;
-                        }
-
+                        return 'La extensión del archivo es inválida ('.$_FILES['imagenes']['name'][$key].').';
                     }
                 }
             }           
         }
+    }
+    return '';
+}
+
+function GuardarImagenes($idPropiedad) {
+
+    $indice=1;
+    foreach ($_FILES["imagenes"]["error"] as $key => $error) {
+
+        $nombreCompleto = explode(".", $_FILES['imagenes']['name'][$key]);
+        $extension = strtolower(end($nombreCompleto));
+
+        $imagen = 'foto_ID'.$idPropiedad."_$indice.".$extension;    //foto_ID[id]_[indice].[extension]
+        $destino = "../images/portfolio/$imagen";
+
+        // MUEVO EL ARCHIVO DEL TEMPORAL AL DESTINO FINAL
+        if (move_uploaded_file($_FILES["imagenes"]["tmp_name"][$key],$destino))
+        {       
+            return '';
+        }
+        else
+        {   
+            // algun error;
+            return 'Ha ocurrido un error con la carga de imágenes ('.$_FILES['imagenes']['name'][$key].').';
+        }
+        $indice++;
     }
     return true;
 }

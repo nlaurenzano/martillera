@@ -146,7 +146,8 @@ function MostrarDestacadasJSON(propiedades) {
 		if (propiedades[i].imagenes.split(",")[0]!='') {
 			retorno += '<article class="col-sm-4 isotopeItem ' + propiedades[i].operacion + '">';
 			retorno += '<div class="portfolio-item">';
-		    retorno += '<img src="images/portfolio/' + propiedades[i].imagenes.split(",")[0] + '" alt="" />';
+		    //retorno += '<img src="images/portfolio/' + propiedades[i].imagenes.split(",")[0] + '" alt="" />';
+		    retorno += '<img src="images/portfolio/foto_ID' + propiedades[i].id + '" alt="" />';
 
 
 		    retorno += '<div class="portfolio-desc align-center" style="height:100%;">';
