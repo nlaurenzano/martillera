@@ -166,8 +166,6 @@ function GuardarFoto($patente) {
 */
 
 function ValidarImagenes() {
-
-
     foreach ($_FILES["imagenes"]["error"] as $key => $error) {
         if($_FILES["imagenes"]['error'][$key]) {
             //error de imagen
@@ -203,6 +201,7 @@ function ValidarImagenes() {
 function GuardarImagenes($idPropiedad) {
 
     $indice=1;
+    $imagenes='';
     foreach ($_FILES["imagenes"]["error"] as $key => $error) {
 
         $nombreCompleto = explode(".", $_FILES['imagenes']['name'][$key]);
@@ -213,17 +212,22 @@ function GuardarImagenes($idPropiedad) {
 
         // MUEVO EL ARCHIVO DEL TEMPORAL AL DESTINO FINAL
         if (move_uploaded_file($_FILES["imagenes"]["tmp_name"][$key],$destino))
-        {       
+        {
+            // Se agrega el nombre de la imagen a la cadena que se guarda en DB
+            if ($imagenes=='') {
+                $imagenes += $imagen;
+            } else {
+                $imagenes += ','.$imagen;
+            }
             return '';
-        }
-        else
-        {   
+        } else {
             // algun error;
             return 'Ha ocurrido un error con la carga de imágenes ('.$_FILES['imagenes']['name'][$key].').';
         }
         $indice++;
     }
-    return true;
+    Elemento::AgregarNombresImagenes($idPropiedad,$imagenes);
+    return $imagenes;
 }
 
 
