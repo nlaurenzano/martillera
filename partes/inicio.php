@@ -115,7 +115,7 @@ require_once('../php/funciones.php');
                         <div class="col-md-8">
                             <div class="form-group" title="Por favor seleccione la zona.">
                                 <label for="zona">Zona</label><br />
-                                <select class="form-control" name="zona" id="zona">
+                                 <select class="form-control" name="zona" id="zona">
                                     <option value="none">Todas las zonas</option>
                                     <option value="caba">Ciudad Autónoma de Buenos Aires</option>
                                     <option value="gbasur">Gran Buenos Aires Sur</option>
@@ -144,9 +144,17 @@ require_once('../php/funciones.php');
 <section id="introText">
     <div class="container">
         <div class="text-center">
-        <h1>Silvana Propiedades</h1>
-          <p>Nos especializamos en gestionar operaciones inmobiliarias, con la finalidad principal de satisfacer a nuestros clientes, ya sea tasación compra-venta o alquiler.</p>
-          <p>Llámenos al 54 11 1234-5678 / 54 11 1234-1111 o escríbanos a info@algunmail.com</p>
+        <h2>Sobre Nosotros</h2>
+            <div class="col-md-8 col-md-offset-2">
+                <p>Nos especializamos en gestionar operaciones inmobiliarias, con la finalidad principal de satisfacer a nuestros clientes, ya sea tasación compra-venta o alquiler.</p>
+                <br />
+                <h4>MISIÓN</h4>
+                <p>Brindar un servicio de asesoría inmobiliaria personalizada, orientada a cuidar el patrimonio de nuestros clientes, con ética y profesionalismo, proporcionando asesoría inmobiliaria personalizada e integral, con ética, honestidad y discreción, siempre orientados al servicio personalizado en todas las etapas de nuestra intervención en la venta, compra o alquiler.</p>
+                <br />
+                <h4>VISIÓN</h4>
+                <p>Ser la mejor alternativa para quienes quieren la ayuda de un profesional inmobiliario, desde una relación cercana y resolutiva, ofreciendo las propuestas más innovadoras.<br />
+                Que nuestros clientes se sientan plenamente acompañados y asesorados durante todo el proceso de compra / alquiler de una propiedad.</p>
+            </div>
         </div>
     </div>
 </section>
@@ -192,7 +200,7 @@ require_once('../php/funciones.php');
             <div class="col-sm-4">
                 <h4>Dirección:</h4>
                 <address>
-                    Silvana Propiedades<br>
+                    SILMAR Propiedades<br>
                     Av. De Mayo 1234, CABA<br>
                 </address>
             </div>

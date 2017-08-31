@@ -27,18 +27,6 @@ function GuardarPropiedad()
 	formData.append('ocultar', ocultar);
 	//formData.append('imagenesNombre', imagenesNombre);
 
-/*
-	// TODO: Ver si esto es mejor ubicarlo al final
-	$("#operacion").val('');
-	$("#tipo").val('');
-	$("#ambientes").val('');
-	$("#zona").val('');
-	$("#descripcion").val('');
-	$("#destacada").prop( "checked", false )
-	$("#ocultar").prop( "checked", false )
-	$("#imagen").val('');
-*/
-
 	var funcionAjax=$.ajax({
 		url:"php/action.php",
 		type:"post",
@@ -51,8 +39,16 @@ function GuardarPropiedad()
 	funcionAjax.done(function(retorno){
 		if (retorno!='') {
 			$(".mensajesABM").html(retorno);
+		} else {
+			$("input:radio").prop( "checked", false );
+			$("#ambientes").val('');
+			$("#zona").val('');
+			$("#descBreve").val('');
+			$("#descripcion").val('');
+			$("#destacada").prop( "checked", false );
+			$("#ocultar").prop( "checked", false );
+			$("#imagen").val('');
 		}
-		//$("#imagen").val('');
 		
 	});
 	funcionAjax.fail(function(retorno){
