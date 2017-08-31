@@ -49,7 +49,6 @@ function GuardarPropiedad()
         data:formData
 	});
 	funcionAjax.done(function(retorno){
-		alert('retorno: '+retorno);
 		if (retorno!='') {
 			$(".mensajesABM").html(retorno);
 		}

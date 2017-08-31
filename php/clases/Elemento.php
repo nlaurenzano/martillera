@@ -252,10 +252,10 @@ class Elemento
 	public static function AgregarNombresImagenes($id,$imagenes) {
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		$consulta = $objetoAccesoDato->RetornarConsulta("
-			UPDATE propiedades SET id=:id,imagenes=:imagenes WHERE id=:id");
+			UPDATE propiedades SET imagenes=:imagenes WHERE id=:id");
 
-		$consulta->bindValue(':id',$id, PDO::PARAM_STR);
 		$consulta->bindValue(':imagenes',$imagenes, PDO::PARAM_STR);
+		$consulta->bindValue(':id',$id, PDO::PARAM_STR);
 	
 		$consulta->execute();
 	}

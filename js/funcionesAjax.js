@@ -396,20 +396,25 @@ function MostrarFormCarga(propiedad) {
 	var retorno = '';
 
 	// Título
-	retorno += '<div class="row mt20"><div class="heading text-center">';
+	retorno += '<div class="row" style="margin-top:70px;"><div class="heading text-center">';
 	retorno += '<h2>' + ObtenerDesc('etiquetas','propiedadNueva') + '</h2>';
 	retorno += '</div></div>';
 	
-	retorno += '<div class="row mrgn10">';
 	retorno += '<form action="" method="post" enctype="multipart/form-data" id="formCarga">';
 
-	// Operación
+	retorno += '<div class="row mrgn10">';
+	retorno += '<div class="col-sm-2"></div>';
 	retorno += '<div class="col-sm-4">';
+	
+	// Operación
 	retorno += '<div class="form-group" title="' + ObtenerDesc('etiquetas','seleccioneOperacion') + '">';
 	retorno += '<label for="operacion">' + ObtenerDesc('etiquetas','operacion') + '</label><br />';
 	retorno += '<input type="radio" name="operacion" value="alquiler"> ' + ObtenerDesc('operacion','alquiler') + '<br />';
 	retorno += '<input type="radio" name="operacion" value="venta"> ' + ObtenerDesc('operacion','venta');
 	retorno += '</div>';
+	
+	retorno += '</div>';	//col-sm-4
+	retorno += '<div class="col-sm-4">';
 
 	// Tipo
 	retorno += '<div class="form-group" title="' + ObtenerDesc('etiquetas','seleccioneTipo') + '">';
@@ -418,12 +423,22 @@ function MostrarFormCarga(propiedad) {
 	retorno += '<input type="radio" name="tipo" value="casa"> ' + ObtenerDesc('tipo','casa') + '<br />';
 	retorno += '<input type="radio" name="tipo" value="local"> ' + ObtenerDesc('tipo','local') + '';
 	retorno += '</div>';
+
+	retorno += '</div>';	//col-sm-4
+	retorno += '<div class="col-sm-2"></div>';
+	retorno += '</div>';	//row
+
+	retorno += '<div class="row mrgn10">';
+	retorno += '<div class="col-sm-2"></div>';
+	retorno += '<div class="col-sm-4">';
 	
 	// Ambientes
 	retorno += '<div class="form-group" title="' + ObtenerDesc('etiquetas','seleccioneAmbientes') + '">';
 	retorno += '<label for="ambientes">' + ObtenerDesc('etiquetas','ambientes') + '</label>';
 	retorno += '<input type="text" class="form-control" name="ambientes" id="ambientes">';
-	retorno += '</div>';
+	retorno += '</div>';	
+	retorno += '</div>';	//col-sm-4
+	retorno += '<div class="col-sm-4">';
 
 	// Zona
 	retorno += '<div class="form-group" title="' + ObtenerDesc('etiquetas','seleccioneZona') + '">';
@@ -436,17 +451,36 @@ function MostrarFormCarga(propiedad) {
 	retorno += '</select>';
 	retorno += '</div>';
 
+	retorno += '</div>';	//col-sm-4
+	retorno += '<div class="col-sm-2"></div>';
+	retorno += '</div>';	//row
+
+	retorno += '<div class="row mrgn10">';
+	retorno += '<div class="col-sm-2"></div>';
+	retorno += '<div class="col-sm-4">';
+	
 	// Descripción breve
 	retorno += '<div class="form-group" title="' + ObtenerDesc('etiquetas','ingreseDescBreve') + '">';
 	retorno += '<label for="descBreve">' + ObtenerDesc('etiquetas','descBreve') + '</label>';
 	retorno += '<textarea name="descBreve" class="form-control" id="descBreve" cols="3" rows="5"></textarea>';
 	retorno += '</div>';
-	
+
+	retorno += '</div>';	//col-sm-4
+	retorno += '<div class="col-sm-4">';
+
 	// Descripción detallada
 	retorno += '<div class="form-group" title="' + ObtenerDesc('etiquetas','ingreseDescripcion') + '">';
 	retorno += '<label for="descripcion">' + ObtenerDesc('etiquetas','descripcion') + '</label>';
 	retorno += '<textarea name="descripcion" class="form-control" id="descripcion" cols="3" rows="5"></textarea>';
 	retorno += '</div>';
+
+	retorno += '</div>';	//col-sm-4
+	retorno += '<div class="col-sm-2"></div>';
+	retorno += '</div>';	//row
+
+	retorno += '<div class="row mrgn10">';
+	retorno += '<div class="col-sm-2"></div>';
+	retorno += '<div class="col-sm-4">';
 	
 	// Destacada
 	retorno += '<div class="form-group form-control">';
@@ -456,6 +490,9 @@ function MostrarFormCarga(propiedad) {
 	retorno += '<label for="destacada" class="label-primary"></label>';
 	retorno += '</div>';
 	retorno += '</div>';
+	
+	retorno += '</div>';	//col-sm-4
+	retorno += '<div class="col-sm-4">';
 
 	// Ocultar
 	retorno += '<div class="form-group form-control">';
@@ -466,16 +503,43 @@ function MostrarFormCarga(propiedad) {
 	retorno += '</div>';
 	retorno += '</div>';
 
+	retorno += '</div>';	//col-sm-4
+	retorno += '<div class="col-sm-2"></div>';
+	retorno += '</div>';	//row
+
+	retorno += '<div class="row mrgn10">';
+	retorno += '<div class="col-sm-2"></div>';
+	retorno += '<div class="col-sm-4">';
+	
 	// Imágenes
 	retorno += '<div class="form-group" title="' + ObtenerDesc('etiquetas','ingreseImagenes') + '">';
 	retorno += '<label for="imagen">' + ObtenerDesc('etiquetas','imagenes') + '</label>';
 	retorno += '<input type="file" class="form-control" name="imagen" id="imagen" accept="image/*" multiple>';
 	retorno += '</div>';
+	
+	retorno += '</div>';	//col-sm-4
+	retorno += '<div class="col-sm-4">';
 
-
+	// Botón Guardar
+	retorno += '<br />';
 	retorno += '<input type="button" class="btn btn-lg btn-primary" name="guardar" value="' + ObtenerDesc('etiquetas','btnGuardar') + '" onclick="GuardarPropiedad()" />';
+
+	retorno += '</div>';	//col-sm-4
+	retorno += '<div class="col-sm-2"></div>';
+	retorno += '</div>';	//row
+	
+	retorno += '<div class="row mrgn10">';
+	retorno += '<div class="col-sm-2"></div>';
+	retorno += '<div class="col-sm-8">';
+	
 	retorno += '<div class="mensajesABM"></div>';
-	retorno += '</div></form></div>';
+
+	retorno += '</div>';	//col-sm-8
+	retorno += '<div class="col-sm-2"></div>';
+	retorno += '</div>';	//row
+	
+	retorno += '</form>';
+	retorno += '</div>';
 
 	$("#principal").html(retorno);
 }

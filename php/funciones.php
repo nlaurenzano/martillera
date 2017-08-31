@@ -203,11 +203,10 @@ function GuardarImagenes($idPropiedad) {
     $indice=1;
     $imagenes='';
     foreach ($_FILES["imagenes"]["error"] as $key => $error) {
-
         $nombreCompleto = explode(".", $_FILES['imagenes']['name'][$key]);
         $extension = strtolower(end($nombreCompleto));
 
-        $imagen = 'foto_ID'.$idPropiedad."_$indice.".$extension;    //foto_ID[id]_[indice].[extension]
+        $imagen = 'foto_ID'.$idPropiedad."_".$indice.'.'.$extension;    //foto_ID[id]_[indice].[extension]
         $destino = "../images/portfolio/$imagen";
 
         // MUEVO EL ARCHIVO DEL TEMPORAL AL DESTINO FINAL
@@ -215,11 +214,10 @@ function GuardarImagenes($idPropiedad) {
         {
             // Se agrega el nombre de la imagen a la cadena que se guarda en DB
             if ($imagenes=='') {
-                $imagenes += $imagen;
+                $imagenes = $imagen;
             } else {
-                $imagenes += ','.$imagen;
+                $imagenes .= ','.$imagen;
             }
-            return '';
         } else {
             // algun error;
             return 'Ha ocurrido un error con la carga de imágenes ('.$_FILES['imagenes']['name'][$key].').';
@@ -227,7 +225,7 @@ function GuardarImagenes($idPropiedad) {
         $indice++;
     }
     Elemento::AgregarNombresImagenes($idPropiedad,$imagenes);
-    return $imagenes;
+    return '';
 }
 
 
