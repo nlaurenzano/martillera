@@ -66,11 +66,11 @@ function CargarDescripcionesAjax(queMostrar, idPropiedad) {
 	});
 }
 
-function MostrarLogin() {
+function MostrarFormLogin() {
 	var funcionAjax=$.ajax({
 		url:"php/action.php",
 		type:"post",
-		data:{queHacer:"MostrarLogin"}
+		data:{queHacer:"MostrarFormLogin"}
 	});
 	funcionAjax.done(function(retorno) {
 		$("#formLogin").html(retorno);

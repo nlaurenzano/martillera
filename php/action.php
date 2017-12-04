@@ -18,7 +18,7 @@ switch ($queHago) {
 		include("../partes/detalle.php");
 		break;
 	case 'MostrarHeaderInicio':
-		include("../partes/navInicio.html");
+		include("../partes/navInicio.php");
 		break;
 	case 'MostrarHeaderPropiedad':
 		include("../partes/navDetalle.html");
@@ -39,6 +39,13 @@ switch ($queHago) {
 		Elemento::Guardar($_POST['id'],$_POST['operacion'],$_POST['tipo'],$_POST['ambientes'],$_POST['zona'],$_POST['descBreve'],$_POST['descripcion'],$_POST['destacada'],$_POST['ocultar']);
 		//Elemento::Guardar($_POST['id'],$_POST['operacion'],$_POST['tipo'],$_POST['ambientes'],$_POST['zona'],$_POST['descripcion'],$_POST['destacada'],$_POST['ocultar'],$_POST['imagenesNombre']);
 		break;
+	case 'MostrarLogin':
+		include("../partes/login.php");
+		break;
+	case 'MostrarFormLogin':
+		include("../partes/formLogin.php");
+		break;
+	
 
 /*
 	case 'MostrarBotones':
