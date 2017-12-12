@@ -11,6 +11,7 @@ if(isset($_SESSION['registrado'])) {
             </a>
             <ul class="dropdown-menu">
                 <li><a onclick="deslogear()">Desconectar</a></li> 
+                <li><a onclick="MostrarHeader('MostrarHeaderLogin');Mostrar('MostrarPassChange')">Cambio de contraseña</a></li> 
             </ul>
         </li>
 <?php 

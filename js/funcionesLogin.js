@@ -2,16 +2,15 @@ function validarLogin()
 {
 	$("#mensajesLogin").val('');
 	var varUsuario=$("#correo").val();
-	var varClave=$("#clave").val();				// ACÁ VOY A MANDAR EL HASH... ¿O SE MANDA LA CLAVE?
+	var varClave=$("#clave").val();
 	var recordar=$("#recordarme").is(':checked');
 		
-//$("#mensajesLogin").html("<img src='imagenes/ajax-loader.gif' style='width: 30px;'/>");
-	
-
 	var funcionAjax=$.ajax({
-		url:"php/validarUsuario.php",
+		//url:"php/validarUsuario.php",
+		url:"php/action.php",
 		type:"post",
 		data:{
+			queHacer:'ValidarUsuario',
 			recordarme:recordar,
 			usuario:varUsuario,
 			clave:varClave
@@ -21,6 +20,7 @@ function validarLogin()
 	funcionAjax.done(function(retorno) {
 		if (retorno != "ingreso") {
 			$("#mensajesLogin").html(retorno);
+			$("#mensajesLogin").removeAttr("hidden");
 			$("#botonesNav").html('');
 		} else {
 			document.cookie = "ultimoIngresado=" + varUsuario;
@@ -31,31 +31,52 @@ function validarLogin()
 	funcionAjax.fail(function(retorno) {
 		$("#botonesNav").html('');
 		$("#mensajesLogin").html(retorno.responseText);
+		$("#mensajesLogin").removeAttr("hidden");
 	});
 	
 }
 
-// Usa datos de usuario hardcodeados, para facilitar las pruebas
-function testLogin(tipoUsuario) {
-	if (tipoUsuario=='comprador' || tipoUsuario=='administrador' || tipoUsuario=='vendedor') {
-		switch(tipoUsuario) {
-	    case 'comprador':
-	        $("#correo").val('comp@comp.com');
-			$("#clave").val('123');
-	        break;
-	    case 'administrador':
-	        $("#correo").val('admin@test.com');
-			$("#clave").val('pass1234');
-	        break;
-	    case 'vendedor':
-	        $("#correo").val('vend@vend.com');
-			$("#clave").val('321');
-	        break;
-	    default:
-	        //
+function validarPassChange()
+{
+	$("#mensajesLogin").val('');
+	var varUsuario=$("#correo").val();
+	var varClaveActual=$("#claveActual").val();
+	var varClaveNueva=$("#claveNueva").val();
+	var varClaveNuevaRep=$("#claveNuevaRep").val();
+
+	$("#claveActual").val('');
+	$("#claveNueva").val('');
+	$("#claveNuevaRep").val('');
+
+	var funcionAjax=$.ajax({
+		//url:"php/validarUsuario.php",
+		url:"php/action.php",
+		type:"post",
+		data:{
+			queHacer:'ValidarPassChange',
+			usuario:varUsuario,
+			claveActual:varClaveActual,
+			claveNueva:varClaveNueva,
+			claveNuevaRep:varClaveNuevaRep
 		}
-		validarLogin();
-	}
+	});
+
+	funcionAjax.done(function(retorno) {
+		if (retorno != "ingreso") {
+			$("#mensajesLogin").html(retorno);
+			$("#mensajesLogin").removeAttr("hidden");
+			$("#botonesNav").html('');
+		} else {
+			$("#mensajesLogin").html('La contraseña se modificó exitosamente.');
+			$("#mensajesLogin").removeAttr("hidden");
+		}
+	});
+	funcionAjax.fail(function(retorno) {
+		$("#botonesNav").html('');
+		$("#mensajesLogin").html(retorno.responseText);
+		$("#mensajesLogin").removeAttr("hidden");
+	});
+	
 }
 
 function deslogear() {

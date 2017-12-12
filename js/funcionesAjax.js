@@ -84,6 +84,24 @@ function MostrarFormLogin() {
 	});
 }
 
+function MostrarFormPassChange() {
+	var funcionAjax=$.ajax({
+		url:"php/action.php",
+		type:"post",
+		data:{queHacer:"MostrarFormPassChange"}
+	});
+	funcionAjax.done(function(retorno) {
+		$("#formLogin").html(retorno);
+		MostrarHeader('MostrarHeaderLogin');
+	});
+	funcionAjax.fail(function(retorno) {
+		$("#mensajesLogin").html("Error en login.");
+	});
+	funcionAjax.always(function(retorno) {
+		//alert("siempre "+retorno.statusText);
+	});
+}
+
 function BuscarPropiedades() {
 	if ($("#operacion").val()==undefined) {
 		var operacion='none';
@@ -386,10 +404,10 @@ function armarEtiquetaFiltroDisponible(operacion, tipo, ambientes, zona) {
 function CargarDescripciones(descripciones) {
 	//return descripciones;
 	descripciones = JSON.parse(descripciones);
-	hayDescripciones = true;	// Se chequea esta variable para saber si es necesario cargar las descripciones
 	for (var i = 0; i <= descripciones.length - 1; i++) {
 		eval(descripciones[i].grupo + descripciones[i].clave + ' = "' + descripciones[i].descripcion + '";');
 	}
+	hayDescripciones = true;	// Se chequea esta variable para saber si es necesario cargar las descripciones
 }
 
 function ObtenerDesc(grupo,clave) {

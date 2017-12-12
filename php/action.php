@@ -1,6 +1,7 @@
 <?php 
 //require_once("clases/AccesoDatos.php");
 require_once("clases/Elemento.php");
+require_once("funcionesLogin.php");
 
 $queHago = $_POST['queHacer'];
 
@@ -38,6 +39,12 @@ switch ($queHago) {
 	case 'BuscarPropiedad':
 		echo Elemento::TraerPorFiltro($_POST['operacion'], $_POST['tipo'], $_POST['ambientes'], $_POST['zona']);
 		break;
+	case 'ValidarUsuario':
+		echo ValidarUsuario();
+		break;
+	case 'ValidarPassChange':
+		echo ValidarPassChange();
+		break;
 	case 'Descripciones':
 		echo ObtenerDescripciones();
 		break;
@@ -50,6 +57,12 @@ switch ($queHago) {
 		break;
 	case 'MostrarFormLogin':
 		include("../partes/formLogin.php");
+		break;
+	case 'MostrarPassChange':
+		include("../partes/password.php");
+		break;
+	case 'MostrarFormPassChange':
+		include("../partes/formPassword.php");
 		break;
 	
 

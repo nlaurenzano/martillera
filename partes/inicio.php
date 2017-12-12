@@ -55,9 +55,9 @@ require_once('../php/funciones.php');
         <div class="row">
             <nav id="filter" class="col-md-12 text-center">
                 <ul>
-                    <li><a href="#" id="tocaboton" class="current btn-theme btn-small" data-filter="*">Ver todo</a></li>
-                    <li><a href="#" class="btn-theme btn-small" data-filter=".venta">Venta</a></li>
+                    <li><a href="#" class="current btn-theme btn-small" data-filter=".venta">Venta</a></li>
                     <li><a href="#" class="btn-theme btn-small" data-filter=".alquiler">Alquiler</a></li>
+                    <li><a onclick="BuscarPropiedades()" style="cursor: pointer;">Ver todo</a></li>
                 </ul>
             </nav>
             <div class="col-md-12">

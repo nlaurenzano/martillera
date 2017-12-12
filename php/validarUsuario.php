@@ -12,7 +12,12 @@ if (!filter_var($usuario, FILTER_VALIDATE_EMAIL)) {
 
 
 	if (!password_strength_check($clave, 8, 50, 1, 1, 0, 0)) {
-		$retorno= "El formato de la clave ingresada no es correcto.";
+		$retorno= "<p>El formato de la clave ingresada no es correcto.</p>";
+		$retorno.= "<ul style='margin-left:20px;'>";
+		$retorno.= "<li>La contraseña debe tener entre 8 y 50 caracteres.</li>";
+		$retorno.= "<li>La contraseña debe contener al menos una letra minúscula.</li>";
+		$retorno.= "<li>La contraseña debe contener al menos un número.</li>";
+		$retorno.= "</ul>";
 	} else {
 		$recordar = $_POST['recordarme'];
 
@@ -31,8 +36,7 @@ if (!filter_var($usuario, FILTER_VALIDATE_EMAIL)) {
 				$_SESSION['rol']=$userBuscado->GetRol();
 				$retorno="ingreso";
 			} else {
-				//$retorno= "La contraseña ingresada es inválida.";
-				$retorno= "La contraseña ingresada es inválida.  ". $userBuscado->GetClave() . " --- " . $retorno=password_hash($userBuscado->GetClave(), PASSWORD_DEFAULT);
+				$retorno= "La contraseña ingresada es inválida.";
 			}
 		} else {
 			$retorno= "No se encuentra el usuario ingresado.";

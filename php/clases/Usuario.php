@@ -3,6 +3,7 @@ class Usuario
 {
 //--------------------------------------------------------------------------------//
 //--ATRIBUTOS
+	private $id;
 	private $email;
  	private $clave;
  	private $nombre;
@@ -12,7 +13,11 @@ class Usuario
 
 //--------------------------------------------------------------------------------//
 //--GETTERS Y SETTERS
- 	public function GetEmail()
+ 	public function GetId()
+	{
+		return $this->id;
+	}
+	public function GetEmail()
 	{
 		return $this->email;
 	}
@@ -29,6 +34,10 @@ class Usuario
 		return $this->rol;
 	}
 
+	public function SetId($valor)
+	{
+		$this->id = $valor;
+	}
 	public function SetEmail($valor)
 	{
 		$this->email = $valor;
@@ -127,6 +136,18 @@ class Usuario
 		</div>";
 
 
+	}
+
+	public static function ModificarClave($id, $clave)
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+		$consulta = $objetoAccesoDato->RetornarConsulta("UPDATE usuarios SET clave=:clave WHERE id=:id");
+
+        //$clave=password_hash($clave, PASSWORD_DEFAULT);
+		$consulta->bindValue(':clave',$clave, PDO::PARAM_STR);
+		$consulta->bindValue(':id',$id, PDO::PARAM_INT);
+		$consulta->execute();
+		//return '';
 	}
 //--------------------------------------------------------------------------------//
 

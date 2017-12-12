@@ -6,34 +6,10 @@ Silmarpropiedades@gmail.com
 
 
 
-- Login
-	- Hacerlo funcionar como está, con la clave almacenada en DB.
-	- Modificarlo para que se genere el hash al almacenar en DB y validar.
+- Login			OK
+	- Hacerlo funcionar como está, con la clave almacenada en DB.				OK
+	- Modificarlo para que se genere el hash al almacenar en DB y validar.		OK
 
-password_hash("rasmuslerdorf", PASSWORD_DEFAULT);
-
-admin@test.com
-$2y$10$xsoahb/1AbtrgR0N/.1rsOUb63AXjbtSU4ZgnxzavNGE9RputcyDW
-
-
-
-
-//password_strength_check($clave, 8, 50, 1, 1, 1, 0)
-
-
-
-
-INSERT INTO `usuarios`(`email`, `clave`, `nombre`, `rol`) 
-VALUES
-('admin@test.com','$2y$10$UZZoQ3ow44mOME2JeLbGdeMKXdB9z9Ibb6pSuD13aVdeEy9OQjc1K','aDMIN','ADMIN')
-
-
-
-if (password_verify('rasmuslerdorf', $hash)) {
-    echo '¡La contraseña es válida!';
-} else {
-    echo 'La contraseña no es válida.';
-}
 
 
 - Pantallas admin. Agregar acciones al listado de resultados. Se administra desde ahí. Se mantienen los filtros, pero podría ocultarse el form de contacto, o reemplazarlo por alguna acción útil para el admin.
@@ -51,13 +27,20 @@ if (password_verify('rasmuslerdorf', $hash)) {
 
 
 
-<?php 
-session_start();
-?>
+
+pass1234
+$2y$10$xsoahb/1AbtrgR0N/.1rsOUb63AXjbtSU4ZgnxzavNGE9RputcyDW
+
+pazz1234
+$2y$10$IubIt6SxfKVvb.0CXEfnP.MRxPIFEW4gIUNNdvoAJ.ft7dRremcqG
 
 
-<script type="text/javascript">
-  //MostrarBotones();
-  MostrarHeader('MostrarHeaderLogin');
-  </script>
+$2y$10$sB6ZLKjkXmZFq3Js8CC4U.nlGDaVsj7v9CO.8azeiFREmLtI97jmq
 
+
+
+
+
+
+
+pazz1234
