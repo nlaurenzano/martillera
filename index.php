@@ -36,6 +36,7 @@
     <script src="js/jquery-1.8.2.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/funcionesAjax.js"></script>
     <script type="text/javascript" src="js/funcionesABM.js"></script>
+    <script type="text/javascript" src="js/funcionesLogin.js"></script>
 </head>
 
 <body>
@@ -55,11 +56,8 @@
     <div id="#top"></div>
 
     <div id="principal">
+        <script type="text/javascript">Mostrar('MostrarInicio');</script>
     </div>
-    
-    <script type="text/javascript">Mostrar('MostrarInicio');</script>
-
-
     
     <footer>
         <div class="container">

@@ -1,6 +1,12 @@
 <?php 
- 
 session_start();
+?>
+
+<style>
+  input { margin-top: 10px; }
+</style>
+
+<?php 
 if(!isset($_SESSION['registrado'])){  ?>
 
     <div class="row">
@@ -10,7 +16,7 @@ if(!isset($_SESSION['registrado'])){  ?>
       <div class="col-md-6">
         <h3>Ingrese sus datos</h3>
 
-        <input type="email" id="correo" placeholder="Correo electrónico" 
+        <input type="email" id="correo" placeholder="Nombre de usuario" 
           class="form-control input-lg" required="" autofocus="" 
           value="<?php  if(isset($_COOKIE["registro"])){echo $_COOKIE["registro"];}?>" />
         
@@ -55,21 +61,13 @@ if(!isset($_SESSION['registrado'])){  ?>
       <div class="col-md-3">
       </div>
     
-      <div class="col-md-2">
-        <input type="button" class="btn btn-lg btn-block btn-success" value="Comprador"
-          onclick="testLogin('comprador');return false;" />
-      </div>
-
+    
       <div class="col-md-2">
         <input type="button" class="btn btn-lg btn-block btn-success" value="Admin"
           onclick="testLogin('administrador');return false;" />
       </div>
 
-      <div class="col-md-2">
-        <input type="button" class="btn btn-lg btn-block btn-success" value="Vendedor"
-          onclick="testLogin('vendedor');return false;" />
-      </div>
-
+    
       <div class="col-md-3">
       </div>
     </div>
@@ -99,8 +97,5 @@ if(!isset($_SESSION['registrado'])){  ?>
     <span class="glyphicon glyphicon-off">&nbsp;</span>Desconectar
   </button>
 
- <script type="text/javascript">
-  MostrarBotones();
-  </script>
 
 <?php  }  ?>

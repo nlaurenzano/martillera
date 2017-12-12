@@ -21,13 +21,19 @@ switch ($queHago) {
 		include("../partes/navInicio.php");
 		break;
 	case 'MostrarHeaderPropiedad':
-		include("../partes/navDetalle.html");
+		include("../partes/navDetalle.php");
 		break;
 	case 'MostrarHeaderListado':
-		include("../partes/navListado.html");
+		include("../partes/navListado.php");
 		break;
 	case 'MostrarHeaderCarga':
-		include("../partes/navCarga.html");
+		include("../partes/navCarga.php");
+		break;
+	case 'MostrarHeaderLogin':
+		include("../partes/navLogin.php");
+		break;
+	case 'MostrarHeaderAdmin':
+		include("../partes/navAdmin.php");
 		break;
 	case 'BuscarPropiedad':
 		echo Elemento::TraerPorFiltro($_POST['operacion'], $_POST['tipo'], $_POST['ambientes'], $_POST['zona']);

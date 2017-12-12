@@ -2,6 +2,7 @@
 	require_once("clases/Elemento.php");
 	require_once("clases/AccesoDatos.php");
 ?>
+
 <div class="panel-body">
 	<div class="row" style="margin-top:70px;">
 		<div class="col-md-1">

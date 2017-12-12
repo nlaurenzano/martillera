@@ -74,6 +74,7 @@ function MostrarFormLogin() {
 	});
 	funcionAjax.done(function(retorno) {
 		$("#formLogin").html(retorno);
+		MostrarHeader('MostrarHeaderLogin');
 	});
 	funcionAjax.fail(function(retorno) {
 		$("#mensajesLogin").html("Error en login.");
@@ -84,15 +85,22 @@ function MostrarFormLogin() {
 }
 
 function BuscarPropiedades() {
-	var operacion=$("#operacion").val();
-	var tipo=$("#tipo").val();
-	var ambientes=$("#ambientes").val();
-	var zona=$("#zona").val();
+	if ($("#operacion").val()==undefined) {
+		var operacion='none';
+		var tipo='none';
+		var ambientes='none';
+		var zona='none';
+	} else {
+		var operacion=$("#operacion").val();
+		var tipo=$("#tipo").val();
+		var ambientes=$("#ambientes").val();
+		var zona=$("#zona").val();
 
-	$("#operacion").val('');
-	$("#tipo").val('');
-	$("#ambientes").val('');
-	$("#zona").val('');
+		$("#operacion").val('');
+		$("#tipo").val('');
+		$("#ambientes").val('');
+		$("#zona").val('');
+	}
 
 	BuscarPropiedadesFiltro(operacion, tipo, ambientes, zona, true);
 }

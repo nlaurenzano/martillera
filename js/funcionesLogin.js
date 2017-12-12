@@ -2,14 +2,14 @@ function validarLogin()
 {
 	$("#mensajesLogin").val('');
 	var varUsuario=$("#correo").val();
-	var varClave=$("#clave").val();
+	var varClave=$("#clave").val();				// ACÁ VOY A MANDAR EL HASH... ¿O SE MANDA LA CLAVE?
 	var recordar=$("#recordarme").is(':checked');
 		
 //$("#mensajesLogin").html("<img src='imagenes/ajax-loader.gif' style='width: 30px;'/>");
 	
 
 	var funcionAjax=$.ajax({
-		url:"php/login.php",
+		url:"php/validarUsuario.php",
 		type:"post",
 		data:{
 			recordarme:recordar,
@@ -24,8 +24,8 @@ function validarLogin()
 			$("#botonesNav").html('');
 		} else {
 			document.cookie = "ultimoIngresado=" + varUsuario;
-			MostrarBotones();
-			MostrarLogin();
+			//MostrarHeader('MostrarHeaderLogin');
+			Mostrar('MostrarLogin');		// Muestra la pantalla de bienvenida
 		}
 	});
 	funcionAjax.fail(function(retorno) {
@@ -44,8 +44,8 @@ function testLogin(tipoUsuario) {
 			$("#clave").val('123');
 	        break;
 	    case 'administrador':
-	        $("#correo").val('admin@admin.com');
-			$("#clave").val('321');
+	        $("#correo").val('admin@test.com');
+			$("#clave").val('pass1234');
 	        break;
 	    case 'vendedor':
 	        $("#correo").val('vend@vend.com');
@@ -65,6 +65,7 @@ function deslogear() {
 	});
 	funcionAjax.done(function(retorno) {
 		$("#botonesNav").html('');
+		MostrarHeader('MostrarHeaderInicio');
 		Mostrar('MostrarInicio');
 	});
 }

@@ -72,19 +72,6 @@ function isLocalServer() {
     return strContains('localhost',$_SERVER['HTTP_HOST']);   
 }
 
-// Checks the server the site is running on. Returns true if it is localhost
-//function obtenerHost() {
-//    //$host = 'http://www.tplaurenzano.esy.es/SERVIDOR/ws.php';
-//
-//    if (isLocalServer()) {
-//        return 'http://localhost:8080/martillera/SERVIDOR/ws.php';
-//    } else {
-//        return 'http://localhost:80/TP-Laurenzano/SERVIDOR/ws.php';
-//    }
-//
-//
-//}
-
 // reCAPTCHA Data site key
 function getDataSitekey() {
     if (isLocalServer()) {
@@ -102,68 +89,6 @@ function getSiteSecretKey() {
         return '6LfTGBMUAAAAAEbGluBBA-mJdHPIPCcu1OS6dAyk';  // public key
     }
 }
-
-/*
-//public static function GuardarFoto($patente) {
-function GuardarFoto($patente) {
-
-    if($_FILES["foto"]['error'])
-    {
-        //error de imagen
-        return false;
-    }
-    else
-    {
-        $tamanio = $_FILES['foto']['size'];
-        if($tamanio>1024000)
-        {
-            // "Error: archivo muy grande!"."<br>";
-            return false;
-        }
-        else
-        {
-            //OBTIENE EL TAMAÑO DE UNA IMAGEN, SI EL ARCHIVO NO ES UNA
-            //IMAGEN, RETORNA FALSE
-            $esImagen = getimagesize($_FILES["foto"]["tmp_name"]);
-            if($esImagen === FALSE) 
-            {
-                //NO ES UNA IMAGEN
-                return false;
-            }
-            else
-            {
-                $NombreCompleto = explode(".", $_FILES['foto']['name']);
-                $Extension = end($NombreCompleto);
-                $arrayDeExtValida = array("jpg", "jpeg", "gif", "bmp","png");  //defino antes las extensiones que seran validas
-                if(!in_array($Extension, $arrayDeExtValida))
-                {
-                   //"Error archivo de extension invalida";
-                    return false;
-                }
-                else
-                {
-                    $destino = "fotos/$patente.$Extension";
-                    $foto=$patente.".".$Extension;
-
-                    // MUEVO EL ARCHIVO DEL TEMPORAL AL DESTINO FINAL
-                    if (move_uploaded_file($_FILES["foto"]["tmp_name"],$destino))
-                    {       
-                         //echo "ok";
-                        return $foto;
-                    }
-                    else
-                    {   
-                        // algun error;
-                        return false;
-                    }
-
-                }
-            }
-        }           
-    }
-    return true;
-}
-*/
 
 function ValidarImagenes() {
     foreach ($_FILES["imagenes"]["error"] as $key => $error) {
@@ -243,5 +168,21 @@ function ObtenerDetalle($idPropiedad) {
 
 function ObtenerDescripciones() {
     return Descripciones::TraerTodos();
+}
+
+function password_strength_check($password, $min_len = 8, $max_len = 70, $req_digit = 1, $req_lower = 1, $req_upper = 1, $req_symbol = 1) {
+    // Build regex string depending on requirements for the password
+    $regex = '/^';
+    if ($req_digit == 1) { $regex .= '(?=.*\d)'; }              // Match at least 1 digit
+    if ($req_lower == 1) { $regex .= '(?=.*[a-z])'; }           // Match at least 1 lowercase letter
+    if ($req_upper == 1) { $regex .= '(?=.*[A-Z])'; }           // Match at least 1 uppercase letter
+    if ($req_symbol == 1) { $regex .= '(?=.*[^a-zA-Z\d])'; }    // Match at least 1 character that is none of the above
+    $regex .= '.{' . $min_len . ',' . $max_len . '}$/';
+
+    if(preg_match($regex, $password)) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
 }
 ?>
