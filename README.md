@@ -10,6 +10,9 @@ Silmarpropiedades@gmail.com
 	- Hacerlo funcionar como está, con la clave almacenada en DB.				OK
 	- Modificarlo para que se genere el hash al almacenar en DB y validar.		OK
 
+	- Validar unicidad del email??? Si no tengo form de carga, jajajja!!
+	
+
 
 
 - Pantallas admin. Agregar acciones al listado de resultados. Se administra desde ahí. Se mantienen los filtros, pero podría ocultarse el form de contacto, o reemplazarlo por alguna acción útil para el admin.

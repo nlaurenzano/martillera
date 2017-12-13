@@ -63,9 +63,8 @@ function ValidarPassChange() {
                     $claveNuevaRep = $_POST['claveNuevaRep'];
                     if ($claveNueva==$claveNuevaRep) {
                         // OK
-                        //$userBuscado->SetClave(password_hash($claveActual, PASSWORD_DEFAULT));
                         $claveNueva=password_hash($claveNueva, PASSWORD_DEFAULT);
-                        Usuario::ModificarClave($userBuscado->GetId(),$claveNueva);
+                        Usuario::ModificarClave($userBuscado->GetEmail(),$claveNueva);
                         $retorno=$claveNueva;
                     } else {
                         $retorno="Las contraseñas son diferentes.";

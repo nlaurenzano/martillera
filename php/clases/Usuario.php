@@ -138,14 +138,13 @@ class Usuario
 
 	}
 
-	public static function ModificarClave($id, $clave)
+	public static function ModificarClave($email, $clave)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta = $objetoAccesoDato->RetornarConsulta("UPDATE usuarios SET clave=:clave WHERE id=:id");
+		$consulta = $objetoAccesoDato->RetornarConsulta("UPDATE usuarios SET clave=:clave WHERE email=:email");
 
-        //$clave=password_hash($clave, PASSWORD_DEFAULT);
 		$consulta->bindValue(':clave',$clave, PDO::PARAM_STR);
-		$consulta->bindValue(':id',$id, PDO::PARAM_INT);
+		$consulta->bindValue(':email',$email, PDO::PARAM_STR);
 		$consulta->execute();
 		//return '';
 	}
