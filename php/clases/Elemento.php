@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require_once('AccesoDatos.php');
 
@@ -192,6 +193,14 @@ class Elemento
 
 	public static function TraerPorFiltro($operacion, $tipo, $ambientes, $zona) {
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+/*
+		// Marca para saber en JS que está abierta la sesión de admin
+		if(isset($_SESSION['registrado'])) {
+		    if($_SESSION['rol']=='admin') {
+		    }
+		}
+*/
+
 
 		// Si no se seteó un filtro, entonces no se incluye en el query
 		if ($operacion == 'none') {

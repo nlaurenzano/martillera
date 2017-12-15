@@ -265,13 +265,29 @@ function MostrarSeccionListado() {
 
 function MostrarResultadosJSON(propiedadesJSON) {
 	//return propiedadesJSON;
+	propiedadesJSON = '[{"admin":1}],' + propiedadesJSON
+	alert(propiedadesJSON);
 	propiedades = JSON.parse(propiedadesJSON);
+	alert(propiedades);
 
 	var retorno = '';
 	var imagen;
 
 	for (var i = 0; i <= propiedades.length - 1; i++) {
-		retorno += '<article><div class="row mrgn10"><div class="col-lg-4"><div class="post-image">';
+		retorno += '<article>';
+/*
+		// Acciones para el admin
+		retorno += '<div class="row mrgn10">';
+
+		retorno += '<div class="col-lg-4">';
+		retorno += '</div>';
+		
+
+		retorno += '</div>';
+
+*/
+
+		retorno += '<div class="row mrgn10"><div class="col-lg-4"><div class="post-image">';
 		retorno += '<a class="mrgn30" style="cursor: pointer;text-transform:uppercase;" onclick="MostrarHeader(\'MostrarHeaderPropiedad\');Mostrar(\'MostrarPropiedad\',' + propiedades[i].id + ');">';
 		imagen = propiedades[i].imagenes.split(",")[0];
 		if (imagen=='') {

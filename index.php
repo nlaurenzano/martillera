@@ -11,7 +11,7 @@
     <!--[if lt IE 9]> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <![endif]-->
-    <title>Silvana Propiedades</title>
+    <title>SILMAR Propiedades</title>
     <meta name="description" content="">
     <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -62,15 +62,12 @@
     <footer>
         <div class="container">
             <div class="social text-center">
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <!--
                 <a href="#"><i class="fa fa-twitter"></i></a>
                 <a href="#"><i class="fa fa-facebook"></i></a>
-                <!--
-                <a href="#"><i class="fa fa-dribbble"></i></a>
-                <a href="#"><i class="fa fa-flickr"></i></a>
-                <a href="#"><i class="fa fa-github"></i></a>
                 -->
             </div>
-
             <div class="clear"></div>
             <!--CLEAR FLOATS-->
         </div>
