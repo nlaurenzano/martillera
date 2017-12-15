@@ -193,14 +193,6 @@ class Elemento
 
 	public static function TraerPorFiltro($operacion, $tipo, $ambientes, $zona) {
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-/*
-		// Marca para saber en JS que está abierta la sesión de admin
-		if(isset($_SESSION['registrado'])) {
-		    if($_SESSION['rol']=='admin') {
-		    }
-		}
-*/
-
 
 		// Si no se seteó un filtro, entonces no se incluye en el query
 		if ($operacion == 'none') {
@@ -245,7 +237,15 @@ class Elemento
 		$consulta->execute();
 		//return $consulta->fetchall(PDO::FETCH_CLASS,"Elemento");
 		$retorno = json_encode($consulta->fetchall());
-		return $retorno;
+
+		$marcaAdmin = '0';
+		// Marca para saber en JS que está abierta la sesión de admin
+		if(isset($_SESSION['registrado'])) {
+		    if($_SESSION['rol']=='admin') {
+		    	$marcaAdmin = '1';
+		    }
+		}
+		return $marcaAdmin.$retorno;
 	}
 
 	public static function TraerTodos()

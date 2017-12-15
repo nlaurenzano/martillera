@@ -21,7 +21,7 @@ function ValidarUsuario() {
                 } else {
                     setcookie("registro",$usuario,  time()-36000, '/');
                 }
-                session_start();
+                //session_start();
                 $_SESSION['registrado']=$userBuscado->GetNombre();
                 $_SESSION['rol']=$userBuscado->GetRol();
                 $retorno="ingreso";

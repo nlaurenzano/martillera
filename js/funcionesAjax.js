@@ -146,7 +146,7 @@ function BuscarPropiedadesFiltro(operacion, tipo, ambientes, zona, header) {
 		// Estas dos secciones forman parte de la página de resultados
 		$("#resultados").html(MostrarResultadosJSON(retorno));
 		$("#filtros").html(MostrarFiltros(operacion, tipo, ambientes, zona));
-		
+
 		$(".topHome").click();
 
 	});
@@ -265,27 +265,39 @@ function MostrarSeccionListado() {
 
 function MostrarResultadosJSON(propiedadesJSON) {
 	//return propiedadesJSON;
-	propiedadesJSON = '[{"admin":1}],' + propiedadesJSON
-	alert(propiedadesJSON);
+
+	var marcaAdmin = propiedadesJSON.charAt(0);
+	propiedadesJSON = propiedadesJSON.slice(1);
 	propiedades = JSON.parse(propiedadesJSON);
-	alert(propiedades);
 
 	var retorno = '';
 	var imagen;
 
 	for (var i = 0; i <= propiedades.length - 1; i++) {
 		retorno += '<article>';
-/*
+
 		// Acciones para el admin
-		retorno += '<div class="row mrgn10">';
 
-		retorno += '<div class="col-lg-4">';
-		retorno += '</div>';
-		
+		if (marcaAdmin == '1') {
+//retorno += '<input type="button" class="btn btn-sm btn-block btn-success" name="editar" value="Editar" onclick="validarLogin();return false;" />';
 
-		retorno += '</div>';
+			retorno += '<div class="row mrgn10" style="margin-top: 30px;">';
+//strPropiedad=JSON.stringify(propiedades[i]);
+//propiedad=propiedades[i];
 
-*/
+			retorno += '<div class="col-lg-2">';
+retorno += '<button type="button" class="btn btn-sm btn-block btn-success" onclick="MostrarHeader(\'MostrarHeaderCarga\');MostrarFormCarga(null);CompletarCamposEdicion('+i+')">Editar <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>';
+			retorno += '</div>';
+
+			retorno += '<div class="col-lg-2">';
+retorno += '<button type="button" class="btn btn-sm btn-block btn-danger" onclick="validarLogin();return false;">Eliminar <i class="fa fa-times" aria-hidden="true"></i></button>';
+			retorno += '</div>';
+
+			retorno += '<div class="col-lg-8"></div>';
+			retorno += '</div>';
+
+		}
+
 
 		retorno += '<div class="row mrgn10"><div class="col-lg-4"><div class="post-image">';
 		retorno += '<a class="mrgn30" style="cursor: pointer;text-transform:uppercase;" onclick="MostrarHeader(\'MostrarHeaderPropiedad\');Mostrar(\'MostrarPropiedad\',' + propiedades[i].id + ');">';
@@ -430,10 +442,15 @@ function ObtenerDesc(grupo,clave) {
 	return eval(grupo + clave);
 }
 
-function MostrarFormCarga(propiedad) {
+function MostrarFormCarga(indicePropiedad) {
 // El parámetro 'propiedad' es null para propiedades nuevas. Caso contrario, se trata de una modificación
 
 //                <input type="hidden" name="idModificar" id="idModificar" />
+
+
+	if (indicePropiedad!=null) {
+		var propiedad = propiedades[indicePropiedad];
+	}
 
 	var retorno = '';
 
@@ -584,4 +601,29 @@ function MostrarFormCarga(propiedad) {
 	retorno += '</div>';
 
 	$("#principal").html(retorno);
+}
+
+function CompletarCamposEdicion(indicePropiedad) {
+// El parámetro 'propiedad' es null para propiedades nuevas. Caso contrario, se trata de una modificación
+
+	if (indicePropiedad!=null) {
+		var propiedad = propiedades[indicePropiedad];
+
+		$("#idPropiedad").val(propiedad.id);
+		$("input:radio[name=operacion][value="+propiedad.operacion+"]").prop( "checked", true );
+		$("input:radio[name=tipo][value="+propiedad.tipo+"]").prop( "checked", true );
+		$("#ambientes").val(propiedad.ambientes);
+		$("#zona").val(propiedad.zona);
+		$("#descBreve").val(propiedad.descBreve);
+		$("#descripcion").val(propiedad.descripcion);
+		
+		$("#destacada").prop( "checked", ((propiedad.destacada=='1')?true:false));
+		$("#ocultar").prop( "checked", ((propiedad.ocultar=='1')?true:false));
+
+/*
+		$("#imagen").val('');
+*/
+
+	}
+
 }

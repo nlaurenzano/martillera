@@ -1,5 +1,5 @@
 <?php 
-session_start();
+//session_start();
 if(isset($_SESSION['registrado'])) {
     if($_SESSION['rol']=='admin') {
 ?>
