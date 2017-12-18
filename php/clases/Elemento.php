@@ -141,10 +141,16 @@ class Elemento
 		$unElemento->SetOcultar($ocultar);
 		//$unElemento->SetImagenes($imagenes);
 
-		if ($unElemento->id > 0) {
-			$retorno = $unElemento->Modificar();
-		} else {
-			$retorno = $unElemento->Insertar();
+		$retorno='';
+		if (isset($_FILES["imagenes"])) {
+			$retorno = ValidarImagenes();
+		}
+		if ($retorno == '') {
+			if ($unElemento->id > 0) {
+				$retorno = $unElemento->Modificar();
+			} else {
+				$retorno = $unElemento->Insertar();
+			}
 		}
 		echo $retorno;
 	}
@@ -174,7 +180,7 @@ class Elemento
 	public static function Borrar($id)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("DELETE FROM listado WHERE id = :id");	
+		$consulta =$objetoAccesoDato->RetornarConsulta("DELETE FROM propiedades WHERE id = :id");	
 		$consulta->bindValue(':id', $id, PDO::PARAM_STR);
 		$consulta->execute();
 		return $consulta->rowCount();
@@ -274,25 +280,24 @@ class Elemento
 //--------------------------------------------------------------------------------//
 //--METODOS DE INSTANCIA
 	public function Insertar() {
-		$retorno = ValidarImagenes();
-		if ($retorno == '') {
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+		$consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO propiedades (operacion,tipo,ambientes,zona,descBreve,descripcion,destacada,ocultar) values (:operacion,:tipo,:ambientes,:zona,:descBreve,:descripcion,:destacada,:ocultar)");
+		//$consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO propiedades (operacion,tipo,ambientes,zona,descBreve,descripcion,destacada,ocultar,imagenes) values (:operacion,:tipo,:ambientes,:zona,:descBreve,:descripcion,:destacada,:ocultar,:imagenes)");
 
-			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-			$consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO propiedades (operacion,tipo,ambientes,zona,descBreve,descripcion,destacada,ocultar) values (:operacion,:tipo,:ambientes,:zona,:descBreve,:descripcion,:destacada,:ocultar)");
-			//$consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO propiedades (operacion,tipo,ambientes,zona,descBreve,descripcion,destacada,ocultar,imagenes) values (:operacion,:tipo,:ambientes,:zona,:descBreve,:descripcion,:destacada,:ocultar,:imagenes)");
-
-			$consulta->bindValue(':operacion',$this->operacion, PDO::PARAM_STR);
-			$consulta->bindValue(':tipo',$this->tipo, PDO::PARAM_STR);
-			$consulta->bindValue(':ambientes',$this->ambientes, PDO::PARAM_STR);
-			$consulta->bindValue(':zona',$this->zona, PDO::PARAM_STR);
-			$consulta->bindValue(':descBreve',$this->descBreve, PDO::PARAM_STR);
-			$consulta->bindValue(':descripcion',$this->descripcion, PDO::PARAM_STR);
-			$consulta->bindValue(':destacada',$this->destacada, PDO::PARAM_STR);
-			$consulta->bindValue(':ocultar',$this->ocultar, PDO::PARAM_STR);
-			//$consulta->bindValue(':imagenes',$this->imagenes, PDO::PARAM_STR);
-			
-			$consulta->execute();
-			$id = $objetoAccesoDato->RetornarUltimoIdInsertado();
+		$consulta->bindValue(':operacion',$this->operacion, PDO::PARAM_STR);
+		$consulta->bindValue(':tipo',$this->tipo, PDO::PARAM_STR);
+		$consulta->bindValue(':ambientes',$this->ambientes, PDO::PARAM_STR);
+		$consulta->bindValue(':zona',$this->zona, PDO::PARAM_STR);
+		$consulta->bindValue(':descBreve',$this->descBreve, PDO::PARAM_STR);
+		$consulta->bindValue(':descripcion',$this->descripcion, PDO::PARAM_STR);
+		$consulta->bindValue(':destacada',$this->destacada, PDO::PARAM_STR);
+		$consulta->bindValue(':ocultar',$this->ocultar, PDO::PARAM_STR);
+		//$consulta->bindValue(':imagenes',$this->imagenes, PDO::PARAM_STR);
+		
+		$consulta->execute();
+		$id = $objetoAccesoDato->RetornarUltimoIdInsertado();
+		$retorno='';
+		if (isset($_FILES["imagenes"])) {
 			$retorno = GuardarImagenes($id);
 		}
 		return $retorno;
@@ -303,18 +308,27 @@ class Elemento
 	public function Modificar()
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta = $objetoAccesoDato->RetornarConsulta("
-			UPDATE propiedades SET campo1=:campo1,campo2=:campo2,campo3=:campo3 WHERE id=:id");
-	
+//		$consulta = $objetoAccesoDato->RetornarConsulta("
+//			UPDATE propiedades SET campo1=:campo1,campo2=:campo2,campo3=:campo3 WHERE id=:id");
+		$consulta = $objetoAccesoDato->RetornarConsulta("UPDATE propiedades SET operacion=:operacion,tipo=:tipo,ambientes=:ambientes,zona=:zona,descBreve=:descBreve,descripcion=:descripcion,destacada=:destacada,ocultar=:ocultar WHERE id=:id");
 
-		$consulta->bindValue(':campo1',$this->campo1, PDO::PARAM_STR);
-		$consulta->bindValue(':campo2',$this->campo2, PDO::PARAM_STR);
-		$consulta->bindValue(':campo3',$this->campo3, PDO::PARAM_STR);
-	
 		$consulta->bindValue(':id',$this->id, PDO::PARAM_STR);
+		$consulta->bindValue(':operacion',$this->operacion, PDO::PARAM_STR);
+		$consulta->bindValue(':tipo',$this->tipo, PDO::PARAM_STR);
+		$consulta->bindValue(':ambientes',$this->ambientes, PDO::PARAM_STR);
+		$consulta->bindValue(':zona',$this->zona, PDO::PARAM_STR);
+		$consulta->bindValue(':descBreve',str_replace(array("\n\r", "\n", "\r"), ' ', $this->descBreve), PDO::PARAM_STR);
+		$consulta->bindValue(':descripcion',str_replace(array("\n\r", "\n", "\r"), ' ', $this->descripcion), PDO::PARAM_STR);
+		$consulta->bindValue(':destacada',$this->destacada, PDO::PARAM_STR);
+		$consulta->bindValue(':ocultar',$this->ocultar, PDO::PARAM_STR);
 
 		$consulta->execute();
-		return '';
+		$id = $objetoAccesoDato->RetornarUltimoIdInsertado();
+		$retorno='';
+		if (isset($_FILES["imagenes"])) {
+			$retorno = GuardarImagenes($id);
+		}
+		return $retorno;
 	}
 
 //--------------------------------------------------------------------------------//

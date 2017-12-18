@@ -199,7 +199,6 @@ function MostrarDestacadasJSON(propiedades) {
 }
 
 function MostrarDetalleJSON(propiedad) {
-
 	//return propiedad;
 	propiedad = JSON.parse(propiedad);
 	var retorno = '';
@@ -276,27 +275,24 @@ function MostrarResultadosJSON(propiedadesJSON) {
 	for (var i = 0; i <= propiedades.length - 1; i++) {
 		retorno += '<article>';
 
-		// Acciones para el admin
+		// Acciones para el admin - INICIO
 
 		if (marcaAdmin == '1') {
-//retorno += '<input type="button" class="btn btn-sm btn-block btn-success" name="editar" value="Editar" onclick="validarLogin();return false;" />';
-
 			retorno += '<div class="row mrgn10" style="margin-top: 30px;">';
-//strPropiedad=JSON.stringify(propiedades[i]);
-//propiedad=propiedades[i];
 
 			retorno += '<div class="col-lg-2">';
-retorno += '<button type="button" class="btn btn-sm btn-block btn-success" onclick="MostrarHeader(\'MostrarHeaderCarga\');MostrarFormCarga(null);CompletarCamposEdicion('+i+')">Editar <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>';
+retorno += '<button type="button" class="btn btn-sm btn-block btn-success" onclick="MostrarHeader(\'MostrarHeaderCarga\');MostrarFormCarga(null);CompletarCamposEdicion('+i+')"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button>';
 			retorno += '</div>';
 
 			retorno += '<div class="col-lg-2">';
-retorno += '<button type="button" class="btn btn-sm btn-block btn-danger" onclick="validarLogin();return false;">Eliminar <i class="fa fa-times" aria-hidden="true"></i></button>';
+retorno += '<button type="button" class="btn btn-sm btn-block btn-danger" onclick="EliminarPropiedad('+i+')"><i class="fa fa-times" aria-hidden="true"></i> Eliminar</button>';
 			retorno += '</div>';
 
 			retorno += '<div class="col-lg-8"></div>';
 			retorno += '</div>';
 
 		}
+		// Acciones para el admin - FIN
 
 
 		retorno += '<div class="row mrgn10"><div class="col-lg-4"><div class="post-image">';
@@ -454,9 +450,13 @@ function MostrarFormCarga(indicePropiedad) {
 
 	var retorno = '';
 
+	// Campo oculto que guada el ID de la propiedad
+	// El valor por defecto es -1. Si se trata de una modificación, el valor se reemplaza por el que corresponda
+
 	// Título
 	retorno += '<div class="row" style="margin-top:70px;"><div class="heading text-center">';
 	retorno += '<h2>' + ObtenerDesc('etiquetas','propiedadNueva') + '</h2>';
+	retorno += '<input type="text" class="" name="idPropiedad" id="idPropiedad" value="-1">';
 	retorno += '</div></div>';
 	
 	retorno += '<form action="" method="post" enctype="multipart/form-data" id="formCarga">';
@@ -604,8 +604,6 @@ function MostrarFormCarga(indicePropiedad) {
 }
 
 function CompletarCamposEdicion(indicePropiedad) {
-// El parámetro 'propiedad' es null para propiedades nuevas. Caso contrario, se trata de una modificación
-
 	if (indicePropiedad!=null) {
 		var propiedad = propiedades[indicePropiedad];
 
@@ -616,7 +614,6 @@ function CompletarCamposEdicion(indicePropiedad) {
 		$("#zona").val(propiedad.zona);
 		$("#descBreve").val(propiedad.descBreve);
 		$("#descripcion").val(propiedad.descripcion);
-		
 		$("#destacada").prop( "checked", ((propiedad.destacada=='1')?true:false));
 		$("#ocultar").prop( "checked", ((propiedad.ocultar=='1')?true:false));
 

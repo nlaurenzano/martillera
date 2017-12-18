@@ -78,6 +78,9 @@ switch ($queHago) {
 	case 'MostrarFormPassChange':
 		include("../partes/formPassword.php");
 		break;
+	case 'Borrar':
+		Elemento::Borrar($_POST['idBorrar']);
+		break;
 	
 
 /*
@@ -96,9 +99,6 @@ switch ($queHago) {
 		break;
 	case 'MostrarLogin':
 		include("partes/formLogin.php");
-		break;
-	case 'Borrar':
-		Elemento::Borrar($_POST['idBorrar']);
 		break;
 	case 'Modificar':
 		$unElemento = Elemento::TraerPorId($_POST['idModificar']);

@@ -21,7 +21,6 @@ function ValidarUsuario() {
                 } else {
                     setcookie("registro",$usuario,  time()-36000, '/');
                 }
-                //session_start();
                 $_SESSION['registrado']=$userBuscado->GetNombre();
                 $_SESSION['rol']=$userBuscado->GetRol();
                 $retorno="ingreso";
@@ -40,15 +39,11 @@ function ValidarPassChange() {
     if (!filter_var($usuario, FILTER_VALIDATE_EMAIL)) {
       $retorno= "El formato del email ingresado no es correcto.";
     } else {
-
         $userBuscado = Usuario::TraerPorEmail($usuario);
-
         if ($userBuscado) {
             // ACA SE COMPARA CONTRA EL HASH, QUE ES LO QUE SE VA A GUARDAR EN DB
             $claveActual = $_POST['claveActual'];
             if (password_verify($claveActual, $userBuscado->GetClave())) {
-              
-                
                 // Controla el formato de la clave nueva
                 $claveNueva = $_POST['claveNueva'];
                 if (!password_strength_check($claveNueva, 8, 50, 1, 1, 0, 0)) {
@@ -76,17 +71,6 @@ function ValidarPassChange() {
         } else {
             $retorno= "No se encuentra el usuario ingresado.";
         }
-
-
-
-
-
-
-
-
-
-
-        
     }
     echo $retorno;
 }

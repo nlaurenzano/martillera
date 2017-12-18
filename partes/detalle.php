@@ -86,10 +86,8 @@ if(isset($_POST['idPropiedad'])) {
     <!--/.container-->
 </section>
 
-<script src="./js/jquery.js"></script>
-
 <!--<script src="./js/jquery.easing.1.3.js"></script>-->
-
+<script src="./js/jquery.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/jquery.fancybox.pack.js"></script>
 <script src="./js/jquery.fancybox-media.js"></script>
