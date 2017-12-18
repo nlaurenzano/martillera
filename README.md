@@ -4,6 +4,7 @@
 
 Silmarpropiedades@gmail.com
 Instagram: Silmarpropiedades
+https://www.instagram.com/silmarpropiedades/
 15 5148 7999
 
 
@@ -36,7 +37,7 @@ Instagram: Silmarpropiedades
 
 
 
-
+<button type="button" onclick="SendContactEmail()" data-toggle="modal" data-target="#alertModal" class="btn btn-primary btn-block btn-lg"><?=get_Text('sendButtonLabel')?> <i class="ion-android-arrow-forward"></i></button>
 
 
 
