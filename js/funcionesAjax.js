@@ -452,11 +452,11 @@ function MostrarFormCarga(indicePropiedad) {
 
 	// Campo oculto que guada el ID de la propiedad
 	// El valor por defecto es -1. Si se trata de una modificación, el valor se reemplaza por el que corresponda
+	retorno += '<input type="text" class="hidden" name="idPropiedad" id="idPropiedad" value="-1">';
 
 	// Título
 	retorno += '<div class="row" style="margin-top:70px;"><div class="heading text-center">';
 	retorno += '<h2>' + ObtenerDesc('etiquetas','propiedadNueva') + '</h2>';
-	retorno += '<input type="text" class="" name="idPropiedad" id="idPropiedad" value="-1">';
 	retorno += '</div></div>';
 	
 	retorno += '<form action="" method="post" enctype="multipart/form-data" id="formCarga">';
@@ -623,4 +623,64 @@ function CompletarCamposEdicion(indicePropiedad) {
 
 	}
 
+}
+
+function SendContactEmail() {
+	var name = $("#name").val();
+	var email = $("#email").val();
+	var message = $("#message").val();
+
+	if ($.trim(name)=='' || $.trim(email)=='' || $.trim(message)=='') {
+		//$("#contactResponseTitle").html(contactEmptyLabel);
+		//$("#contactResponse").html(contactEmptyContent);
+	} else {
+		var ajaxFunction=$.ajax({
+			url:"php/action.php",
+			type:"post",
+			data:{
+				queHacer:'SendContactEmail',
+				name:name,
+				email:email,
+				message:message
+			}
+		});
+		ajaxFunction.done(function(response) {
+			switch(response) {
+			    case 'ok':
+			        $(".result").html('Su mensaje ha sido enviado.');
+			        //$("#contactResponseTitle").html(sentMsgTitle);
+					//$("#contactResponse").html(sentMsgContent);	// Your message has been sent!
+
+					$("#name").val('');
+					$("#email").val('');
+					$("#message").val('');
+			        break;
+			    case 'humanFail':
+			        //$("#contactResponseTitle").html(humanErrorLabel);
+					//$("#contactResponse").html(humanErrorMsg);	// Robot verification failed, please try again.
+			        break;
+			    case 'humanEmpty':
+			        //$("#contactResponseTitle").html(humanEmptyLabel);
+					//$("#contactResponse").html(humanEmptyMsg);	// Something went wrong, go back and try again!
+			        break;
+			    case 'error':
+			    	$(".result").html('Ha ocurrido un error al enviar su mensaje. Por favor vuelva a intentarlo más tarde.');
+			        //$("#contactResponseTitle").html(notSentMsgTitle);
+					//$("#contactResponse").html(notSentMsgContent);	// Something went wrong, go back and try again!
+			        break;
+			    default:
+			        
+			}
+
+			
+		});
+		ajaxFunction.fail(function(response) {
+			//$("#contactResponseTitle").html('Error');
+			//$("#contactResponse").html(response.responseText);
+		});
+		ajaxFunction.always(function(response) {
+			//alert("siempre "+response.statusText);
+
+		});
+	}
 }

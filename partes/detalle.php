@@ -59,26 +59,15 @@ if(isset($_POST['idPropiedad'])) {
                         </div>
                         <div class="form-group">
                             <!--<label for="comments">Mensaje</label>-->
-                            <textarea name="comment" class="form-control" id="comments" cols="3" rows="5" placeholder="Mensaje" title="Por favor ingrese su mensaje"></textarea>
+                            <textarea name="message" class="form-control" id="message" cols="3" rows="5" placeholder="Mensaje" title="Por favor ingrese su mensaje"></textarea>
                         </div>
-                        <button name="submit" type="submit" class="btn btn-lg btn-primary" id="submit">Enviar</button>
+                        <button type="button" onclick="SendContactEmail();" class="btn btn-lg btn-primary"><i class="fa fa-envelope-o" aria-hidden="true"></i> Enviar</button>
                         <div class="result"></div>
                     </div>
                 </form>
-
-
-
             
             </aside>
         </div>
-
-
-
-
-
-            
-
-
         </div>
         <!-- /.row -->
 
@@ -87,6 +76,7 @@ if(isset($_POST['idPropiedad'])) {
 </section>
 
 <!--<script src="./js/jquery.easing.1.3.js"></script>-->
+<script type="text/javascript" src="./js/funcionesAjax.js"></script>
 <script src="./js/jquery.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/jquery.fancybox.pack.js"></script>

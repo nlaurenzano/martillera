@@ -188,9 +188,10 @@ require_once('../php/funciones.php');
                 <div class="col-sm-8">
                     <div class="form-group">
                         <!--<label for="comments">Mensaje</label>-->
-                        <textarea name="comment" class="form-control" id="comments" cols="3" rows="5" placeholder="Mensaje" title="Por favor ingrese su mensaje"></textarea>
+                        <textarea name="message" class="form-control" id="message" cols="3" rows="5" placeholder="Mensaje" title="Por favor ingrese su mensaje"></textarea>
                     </div>
-                    <button name="submit" type="submit" class="btn btn-lg btn-primary" id="submit">Enviar</button>
+                    <button type="button" onclick="SendContactEmail()" class="btn btn-lg btn-primary"><i class="fa fa-envelope-o" aria-hidden="true"></i> Enviar</button>
+
                     <div class="result"></div>
                 </div>
             </form>
@@ -201,13 +202,12 @@ require_once('../php/funciones.php');
                 <h4>Dirección:</h4>
                 <address>
                     SILMAR Propiedades<br>
-                    Av. De Mayo 1234, CABA<br>
                 </address>
             </div>
             <div class="col-sm-4">
                 <h4>Teléfonos:</h4>
                 <address>
-                    54 11 1234-5678 / 54 11 1234-1111<br>
+                    54 11 5148 7999<br>
                 </address>
             </div>
         </div>

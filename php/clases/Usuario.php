@@ -134,17 +134,23 @@ class Usuario
 		echo "</table>
 			</div>
 		</div>";
-
-
 	}
 
-	public static function ModificarClave($email, $clave)
-	{
+	public static function ModificarClave($email, $clave) {
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		$consulta = $objetoAccesoDato->RetornarConsulta("UPDATE usuarios SET clave=:clave WHERE email=:email");
 
 		$consulta->bindValue(':clave',$clave, PDO::PARAM_STR);
 		$consulta->bindValue(':email',$email, PDO::PARAM_STR);
+		$consulta->execute();
+		//return '';
+	}
+
+	public static function ObtenerMailContacto() {
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+		$consulta = $objetoAccesoDato->RetornarConsulta("SELECT email FROM usuarios WHERE rol=:rol");
+
+		$consulta->bindValue(':rol','contacto', PDO::PARAM_STR);
 		$consulta->execute();
 		//return '';
 	}

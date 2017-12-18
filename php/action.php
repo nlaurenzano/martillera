@@ -38,20 +38,6 @@ switch ($queHago) {
 		break;
 	case 'BuscarPropiedad':
 		echo Elemento::TraerPorFiltro($_POST['operacion'], $_POST['tipo'], $_POST['ambientes'], $_POST['zona']);
-/*
-		$retorno = Elemento::TraerPorFiltro($_POST['operacion'], $_POST['tipo'], $_POST['ambientes'], $_POST['zona']);
-
-		$marcaAdmin = '0';
-		// Marca para saber en JS que está abierta la sesión de admin
-		if(isset($_SESSION['registrado'])) {
-		    	$marcaAdmin = '2';
-		    if($_SESSION['rol']=='admin') {
-		    	$marcaAdmin = '1';
-		    }
-		}
-		echo $marcaAdmin.$retorno;
-*/	
-		
 		break;
 	case 'ValidarUsuario':
 		echo ValidarUsuario();
@@ -81,7 +67,10 @@ switch ($queHago) {
 	case 'Borrar':
 		Elemento::Borrar($_POST['idBorrar']);
 		break;
-	
+	case 'SendContactEmail':
+		echo SendContactEmail();
+		break;
+
 
 /*
 	case 'MostrarBotones':

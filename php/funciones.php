@@ -4,53 +4,33 @@ require_once('clases/Elemento.php');
 require_once('clases/Descripciones.php');
 
 function SendContactEmail() {
+    //$body = "From: $name\n E-Mail: $email\n Message:\n $message";
+    $name = !empty($_POST['name'])?$_POST['name']:'';
+    $email = !empty($_POST['email'])?$_POST['email']:'';
+    $message = !empty($_POST['message'])?$_POST['message']:'';
+    $from = 'From: SILMAR Propiedades';
+    $to = Usuario::ObtenerMailContacto();
+    $subject = 'Contact';
 
-    //$human = $_POST['human'];
+    $htmlContent = "
+        <h1>Datos del contacto</h1>
+        <p><b>Nombre: </b>".$name."</p>
+        <p><b>Correo: </b>".$email."</p>
+        <p><b>Mensaje: </b>".$message."</p>
+    ";
 
-    if(isset($_POST['grecaptcharesponse']) && !empty($_POST['grecaptcharesponse'])) {
-        // your site secret key
-        $secret = getSiteSecretKey();
-        
-        //get verify response data
-        $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['grecaptcharesponse']);
+    // Always set content-type when sending HTML email
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    // More headers
+    $headers .= 'From:'.$name.' <'.$email.'>' . "\r\n";
 
-        $responseData = json_decode($verifyResponse);
-
-        if($responseData->success) {
-            //$body = "From: $name\n E-Mail: $email\n Message:\n $message";
-            $name = !empty($_POST['name'])?$_POST['name']:'';
-            $email = !empty($_POST['email'])?$_POST['email']:'';
-            $message = !empty($_POST['message'])?$_POST['message']:'';
-            $from = 'From: ReLatIBaS';
-            
-            $to = 'power500@gmail.com';
-            $subject = 'Contact';
-
-            $htmlContent = "
-                <h1>Contact request details</h1>
-                <p><b>Name: </b>".$name."</p>
-                <p><b>Email: </b>".$email."</p>
-                <p><b>Message: </b>".$message."</p>
-            ";
-
-            // Always set content-type when sending HTML email
-            $headers = "MIME-Version: 1.0" . "\r\n";
-            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-            // More headers
-            $headers .= 'From:'.$name.' <'.$email.'>' . "\r\n";
-
-            //mail($para, $titulo, $mensaje, $cabeceras);
-            //if (mail ($to, $subject, $headers, $from)) { 
-            if (mail ($to, $subject, $htmlContent, $headers)) { 
-                echo 'ok';  // Your message has been sent!
-            } else { 
-                echo 'error';   // Something went wrong, go back and try again!
-            }
-        } else {
-             echo 'humanFail'; // Robot verification failed, please try again.
-        }
-    } else {
-         echo 'humanEmpty';  // Please click on the reCAPTCHA box.
+    //mail($para, $titulo, $mensaje, $cabeceras);
+    //if (mail ($to, $subject, $headers, $from)) { 
+    if (mail ($to, $subject, $htmlContent, $headers)) { 
+        echo 'ok';  // Your message has been sent!
+    } else { 
+        echo 'error';   // Something went wrong, go back and try again!
     }
 }
 

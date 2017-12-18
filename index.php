@@ -62,7 +62,7 @@
     <footer>
         <div class="container">
             <div class="social text-center">
-                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="https://www.instagram.com/silmarpropiedades/"><i class="fa fa-instagram"></i></a>
                 <!--
                 <a href="#"><i class="fa fa-twitter"></i></a>
                 <a href="#"><i class="fa fa-facebook"></i></a>
