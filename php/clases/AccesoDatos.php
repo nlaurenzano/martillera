@@ -11,9 +11,9 @@ class AccesoDatos
     {
         try {
             if (isLocalServer()) {
-            $this->objetoPDO = new PDO('mysql:host=localhost;dbname=silvanapropiedades;charset=utf8', 'root', '', array(PDO::ATTR_EMULATE_PREPARES => false,PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            $this->objetoPDO = new PDO('mysql:host=localhost;dbname=silmarpropiedades;charset=utf8', 'root', '', array(PDO::ATTR_EMULATE_PREPARES => false,PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
             } else {
-            $this->objetoPDO = new PDO('mysql:host=localhost;dbname=id3609639_silmardb;charset=utf8', 'id3609639_silmaradmin', 'Apocalypsh1t', array(PDO::ATTR_EMULATE_PREPARES => false,PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            $this->objetoPDO = new PDO('mysql:host=localhost;dbname=silmarpr_DB;charset=utf8', 'silmarpr_admin', 'Apocalypsh1t', array(PDO::ATTR_EMULATE_PREPARES => false,PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
             }
             $this->objetoPDO->exec("SET CHARACTER SET utf8");
         }

@@ -1,11 +1,38 @@
 # martillera
 
 
-
-Silmarpropiedades@gmail.com
+contacto@silmarpropiedades.com 
+silmarpropiedades@gmail.com
 Instagram: Silmarpropiedades
 https://www.instagram.com/silmarpropiedades/
 15 5148 7999
+
+
+#1044 - Acceso negado para usuario: 'cpses_siy61wzccn'@'localhost' para la base de datos 'silmarpropiedades'
+
+silmarpr_DB
+silmarpr_admin
+
+
+Nombre de usuario de FTP: silmarpr
+Servidor FTP: ftp.silmarpropiedades.com
+Puerto FTPS explícito de FTP &:  21
+
+Egresadosuai!
+
+
+ftp.silmarpropiedades.com/home/silmarpr
+ftp.silmarpropiedades.com/home/silmarpr/admin
+
+
+170.78.74.12:21
+admin@silmarpropiedades.com
+Apocalypsh1t
+{zB2pCK9Ml=@
+
+
+Error al recuperar el listado del directorio
+
 
 
 
@@ -75,3 +102,13 @@ title
 singleton
 popout
 ***********************************************************************************************
+
+
+
+Buenas tardes,
+Estamos tratando de crear nuestro sitio y no nos es posible crear una base de datos en phpmyadmin.
+En prime lugar, no está la opción disponible en el navegador. Intentamos crearla con una consulta SQL y obtuvimos el siguiente mensaje de error:
+
+#1044 - Acceso negado para usuario: 'cpses_siy61wzccn'@'localhost' para la base de datos 'silmarpropiedades'
+
+El usuario con el que estamos registrándonos es silmarpr, que es el único que tenemos.
