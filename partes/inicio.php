@@ -149,7 +149,7 @@ require_once('../php/funciones.php');
                 <p>Nos especializamos en gestionar operaciones inmobiliarias, con la finalidad principal de satisfacer a nuestros clientes, ya sea tasación compra-venta o alquiler.</p>
                 <br />
                 <h4>MISIÓN</h4>
-                <p>Brindar un servicio de asesoría inmobiliaria integral cuidando el patrimonio de nuestros clientes, con ética, honestidad y profesionalismo. Orientados al servicio personalizado en todas las etapas de nuestra intervención en la venta, compra o alquiler.</p>
+                <p>Brindar un servicio de asesoría inmobiliaria integral cuidando el patrimonio de nuestros clientes, con ética, honestidad y profesionalismo.</p>
                 <br />
                 <h4>VISIÓN</h4>
                 <p>Ser la mejor alternativa para quienes quieren la ayuda de un profesional inmobiliario, desde una relación cercana y resolutiva, ofreciendo las propuestas más innovadoras.<br />
