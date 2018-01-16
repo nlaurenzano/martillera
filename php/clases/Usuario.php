@@ -152,7 +152,8 @@ class Usuario
 
 		$consulta->bindValue(':rol','contacto', PDO::PARAM_STR);
 		$consulta->execute();
-		//return '';
+		$usuario = $consulta->fetchObject('Usuario');
+		return $usuario->GetEmail();
 	}
 //--------------------------------------------------------------------------------//
 

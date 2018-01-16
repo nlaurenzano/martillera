@@ -199,9 +199,9 @@ require_once('../php/funciones.php');
 
         <div class="row mrgn30">
             <div class="col-sm-4">
-                <h4>Dirección:</h4>
+                <h4>Correo electrónico:</h4>
                 <address>
-                    SILMAR Propiedades<br>
+                    Info@silmarpropiedades.com<br>
                 </address>
             </div>
             <div class="col-sm-4">

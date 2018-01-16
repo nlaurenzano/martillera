@@ -669,7 +669,6 @@ function SendContactEmail() {
 					//$("#contactResponse").html(notSentMsgContent);	// Something went wrong, go back and try again!
 			        break;
 			    default:
-			        
 			}
 
 			
