@@ -118,7 +118,7 @@ require_once('../php/funciones.php');
                                  <select class="form-control" name="zona" id="zona">
                                     <option value="none">Todas las zonas</option>
                                     <option value="caba">Ciudad Autónoma de Buenos Aires</option>
-                                    <option value="gbasur">Gran Buenos Aires Sur</option>
+                                    <option value="gbasur">Gran Buenos Aires</option>
                                     <option value="costa">Costa Atlántica</option>
                                 </select>
                             </div>
@@ -146,7 +146,7 @@ require_once('../php/funciones.php');
         <div class="text-center">
         <h2>Sobre Nosotros</h2>
             <div class="col-md-8 col-md-offset-2">
-                <p>Nos especializamos en gestionar operaciones inmobiliarias, con la finalidad principal de satisfacer a nuestros clientes, ya sea tasación compra-venta o alquiler.</p>
+                <p>Nos especializamos en gestionar operaciones inmobiliarias, con la finalidad principal de satisfacer a nuestros clientes, ya sea administración, tasación, compra-venta o alquiler.</p>
                 <br />
                 <h4>MISIÓN</h4>
                 <p>Brindar un servicio de asesoría inmobiliaria integral cuidando el patrimonio de nuestros clientes, con ética, honestidad y profesionalismo.</p>
@@ -205,7 +205,7 @@ require_once('../php/funciones.php');
                 </address>
             </div>
             <div class="col-sm-4">
-                <h4>Teléfonos:</h4>
+                <h4>Teléfono:</h4>
                 <address>
                     54 11 5148 7999<br>
                 </address>
