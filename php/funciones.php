@@ -143,7 +143,15 @@ function ObtenerTodas() {
 }
 
 function ObtenerDetalle($idPropiedad) {
-    return json_encode(Elemento::TraerPorId($idPropiedad));
+    //return json_encode(Elemento::TraerPorId($idPropiedad));
+
+    $resultado = json_encode(Elemento::TraerPorId($idPropiedad));
+    $resultado = str_replace(array('\r\n', '\r', '\n'), "<br />", $resultado); 
+
+    return $resultado;
+    //return nl2br($resultado);
+
+
 }
 
 function ObtenerDescripciones() {

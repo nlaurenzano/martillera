@@ -118,7 +118,7 @@ require_once('../php/funciones.php');
                                  <select class="form-control" name="zona" id="zona">
                                     <option value="none">Todas las zonas</option>
                                     <option value="caba">Ciudad Autónoma de Buenos Aires</option>
-                                    <option value="gbasur">Gran Buenos Aires</option>
+                                    <option value="gba">Gran Buenos Aires</option>
                                     <option value="costa">Costa Atlántica</option>
                                 </select>
                             </div>

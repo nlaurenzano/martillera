@@ -34,13 +34,13 @@ function MostrarHeader(queMostrar) {
 		type:"post",
 		data:{queHacer:queMostrar}
 	});
-	funcionAjax.done(function(retorno){
+	funcionAjax.done(function(retorno) {
 		$("#navegacion").html(retorno);
 	});
-	funcionAjax.fail(function(retorno){
+	funcionAjax.fail(function(retorno) {
 		$("#navegacion").html(retorno.responseText);	
 	});
-	funcionAjax.always(function(retorno){
+	funcionAjax.always(function(retorno) {
 		//alert("siempre "+retorno.statusText);
 
 	});
@@ -200,6 +200,7 @@ function MostrarDestacadasJSON(propiedades) {
 
 function MostrarDetalleJSON(propiedad) {
 	//return propiedad;
+	alert(propiedad);
 	propiedad = JSON.parse(propiedad);
 	var retorno = '';
 	var imagen;
@@ -223,7 +224,7 @@ function MostrarDetalleJSON(propiedad) {
 
   	retorno += '<div class="mrgn30"><h4>' + ObtenerDesc('etiquetas','descripcion') + '</h4>';
   	retorno += '<p>' + propiedad.descripcion + '</p></div>';
-
+alert(propiedad.descripcion);
   	retorno += '<div class="bottom-article"><ul class="meta-post">';
   	retorno += '<li><strong>' + ObtenerDesc('etiquetas','operacion') + ':</strong> ' + ObtenerDesc('operacion',propiedad.operacion) + '</li>';
   	retorno += '<li><strong>' + ObtenerDesc('etiquetas','tipo') + ':</strong> ' + ObtenerDesc('tipo',propiedad.tipo) + '</li>';
@@ -417,7 +418,7 @@ function armarEtiquetaFiltroDisponible(operacion, tipo, ambientes, zona) {
 	if (zona == 'none') {
 		retorno += '<h5 class="tituloFiltros">' + ObtenerDesc('etiquetas','zona') + '</h5><ul class="cat">';
         retorno += '<li class="filtroDisponible" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\',\'' + tipo + '\',\'' + ambientes + '\',\'caba\', false)">' + ObtenerDesc('zona','caba') + '</li>';
-        retorno += '<li class="filtroDisponible" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\',\'' + tipo + '\',\'' + ambientes + '\',\'gbasur\', false)">' + ObtenerDesc('zona','gbasur') + '</li>';
+        retorno += '<li class="filtroDisponible" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\',\'' + tipo + '\',\'' + ambientes + '\',\'gba\', false)">' + ObtenerDesc('zona','gba') + '</li>';
         retorno += '<li class="filtroDisponible" onclick="BuscarPropiedadesFiltro(\'' + operacion + '\',\'' + tipo + '\',\'' + ambientes + '\',\'costa\', false)">' + ObtenerDesc('zona','costa') + '</li>';
 		retorno += '</ul>';
 	}
@@ -505,7 +506,7 @@ function MostrarFormCarga(indicePropiedad) {
 	retorno += '<select class="form-control" name="zona" id="zona">';
 	retorno += '<option value="none">' + ObtenerDesc('etiquetas','seleccioneZona') + '</option>';
 	retorno += '<option value="caba">' + ObtenerDesc('zona','caba') + '</option>';
-	retorno += '<option value="gbasur">' + ObtenerDesc('zona','gbasur') + '</option>';
+	retorno += '<option value="gba">' + ObtenerDesc('zona','gba') + '</option>';
 	retorno += '<option value="costa">' + ObtenerDesc('zona','costa') + '</option>';
 	retorno += '</select>';
 	retorno += '</div>';
