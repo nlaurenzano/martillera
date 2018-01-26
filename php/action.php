@@ -71,29 +71,10 @@ switch ($queHago) {
 		echo SendContactEmail();
 		break;
 
+	case 'MostrarMapa':
+		include("../partes/test.php");
+		break;
 
-/*
-	case 'MostrarBotones':
-		include("partes/botonesNav.php");
-		break;
-	case 'MostrarAlta':
-		include("partes/alta.php");
-		break;
-	case 'MostrarGrilla':
-		include("partes/grilla.php");
-		//ImprimirTablas();
-		break;
-	case 'MostrarAdmin':
-		include("partes/admin.php");
-		break;
-	case 'MostrarLogin':
-		include("partes/formLogin.php");
-		break;
-	case 'Modificar':
-		$unElemento = Elemento::TraerPorId($_POST['idModificar']);
-		echo json_encode($unElemento);
-		break;
-*/
 	default:
 		# code...
 		break;

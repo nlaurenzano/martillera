@@ -583,7 +583,8 @@ function MostrarFormCarga(indicePropiedad) {
 	// Botón Guardar
 	retorno += '<br />';
 	retorno += '<input type="button" class="btn btn-lg btn-primary" name="guardar" value="' + ObtenerDesc('etiquetas','btnGuardar') + '" onclick="GuardarPropiedad()" />';
-
+	retorno += '<input type="button" class="btn btn-lg btn-primary" name="mapa" value="MAPA" onclick="$.getScript(\'https://maps.googleapis.com/maps/api/js?key=AIzaSyDOcKw36NiPTVBs_AwP5zIRmNeVkZVx5D4&amp;async=2&amp;callback=initMap\')" />';
+ 
 	retorno += '</div>';	//col-sm-4
 	retorno += '<div class="col-sm-2"></div>';
 	retorno += '</div>';	//row
@@ -596,12 +597,30 @@ function MostrarFormCarga(indicePropiedad) {
 
 	retorno += '</div>';	//col-sm-8
 	retorno += '<div class="col-sm-2"></div>';
-	retorno += '</div>';	//row
+
 	
+	retorno += '</div>';	//row
+
+	
+// ACÁ VA LO DEL MAPA
+	retorno += '<div class="row mrgn10">';
+	retorno += '<div class="col-sm-2"></div>';
+	retorno += '<div class="col-sm-8">';
+	retorno += '<div id="map">Acá va el mapa</div>';
+	retorno += '</div>';	//col
+	retorno += '<div class="col-sm-2"></div>';
+	retorno += '</div>';	//row
+
 	retorno += '</form>';
+
+	
 	retorno += '</div>';
+	
 
 	$("#principal").html(retorno);
+
+	
+
 }
 
 function CompletarCamposEdicion(indicePropiedad) {
@@ -621,7 +640,6 @@ function CompletarCamposEdicion(indicePropiedad) {
 /*
 		$("#imagen").val('');
 */
-
 	}
 
 }
@@ -683,4 +701,19 @@ function SendContactEmail() {
 
 		});
 	}
+}
+
+var map;
+function initMap() {
+	//alert('cargando mapa');
+	map = new google.maps.Map(document.getElementById('map'), {
+	  center: {lat: -34.921610, lng: -57.954296},
+	  zoom: 16
+	});
+
+
+//	$("#map").show();//1º MOSTRAR EL DIV QUE CONTENDRA EL MAPA
+	$("#map").width("100%");//2º DAR TAMAÑO AL DIV QUE CONTENDRA EL MAPA
+	$("#map").height("300px");//2º DAR TAMAÑO AL DIV QUE CONTENDRA EL MAPA
+
 }

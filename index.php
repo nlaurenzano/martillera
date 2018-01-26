@@ -60,6 +60,8 @@
     <div id="principal">
         <script type="text/javascript">Mostrar('MostrarInicio');</script>
     </div>
+     
+
     
     <footer>
         <div class="container">
@@ -87,9 +89,9 @@
             <!-- / .row -->
         </div>
     </section>
-
     <a href="#top" class="topHome"><i class="fa fa-chevron-up fa-2x"></i></a>
-    
+
+
     <!--[if lte IE 8]><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><![endif]-->
     <!--
     <script src="js/modernizr-latest.js"></script>
