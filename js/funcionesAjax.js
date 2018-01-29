@@ -584,6 +584,7 @@ function MostrarFormCarga(indicePropiedad) {
 	retorno += '<br />';
 	retorno += '<input type="button" class="btn btn-lg btn-primary" name="guardar" value="' + ObtenerDesc('etiquetas','btnGuardar') + '" onclick="GuardarPropiedad()" />';
 	retorno += '<input type="button" class="btn btn-lg btn-primary" name="mapa" value="MAPA" onclick="$.getScript(\'https://maps.googleapis.com/maps/api/js?key=AIzaSyDOcKw36NiPTVBs_AwP5zIRmNeVkZVx5D4&amp;async=2&amp;callback=initMap\')" />';
+	retorno += '<div id="coordenadas"></div>';
  
 	retorno += '</div>';	//col-sm-4
 	retorno += '<div class="col-sm-2"></div>';
@@ -703,17 +704,61 @@ function SendContactEmail() {
 	}
 }
 
+
 var map;
+var marker = null;
 function initMap() {
 	//alert('cargando mapa');
+
+	var myLatLng = new google.maps.LatLng(-34.921610,-57.954296);
+	marker = null;
 	map = new google.maps.Map(document.getElementById('map'), {
-	  center: {lat: -34.921610, lng: -57.954296},
+	  center: myLatLng,
 	  zoom: 16
 	});
 
-
 //	$("#map").show();//1º MOSTRAR EL DIV QUE CONTENDRA EL MAPA
 	$("#map").width("100%");//2º DAR TAMAÑO AL DIV QUE CONTENDRA EL MAPA
-	$("#map").height("300px");//2º DAR TAMAÑO AL DIV QUE CONTENDRA EL MAPA
+	$("#map").height("400px");//2º DAR TAMAÑO AL DIV QUE CONTENDRA EL MAPA
 
+	map.addListener('click', function(e) {
+    	placeMarkerAndPanTo(e.latLng, map);
+	});
+
+
+/* var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+    draggable: true,
+    title: 'Acá toy!'
+  });
+*/
+}
+
+function placeMarkerAndPanTo(latLng, map) {
+	if (marker===null) {
+	  marker = new google.maps.Marker({
+	    position: latLng,
+	    map: map,
+	    draggable: true,
+    	title: 'Acá toy!'
+	  });
+	  map.panTo(latLng);
+		marker.addListener('dragend', function(e) {
+	    	guardarPosicion(e.latLng);
+	    	//placeMarkerAndPanTo(e.latLng, map);
+		});
+	} else {
+		marker.setPosition(latLng);
+	}
+
+	guardarPosicion(latLng);
+}
+
+function guardarPosicion(latLng) {
+
+	$("#coordenadas").html(latLng.toString());
+
+	// 	ACÁ SE GUARDA LA POSICIÓN, SEPARANDO EN DOS CAMPOS LAT Y LNG
+	
 }
