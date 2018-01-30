@@ -583,7 +583,6 @@ function MostrarFormCarga(indicePropiedad) {
 	// Botón Guardar
 	retorno += '<br />';
 	retorno += '<input type="button" class="btn btn-lg btn-primary" name="guardar" value="' + ObtenerDesc('etiquetas','btnGuardar') + '" onclick="GuardarPropiedad()" />';
-	retorno += '<input type="button" class="btn btn-lg btn-primary" name="mapa" value="MAPA" onclick="$.getScript(\'https://maps.googleapis.com/maps/api/js?key=AIzaSyDOcKw36NiPTVBs_AwP5zIRmNeVkZVx5D4&amp;async=2&amp;callback=initMap\')" />';
 	retorno += '<div id="coordenadas"></div>';
  
 	retorno += '</div>';	//col-sm-4
@@ -602,26 +601,23 @@ function MostrarFormCarga(indicePropiedad) {
 	
 	retorno += '</div>';	//row
 
+	retorno += '';
 	
 // ACÁ VA LO DEL MAPA
 	retorno += '<div class="row mrgn10">';
 	retorno += '<div class="col-sm-2"></div>';
 	retorno += '<div class="col-sm-8">';
-	retorno += '<div id="map">Acá va el mapa</div>';
+	retorno += '<div id="map"><input type="button" class="btn btn-lg btn-primary" name="mapa" value="' + ObtenerDesc('etiquetas','botonUbicacion') + '" onclick="$.getScript(\'https://maps.googleapis.com/maps/api/js?key=AIzaSyDOcKw36NiPTVBs_AwP5zIRmNeVkZVx5D4&amp;async=2&amp;callback=initMap\')" /></div>';
 	retorno += '</div>';	//col
 	retorno += '<div class="col-sm-2"></div>';
 	retorno += '</div>';	//row
 
 	retorno += '</form>';
-
-	
 	retorno += '</div>';
 	
-
 	$("#principal").html(retorno);
 
 	
-
 }
 
 function CompletarCamposEdicion(indicePropiedad) {
@@ -708,31 +704,19 @@ function SendContactEmail() {
 var map;
 var marker = null;
 function initMap() {
-	//alert('cargando mapa');
-
-	var myLatLng = new google.maps.LatLng(-34.921610,-57.954296);
+	var myLatLng = new google.maps.LatLng(-34.613703,-58.371735);
 	marker = null;
 	map = new google.maps.Map(document.getElementById('map'), {
 	  center: myLatLng,
-	  zoom: 16
+	  zoom: 9
 	});
 
-//	$("#map").show();//1º MOSTRAR EL DIV QUE CONTENDRA EL MAPA
 	$("#map").width("100%");//2º DAR TAMAÑO AL DIV QUE CONTENDRA EL MAPA
 	$("#map").height("400px");//2º DAR TAMAÑO AL DIV QUE CONTENDRA EL MAPA
 
 	map.addListener('click', function(e) {
     	placeMarkerAndPanTo(e.latLng, map);
 	});
-
-
-/* var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-    draggable: true,
-    title: 'Acá toy!'
-  });
-*/
 }
 
 function placeMarkerAndPanTo(latLng, map) {
@@ -746,12 +730,10 @@ function placeMarkerAndPanTo(latLng, map) {
 	  map.panTo(latLng);
 		marker.addListener('dragend', function(e) {
 	    	guardarPosicion(e.latLng);
-	    	//placeMarkerAndPanTo(e.latLng, map);
 		});
 	} else {
 		marker.setPosition(latLng);
 	}
-
 	guardarPosicion(latLng);
 }
 
