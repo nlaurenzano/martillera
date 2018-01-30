@@ -126,7 +126,7 @@ class Elemento
 //--------------------------------------------------------------------------------//
 //--METODO DE CLASE
 
-	public static function Guardar($id,$operacion,$tipo,$ambientes,$zona,$descBreve,$descripcion,$destacada,$ocultar) {
+	public static function Guardar($id,$operacion,$tipo,$ambientes,$zona,$descBreve,$descripcion,$destacada,$ocultar,$latCarga,$lngCarga) {
 	//public static function Guardar($id,$operacion,$tipo,$ambientes,$zona,$descBreve,$descripcion,$destacada,$ocultar,$imagenes) {
 
 		$unElemento = new Elemento();
@@ -139,6 +139,8 @@ class Elemento
 		$unElemento->SetDescripcion($descripcion);
 		$unElemento->SetDestacada($destacada);
 		$unElemento->SetOcultar($ocultar);
+		$unElemento->SetLatCarga($latCarga);
+		$unElemento->SetLngCarga($lngCarga);
 		//$unElemento->SetImagenes($imagenes);
 
 		$retorno='';
@@ -281,8 +283,7 @@ class Elemento
 //--METODOS DE INSTANCIA
 	public function Insertar() {
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO propiedades (operacion,tipo,ambientes,zona,descBreve,descripcion,destacada,ocultar) values (:operacion,:tipo,:ambientes,:zona,:descBreve,:descripcion,:destacada,:ocultar)");
-		//$consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO propiedades (operacion,tipo,ambientes,zona,descBreve,descripcion,destacada,ocultar,imagenes) values (:operacion,:tipo,:ambientes,:zona,:descBreve,:descripcion,:destacada,:ocultar,:imagenes)");
+		$consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO propiedades (operacion,tipo,ambientes,zona,descBreve,descripcion,destacada,ocultar,latCarga,lngCarga) values (:operacion,:tipo,:ambientes,:zona,:descBreve,:descripcion,:destacada,:ocultar,:latCarga,:lngCarga)");
 
 		$consulta->bindValue(':operacion',$this->operacion, PDO::PARAM_STR);
 		$consulta->bindValue(':tipo',$this->tipo, PDO::PARAM_STR);
@@ -292,6 +293,8 @@ class Elemento
 		$consulta->bindValue(':descripcion',$this->descripcion, PDO::PARAM_STR);
 		$consulta->bindValue(':destacada',$this->destacada, PDO::PARAM_STR);
 		$consulta->bindValue(':ocultar',$this->ocultar, PDO::PARAM_STR);
+		$consulta->bindValue(':latCarga',$this->latCarga, PDO::PARAM_STR);
+		$consulta->bindValue(':lngCarga',$this->lngCarga, PDO::PARAM_STR);
 		//$consulta->bindValue(':imagenes',$this->imagenes, PDO::PARAM_STR);
 		
 		$consulta->execute();
@@ -310,7 +313,7 @@ class Elemento
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 //		$consulta = $objetoAccesoDato->RetornarConsulta("
 //			UPDATE propiedades SET campo1=:campo1,campo2=:campo2,campo3=:campo3 WHERE id=:id");
-		$consulta = $objetoAccesoDato->RetornarConsulta("UPDATE propiedades SET operacion=:operacion,tipo=:tipo,ambientes=:ambientes,zona=:zona,descBreve=:descBreve,descripcion=:descripcion,destacada=:destacada,ocultar=:ocultar WHERE id=:id");
+		$consulta = $objetoAccesoDato->RetornarConsulta("UPDATE propiedades SET operacion=:operacion,tipo=:tipo,ambientes=:ambientes,zona=:zona,descBreve=:descBreve,descripcion=:descripcion,destacada=:destacada,ocultar=:ocultar,latCarga=:latCarga,lngCarga=:lngCarga WHERE id=:id");
 
 		$consulta->bindValue(':id',$this->id, PDO::PARAM_STR);
 		$consulta->bindValue(':operacion',$this->operacion, PDO::PARAM_STR);
@@ -321,6 +324,8 @@ class Elemento
 		$consulta->bindValue(':descripcion',str_replace(array("\n\r", "\n", "\r"), ' ', $this->descripcion), PDO::PARAM_STR);
 		$consulta->bindValue(':destacada',$this->destacada, PDO::PARAM_STR);
 		$consulta->bindValue(':ocultar',$this->ocultar, PDO::PARAM_STR);
+		$consulta->bindValue(':latCarga',$this->latCarga, PDO::PARAM_STR);
+		$consulta->bindValue(':lngCarga',$this->lngCarga, PDO::PARAM_STR);
 
 		$consulta->execute();
 		$id = $objetoAccesoDato->RetornarUltimoIdInsertado();

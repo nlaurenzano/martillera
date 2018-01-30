@@ -21,7 +21,6 @@ function Mostrar(queMostrar, idPropiedad) {
 		});
 		funcionAjax.always(function(retorno){
 			//alert("siempre "+retorno.statusText);
-
 		});
 	}
 }
@@ -451,9 +450,14 @@ function MostrarFormCarga(indicePropiedad) {
 
 	var retorno = '';
 
-	// Campo oculto que guada el ID de la propiedad
+	// Campo oculto que guarda el ID de la propiedad
 	// El valor por defecto es -1. Si se trata de una modificación, el valor se reemplaza por el que corresponda
 	retorno += '<input type="text" class="hidden" name="idPropiedad" id="idPropiedad" value="-1">';
+	// Campos ocultos que guardan la ubicación en el mapa
+	retorno += '<input type="text" class="hidden" name="latCarga" id="latCarga" value="">';
+	retorno += '<input type="text" class="hidden" name="lngCarga" id="lngCarga" value="">';
+
+
 
 	// Título
 	retorno += '<div class="row" style="margin-top:70px;"><div class="heading text-center">';
@@ -583,7 +587,6 @@ function MostrarFormCarga(indicePropiedad) {
 	// Botón Guardar
 	retorno += '<br />';
 	retorno += '<input type="button" class="btn btn-lg btn-primary" name="guardar" value="' + ObtenerDesc('etiquetas','btnGuardar') + '" onclick="GuardarPropiedad()" />';
-	retorno += '<div id="coordenadas"></div>';
  
 	retorno += '</div>';	//col-sm-4
 	retorno += '<div class="col-sm-2"></div>';
@@ -738,9 +741,7 @@ function placeMarkerAndPanTo(latLng, map) {
 }
 
 function guardarPosicion(latLng) {
-
-	$("#coordenadas").html(latLng.toString());
-
-	// 	ACÁ SE GUARDA LA POSICIÓN, SEPARANDO EN DOS CAMPOS LAT Y LNG
-	
+	//$("#coordenadas").html(latLng.toString());
+	$("#latCarga").val(latLng.lat());
+	$("#lngCarga").val(latLng.lng());
 }

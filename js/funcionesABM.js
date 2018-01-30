@@ -15,6 +15,9 @@ function GuardarPropiedad()
 		var ocultar=($("#ocultar").prop('checked')===true) ? '1' : '0';	// check
 		//var imagenesNombre=$("#imagen").val();			// file upload
 		var imagenes=$("#imagen");
+		
+		var latCarga=$("#latCarga").val();
+		var lngCarga=$("#lngCarga").val();
 
 		var formData = new FormData($("#formCarga")[0]);
 		var file_data = jQuery('#imagen')[0].files;
@@ -49,6 +52,8 @@ function GuardarPropiedad()
 				$("#destacada").prop( "checked", false );
 				$("#ocultar").prop( "checked", false );
 				$("#imagen").val('');
+				$("#latCarga").val('');
+				$("#lngCarga").val('');
 			}
 			
 		});
