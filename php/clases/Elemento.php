@@ -16,6 +16,8 @@ class Elemento
 	private $descripcion;
 	private $destacada;
 	private $ocultar;
+	private $latCarga;
+	private $lngCarga;
 	//private $imagenes;
 
 //--------------------------------------------------------------------------------//
@@ -51,6 +53,12 @@ class Elemento
 	public function GetOcultar() {
 		return $this->ocultar;
 	}
+	public function GetLatCarga() {
+		return $this->latCarga;
+	}
+	public function GetLngCarga() {
+		return $this->lngCarga;
+	}
 	public function GetDestacada() {
 		return $this->destacada;
 	}
@@ -83,6 +91,12 @@ class Elemento
 	public function SetOcultar($valor) {
 		$this->ocultar = $valor;
 	}
+	public function SetLatCarga($valor) {
+		$this->latCarga = $valor;
+	}
+	public function SetLngCarga($valor) {
+		$this->lngCarga = $valor;
+	}
 	/*public function SetImagenes($valor) {
 		var_dump($valor);
 		$imagenesArray = explode(",",$valor);
@@ -110,6 +124,8 @@ class Elemento
 			$this->descripcion = $obj->descripcion;
 			//$this->imagenes = $obj->imagenes;
 			$this->ocultar = $obj->ocultar;
+			$this->latCarga = $obj->latCarga;
+			$this->lngCarga = $obj->lngCarga;
 			$this->destacada = $obj->destacada;
 		}
 	}
@@ -118,8 +134,7 @@ class Elemento
 //--TOSTRING	
   	public function ToString()
 	{
-	  	return $this->id."  ".$this->operacion."  ".$this->tipo."  ".$this->ambientes."  ".$this->zona."  ".$this->descBreve."  ".$this->descripcion."  ".$this->ocultar."  ".$this->destacada;
-	  	//return $this->id."  ".$this->operacion."  ".$this->tipo."  ".$this->ambientes."  ".$this->zona."  ".$this->descBreve."  ".$this->descripcion."  ".$this->imagenes."  ".$this->ocultar."  ".$this->destacada;
+	  	return $this->id."  ".$this->operacion."  ".$this->tipo."  ".$this->ambientes."  ".$this->zona."  ".$this->descBreve."  ".$this->descripcion."  ".$this->ocultar."  ".$this->latCarga."  ".$this->lngCarga."  ".$this->destacada;
 	}
 //--------------------------------------------------------------------------------//
 
@@ -127,7 +142,6 @@ class Elemento
 //--METODO DE CLASE
 
 	public static function Guardar($id,$operacion,$tipo,$ambientes,$zona,$descBreve,$descripcion,$destacada,$ocultar,$latCarga,$lngCarga) {
-	//public static function Guardar($id,$operacion,$tipo,$ambientes,$zona,$descBreve,$descripcion,$destacada,$ocultar,$imagenes) {
 
 		$unElemento = new Elemento();
 		$unElemento->SetId($id);

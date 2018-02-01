@@ -453,11 +453,6 @@ function MostrarFormCarga(indicePropiedad) {
 	// Campo oculto que guarda el ID de la propiedad
 	// El valor por defecto es -1. Si se trata de una modificación, el valor se reemplaza por el que corresponda
 	retorno += '<input type="text" class="hidden" name="idPropiedad" id="idPropiedad" value="-1">';
-	// Campos ocultos que guardan la ubicación en el mapa
-	retorno += '<input type="text" class="hidden" name="latCarga" id="latCarga" value="">';
-	retorno += '<input type="text" class="hidden" name="lngCarga" id="lngCarga" value="">';
-
-
 
 	// Título
 	retorno += '<div class="row" style="margin-top:70px;"><div class="heading text-center">';
@@ -465,6 +460,10 @@ function MostrarFormCarga(indicePropiedad) {
 	retorno += '</div></div>';
 	
 	retorno += '<form action="" method="post" enctype="multipart/form-data" id="formCarga">';
+	
+	// Campos ocultos que guardan la ubicación en el mapa
+	retorno += '<input type="text" class="hidden" name="latCarga" id="latCarga" value="">';
+	retorno += '<input type="text" class="hidden" name="lngCarga" id="lngCarga" value="">';
 
 	retorno += '<div class="row mrgn10">';
 	retorno += '<div class="col-sm-2"></div>';
@@ -707,7 +706,7 @@ function SendContactEmail() {
 var map;
 var marker = null;
 function initMap() {
-	var myLatLng = new google.maps.LatLng(-34.613703,-58.371735);
+	var myLatLng = new google.maps.LatLng(-34.588206,-58.431082);
 	marker = null;
 	map = new google.maps.Map(document.getElementById('map'), {
 	  center: myLatLng,
