@@ -54,8 +54,8 @@ function GuardarPropiedad()
 				$("#imagen").val('');
 				$("#latCarga").val('');
 				$("#lngCarga").val('');
+				marker.setVisible(false);
 			}
-			
 		});
 		funcionAjax.fail(function(retorno){
 			$(".mensajesABM").html("Error al cargar la propiedad: " + retorno);

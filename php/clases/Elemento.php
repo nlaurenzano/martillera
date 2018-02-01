@@ -185,7 +185,7 @@ class Elemento
 	public static function TraerPorId($id) 
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta = $objetoAccesoDato->RetornarConsulta("SELECT id,operacion,tipo,ambientes,zona,descBreve,descripcion,imagenes,ocultar,destacada FROM propiedades WHERE id = :id");
+		$consulta = $objetoAccesoDato->RetornarConsulta("SELECT id,operacion,tipo,ambientes,zona,descBreve,descripcion,imagenes,ocultar,destacada,latCarga,lngCarga FROM propiedades WHERE id = :id");
 		$consulta->bindValue(':id', $id, PDO::PARAM_STR);
 		$consulta->execute();
 		//return $consulta->fetchObject('Elemento');
@@ -204,7 +204,8 @@ class Elemento
 
 	public static function TraerDestacadas() {
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta=$objetoAccesoDato->RetornarConsulta("SELECT id,operacion,tipo,ambientes,zona,descBreve,descripcion,imagenes,ocultar,destacada FROM propiedades WHERE destacada = :destacada AND ocultar = :ocultar");
+		$consulta=$objetoAccesoDato->RetornarConsulta("SELECT id,operacion,tipo,ambientes,zona,descBreve,imagenes,ocultar,destacada FROM propiedades WHERE destacada = :destacada AND ocultar = :ocultar");
+		//$consulta=$objetoAccesoDato->RetornarConsulta("SELECT id,operacion,tipo,ambientes,zona,descBreve,descripcion,imagenes,ocultar,destacada FROM propiedades WHERE destacada = :destacada AND ocultar = :ocultar");
 		$consulta->bindValue(':destacada', 1, PDO::PARAM_STR);
 		$consulta->bindValue(':ocultar', 0, PDO::PARAM_STR);
 		$consulta->execute();
@@ -334,8 +335,9 @@ class Elemento
 		$consulta->bindValue(':tipo',$this->tipo, PDO::PARAM_STR);
 		$consulta->bindValue(':ambientes',$this->ambientes, PDO::PARAM_STR);
 		$consulta->bindValue(':zona',$this->zona, PDO::PARAM_STR);
-		$consulta->bindValue(':descBreve',str_replace(array("\n\r", "\n", "\r"), ' ', $this->descBreve), PDO::PARAM_STR);
-		$consulta->bindValue(':descripcion',str_replace(array("\n\r", "\n", "\r"), ' ', $this->descripcion), PDO::PARAM_STR);
+		//$consulta->bindValue(':descBreve',str_replace(array("\n\r", "\n", "\r"), ' ', $this->descBreve), PDO::PARAM_STR);
+		$consulta->bindValue(':descBreve',nl2br($this->descBreve), PDO::PARAM_STR);
+		$consulta->bindValue(':descripcion',nl2br($this->descripcion), PDO::PARAM_STR);
 		$consulta->bindValue(':destacada',$this->destacada, PDO::PARAM_STR);
 		$consulta->bindValue(':ocultar',$this->ocultar, PDO::PARAM_STR);
 		$consulta->bindValue(':latCarga',$this->latCarga, PDO::PARAM_STR);

@@ -75,6 +75,9 @@ if(isset($_POST['idPropiedad'])) {
     <!--/.container-->
 </section>
 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOcKw36NiPTVBs_AwP5zIRmNeVkZVx5D4&amp;async=2&amp;callback=initMapVista"
+    async defer></script>
+
 <!--<script src="./js/jquery.easing.1.3.js"></script>-->
 <script type="text/javascript" src="./js/funcionesAjax.js"></script>
 <script src="./js/jquery.js"></script>

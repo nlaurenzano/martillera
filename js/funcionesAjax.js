@@ -199,7 +199,6 @@ function MostrarDestacadasJSON(propiedades) {
 
 function MostrarDetalleJSON(propiedad) {
 	//return propiedad;
-	alert(propiedad);
 	propiedad = JSON.parse(propiedad);
 	var retorno = '';
 	var imagen;
@@ -223,13 +222,28 @@ function MostrarDetalleJSON(propiedad) {
 
   	retorno += '<div class="mrgn30"><h4>' + ObtenerDesc('etiquetas','descripcion') + '</h4>';
   	retorno += '<p>' + propiedad.descripcion + '</p></div>';
-alert(propiedad.descripcion);
+
   	retorno += '<div class="bottom-article"><ul class="meta-post">';
   	retorno += '<li><strong>' + ObtenerDesc('etiquetas','operacion') + ':</strong> ' + ObtenerDesc('operacion',propiedad.operacion) + '</li>';
   	retorno += '<li><strong>' + ObtenerDesc('etiquetas','tipo') + ':</strong> ' + ObtenerDesc('tipo',propiedad.tipo) + '</li>';
   	retorno += '<li><strong>' + ObtenerDesc('etiquetas','ambientes') + ':</strong> ' + propiedad.ambientes + '</li>';
   	retorno += '<li><strong>' + ObtenerDesc('etiquetas','zona') + ':</strong> ' + ObtenerDesc('zona',propiedad.zona) + '</li>';
-	retorno += '</ul></div></article>';
+	//retorno += '</ul></div></article>';
+	retorno += '</ul></div>';
+
+
+	retorno += '<div class="row mrgn10">';
+	retorno += '<div class="col-sm-12">';
+	//retorno += '<div id="map"><input type="button" class="btn btn-lg btn-primary" name="mapa" value="' + ObtenerDesc('etiquetas','botonUbicacion') + '" onclick="$.getScript(\'https://maps.googleapis.com/maps/api/js?key=AIzaSyDOcKw36NiPTVBs_AwP5zIRmNeVkZVx5D4&amp;async=2&amp;callback=initMap\')" /></div>';
+	retorno += '<div id="map"></div>';
+	retorno += '</div>';	//col
+	retorno += '</div>';	//row
+
+	retorno += '</article>';
+
+	// Campos ocultos que guardan la ubicación en el mapa
+	retorno += '<input type="text" class="hidden" name="latVista" id="latVista" value="' + propiedad.latCarga + '">';
+	retorno += '<input type="text" class="hidden" name="lngVista" id="lngVista" value="' + propiedad.lngCarga + '">';
 
 	return retorno;
 }
@@ -702,7 +716,6 @@ function SendContactEmail() {
 	}
 }
 
-
 var map;
 var marker = null;
 function initMap() {
@@ -713,34 +726,56 @@ function initMap() {
 	  zoom: 9
 	});
 
-	$("#map").width("100%");//2º DAR TAMAÑO AL DIV QUE CONTENDRA EL MAPA
-	$("#map").height("400px");//2º DAR TAMAÑO AL DIV QUE CONTENDRA EL MAPA
+	// DAR TAMAÑO AL DIV QUE CONTENDRA EL MAPA
+	$("#map").width("100%");
+	$("#map").height("400px");
 
 	map.addListener('click', function(e) {
     	placeMarkerAndPanTo(e.latLng, map);
 	});
 }
 
+function initMapVista() {
+
+	if ($("#latVista").val() != '') {
+		var myLatLng = new google.maps.LatLng($("#latVista").val(),$("#lngVista").val());
+		map = new google.maps.Map(document.getElementById('map'), {
+		  center: myLatLng,
+		  zoom: 17
+		});
+
+		// DAR TAMAÑO AL DIV QUE CONTENDRA EL MAPA
+		$("#map").width("100%");
+		$("#map").height("400px");
+	  	map.panTo(myLatLng);
+
+		marker = new google.maps.Marker({
+		    position: myLatLng,
+		    map: map
+		});
+		marker.setPosition(myLatLng);
+	}
+}
+
 function placeMarkerAndPanTo(latLng, map) {
 	if (marker===null) {
-	  marker = new google.maps.Marker({
-	    position: latLng,
-	    map: map,
-	    draggable: true,
-    	title: 'Acá toy!'
-	  });
-	  map.panTo(latLng);
+		marker = new google.maps.Marker({
+		    position: latLng,
+		    map: map,
+		    draggable: true
+		});
+	  	map.panTo(latLng);
 		marker.addListener('dragend', function(e) {
-	    	guardarPosicion(e.latLng);
+			guardarPosicion(e.latLng);
 		});
 	} else {
+		marker.setVisible(true);
 		marker.setPosition(latLng);
 	}
 	guardarPosicion(latLng);
 }
 
 function guardarPosicion(latLng) {
-	//$("#coordenadas").html(latLng.toString());
 	$("#latCarga").val(latLng.lat());
 	$("#lngCarga").val(latLng.lng());
 }
