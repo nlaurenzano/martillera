@@ -234,7 +234,6 @@ function MostrarDetalleJSON(propiedad) {
 
 	retorno += '<div class="row mrgn10">';
 	retorno += '<div class="col-sm-12">';
-	//retorno += '<div id="map"><input type="button" class="btn btn-lg btn-primary" name="mapa" value="' + ObtenerDesc('etiquetas','botonUbicacion') + '" onclick="$.getScript(\'https://maps.googleapis.com/maps/api/js?key=AIzaSyDOcKw36NiPTVBs_AwP5zIRmNeVkZVx5D4&amp;async=2&amp;callback=initMap\')" /></div>';
 	retorno += '<div id="map"></div>';
 	retorno += '</div>';	//col
 	retorno += '</div>';	//row
@@ -649,7 +648,9 @@ function CompletarCamposEdicion(indicePropiedad) {
 		$("#descripcion").val(propiedad.descripcion);
 		$("#destacada").prop( "checked", ((propiedad.destacada=='1')?true:false));
 		$("#ocultar").prop( "checked", ((propiedad.ocultar=='1')?true:false));
-
+		$("#latCarga").val(propiedad.latCarga);
+		$("#lngCarga").val(propiedad.lngCarga);
+alert('propiedad.latCarga='+propiedad.latCarga);
 /*
 		$("#imagen").val('');
 */

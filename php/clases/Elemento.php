@@ -240,7 +240,7 @@ class Elemento
 		}
 
 		// Las condiciones del query se terminan en TRUE para completar el posible AND que queda al final
-		$consulta=$objetoAccesoDato->RetornarConsulta("SELECT id,operacion,tipo,ambientes,zona,descBreve,descripcion,imagenes,ocultar,destacada FROM propiedades WHERE " . $operacionQuery . $tipoQuery . $ambientesQuery . $zonaQuery . "ocultar = :ocultar");
+		$consulta=$objetoAccesoDato->RetornarConsulta("SELECT id,operacion,tipo,ambientes,zona,descBreve,descripcion,imagenes,ocultar,destacada,latCarga,lngCarga FROM propiedades WHERE " . $operacionQuery . $tipoQuery . $ambientesQuery . $zonaQuery . "ocultar = :ocultar");
 		
 		// Si el filtro no se incluyó en el query, entonces no hay que bindearlo
 		if ($operacion != 'none') {
@@ -304,7 +304,7 @@ class Elemento
 		$consulta->bindValue(':tipo',$this->tipo, PDO::PARAM_STR);
 		$consulta->bindValue(':ambientes',$this->ambientes, PDO::PARAM_STR);
 		$consulta->bindValue(':zona',$this->zona, PDO::PARAM_STR);
-		$consulta->bindValue(':descBreve',$this->descBreve, PDO::PARAM_STR);
+		$consulta->bindValue(':descBreve',str_replace(array("\n\r", "\n", "\r"), ' ', $this->descBreve), PDO::PARAM_STR);
 		$consulta->bindValue(':descripcion',$this->descripcion, PDO::PARAM_STR);
 		$consulta->bindValue(':destacada',$this->destacada, PDO::PARAM_STR);
 		$consulta->bindValue(':ocultar',$this->ocultar, PDO::PARAM_STR);
@@ -326,8 +326,6 @@ class Elemento
 	public function Modificar()
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-//		$consulta = $objetoAccesoDato->RetornarConsulta("
-//			UPDATE propiedades SET campo1=:campo1,campo2=:campo2,campo3=:campo3 WHERE id=:id");
 		$consulta = $objetoAccesoDato->RetornarConsulta("UPDATE propiedades SET operacion=:operacion,tipo=:tipo,ambientes=:ambientes,zona=:zona,descBreve=:descBreve,descripcion=:descripcion,destacada=:destacada,ocultar=:ocultar,latCarga=:latCarga,lngCarga=:lngCarga WHERE id=:id");
 
 		$consulta->bindValue(':id',$this->id, PDO::PARAM_STR);
@@ -335,9 +333,8 @@ class Elemento
 		$consulta->bindValue(':tipo',$this->tipo, PDO::PARAM_STR);
 		$consulta->bindValue(':ambientes',$this->ambientes, PDO::PARAM_STR);
 		$consulta->bindValue(':zona',$this->zona, PDO::PARAM_STR);
-		//$consulta->bindValue(':descBreve',str_replace(array("\n\r", "\n", "\r"), ' ', $this->descBreve), PDO::PARAM_STR);
-		$consulta->bindValue(':descBreve',nl2br($this->descBreve), PDO::PARAM_STR);
-		$consulta->bindValue(':descripcion',nl2br($this->descripcion), PDO::PARAM_STR);
+		$consulta->bindValue(':descBreve',str_replace(array("\n\r", "\n", "\r"), ' ', $this->descBreve), PDO::PARAM_STR);
+		$consulta->bindValue(':descripcion',$this->descripcion, PDO::PARAM_STR);
 		$consulta->bindValue(':destacada',$this->destacada, PDO::PARAM_STR);
 		$consulta->bindValue(':ocultar',$this->ocultar, PDO::PARAM_STR);
 		$consulta->bindValue(':latCarga',$this->latCarga, PDO::PARAM_STR);
