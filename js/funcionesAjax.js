@@ -508,13 +508,17 @@ function MostrarFormCarga(indicePropiedad) {
 	retorno += '<div class="col-sm-2"></div>';
 	retorno += '<div class="col-sm-4">';
 	
+	// Descripción breve
+	retorno += '<div class="form-group" title="' + ObtenerDesc('etiquetas','ingreseDescBreve') + '">';
+	retorno += '<label for="descBreve">' + ObtenerDesc('etiquetas','descBreve') + '</label>';
+	retorno += '<textarea name="descBreve" class="form-control" id="descBreve" cols="3" rows="5"></textarea>';
+	retorno += '</div>';
+
 	// Ambientes
 	retorno += '<div class="form-group" title="' + ObtenerDesc('etiquetas','seleccioneAmbientes') + '">';
 	retorno += '<label for="ambientes">' + ObtenerDesc('etiquetas','ambientes') + '</label>';
 	retorno += '<input type="text" class="form-control" name="ambientes" id="ambientes">';
-	retorno += '</div>';	
-	retorno += '</div>';	//col-sm-4
-	retorno += '<div class="col-sm-4">';
+	retorno += '</div>';
 
 	// Zona
 	retorno += '<div class="form-group" title="' + ObtenerDesc('etiquetas','seleccioneZona') + '">';
@@ -527,37 +531,6 @@ function MostrarFormCarga(indicePropiedad) {
 	retorno += '</select>';
 	retorno += '</div>';
 
-	retorno += '</div>';	//col-sm-4
-	retorno += '<div class="col-sm-2"></div>';
-	retorno += '</div>';	//row
-
-	retorno += '<div class="row mrgn10">';
-	retorno += '<div class="col-sm-2"></div>';
-	retorno += '<div class="col-sm-4">';
-	
-	// Descripción breve
-	retorno += '<div class="form-group" title="' + ObtenerDesc('etiquetas','ingreseDescBreve') + '">';
-	retorno += '<label for="descBreve">' + ObtenerDesc('etiquetas','descBreve') + '</label>';
-	retorno += '<textarea name="descBreve" class="form-control" id="descBreve" cols="3" rows="5"></textarea>';
-	retorno += '</div>';
-
-	retorno += '</div>';	//col-sm-4
-	retorno += '<div class="col-sm-4">';
-
-	// Descripción detallada
-	retorno += '<div class="form-group" title="' + ObtenerDesc('etiquetas','ingreseDescripcion') + '">';
-	retorno += '<label for="descripcion">' + ObtenerDesc('etiquetas','descripcion') + '</label>';
-	retorno += '<textarea name="descripcion" class="form-control" id="descripcion" cols="3" rows="5"></textarea>';
-	retorno += '</div>';
-
-	retorno += '</div>';	//col-sm-4
-	retorno += '<div class="col-sm-2"></div>';
-	retorno += '</div>';	//row
-
-	retorno += '<div class="row mrgn10">';
-	retorno += '<div class="col-sm-2"></div>';
-	retorno += '<div class="col-sm-4">';
-	
 	// Destacada
 	retorno += '<div class="form-group form-control">';
 	retorno += ObtenerDesc('etiquetas','destacada');
@@ -566,9 +539,6 @@ function MostrarFormCarga(indicePropiedad) {
 	retorno += '<label for="destacada" class="label-primary"></label>';
 	retorno += '</div>';
 	retorno += '</div>';
-	
-	retorno += '</div>';	//col-sm-4
-	retorno += '<div class="col-sm-4">';
 
 	// Ocultar
 	retorno += '<div class="form-group form-control">';
@@ -579,6 +549,28 @@ function MostrarFormCarga(indicePropiedad) {
 	retorno += '</div>';
 	retorno += '</div>';
 
+	// Imágenes
+	retorno += '<div class="form-group" title="' + ObtenerDesc('etiquetas','ingreseImagenes') + '">';
+	retorno += '<label for="imagen">' + ObtenerDesc('etiquetas','imagenes') + '</label>';
+	retorno += '<input type="file" class="form-control" name="imagen" id="imagen" accept="image/*" multiple>';
+	retorno += '</div>';
+
+	// Botón para agregar ubicación		¿HACE FALTA?
+	retorno += '<input type="button" class="btn btn-lg btn-primary" name="mapa" value="' + ObtenerDesc('etiquetas','botonUbicacion') + '" onclick="$.getScript(\'https://maps.googleapis.com/maps/api/js?key=AIzaSyDOcKw36NiPTVBs_AwP5zIRmNeVkZVx5D4&amp;async=2&amp;callback=initMap\')" />';
+
+	retorno += '</div>';	//col-sm-4
+	retorno += '<div class="col-sm-4">';
+
+	// Descripción detallada
+	retorno += '<div class="form-group" title="' + ObtenerDesc('etiquetas','ingreseDescripcion') + '">';
+	retorno += '<label for="descripcion">' + ObtenerDesc('etiquetas','descripcion') + '</label>';
+	retorno += '<textarea name="descripcion" class="form-control" id="descripcion" cols="3" rows="30">';
+
+	retorno += '\n\n\nSuperficie del lote: \nSuperficie cubierta: \nSuperficie semicubierta: \nTipo de calefacción/refrigeración: \nCantidad de ambientes totales: \nCantidad de habitaciones: \nCantidad de baños: \nPlayroom: \nCocheras: \nPisos: \nTipo de aberturas: \nAmoblamientos de cocina: \nDetalles de categoría: \nServicios: \nAgua Corriente: \nLuz: \nGas Natural: \nInternet: \nDesagüe Cloacal: \nPavimento: \nTeléfono: \nCable/Direct TV: \nPiscina: \nParrilla: \nGalería: \nQuincho: \nRiego Artificial: ';
+
+	retorno += '</textarea>';
+	retorno += '</div>';
+
 	retorno += '</div>';	//col-sm-4
 	retorno += '<div class="col-sm-2"></div>';
 	retorno += '</div>';	//row
@@ -587,11 +579,7 @@ function MostrarFormCarga(indicePropiedad) {
 	retorno += '<div class="col-sm-2"></div>';
 	retorno += '<div class="col-sm-4">';
 	
-	// Imágenes
-	retorno += '<div class="form-group" title="' + ObtenerDesc('etiquetas','ingreseImagenes') + '">';
-	retorno += '<label for="imagen">' + ObtenerDesc('etiquetas','imagenes') + '</label>';
-	retorno += '<input type="file" class="form-control" name="imagen" id="imagen" accept="image/*" multiple>';
-	retorno += '</div>';
+	
 	
 	retorno += '</div>';	//col-sm-4
 	retorno += '<div class="col-sm-4">';
@@ -622,7 +610,7 @@ function MostrarFormCarga(indicePropiedad) {
 	retorno += '<div class="row mrgn10">';
 	retorno += '<div class="col-sm-2"></div>';
 	retorno += '<div class="col-sm-8">';
-	retorno += '<div id="map"><input type="button" class="btn btn-lg btn-primary" name="mapa" value="' + ObtenerDesc('etiquetas','botonUbicacion') + '" onclick="$.getScript(\'https://maps.googleapis.com/maps/api/js?key=AIzaSyDOcKw36NiPTVBs_AwP5zIRmNeVkZVx5D4&amp;async=2&amp;callback=initMap\')" /></div>';
+	retorno += '<div id="map"></div>';
 	retorno += '</div>';	//col
 	retorno += '<div class="col-sm-2"></div>';
 	retorno += '</div>';	//row
